@@ -1,209 +1,437 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BetterBot 2.0 | Discord Bot</title>
-  <!-- Open Graph / Sosyal Medya paylaşımı için -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BetterBot 2.0 | BetterNetwork</title>
+  
+  <!-- Google Fonts (Modern ve şık fontlar) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+
+  <!-- Open Graph (Sosyal Medya Paylaşımı) -->
   <meta property="og:title" content="BetterBot 2.0" />
   <meta property="og:description" content="Discord sunucunuz için gelişmiş bot çözümleri." />
   <meta property="og:image" content="https://cdn.discordapp.com/attachments/1237301567259152404/1522931261461630996/Gemini_Generated_Image_9wuja89wuja89wuj.png?ex=6a4a43c3&is=6a48f243&hm=bd40a7c5da77a3148c20b87f59d9bf021661eadb55a7f495ea69456406145c1e&" />
+  <meta property="og:url" content="https://ahmetejler.github.io" />
+  
   <style>
+    /* ===== RESET & TEMEL ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      background: #0a192f;
-      color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
       padding: 20px;
+      background: #0b1124;
+      /* Arka plan için hareketli gradient */
+      background: radial-gradient(circle at 20% 30%, #132043 0%, #0b1124 70%);
+      position: relative;
+      overflow-x: hidden;
     }
-    .container {
-      max-width: 700px;
+
+    /* ===== ANİMASYONLU ARKA PLAN (Soyut Işık Efekti) ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at 30% 40%, rgba(0, 212, 255, 0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 60%, rgba(123, 47, 190, 0.08) 0%, transparent 50%);
+      animation: ambientGlow 12s ease-in-out infinite alternate;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes ambientGlow {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+      100% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+    }
+
+    /* ===== KART (ANA KONTEYNER) ===== */
+    .card {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
       width: 100%;
+      background: rgba(17, 34, 64, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 40px 35px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.08);
+      transition: transform 0.3s ease;
+      text-align: center;
     }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* ===== LOGO ===== */
+    .logo-wrapper {
+      display: inline-block;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      padding: 6px;
+      background: linear-gradient(135deg, #00d4ff, #7b2fbe);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.25);
+    }
+
     .logo {
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      border: 3px solid #00d4ff;
-      margin-bottom: 20px;
+      display: block;
+      background: #0b1124;
       object-fit: cover;
+      border: 3px solid #0b1124;
     }
+
+    /* ===== BAŞLIK ===== */
     h1 {
-      color: #00d4ff;
-      font-size: 3rem;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
+      font-size: 3.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #00d4ff 0%, #7b2fbe 70%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+      line-height: 1.1;
     }
+
     .tagline {
-      color: #8892b0;
-      font-size: 1.2rem;
+      color: #9ba8c9;
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
       margin-bottom: 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding-bottom: 18px;
     }
+
+    /* ===== İSTATİSTİKLER ===== */
     .stats {
       display: flex;
       justify-content: center;
-      gap: 40px;
-      margin-bottom: 30px;
+      gap: 30px;
       flex-wrap: wrap;
+      margin-bottom: 35px;
     }
-    .stat-box {
-      background: #112240;
-      padding: 15px 30px;
-      border-radius: 12px;
+
+    .stat-item {
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(4px);
+      padding: 14px 28px;
+      border-radius: 60px;
+      border: 1px solid rgba(0, 212, 255, 0.12);
       min-width: 100px;
+      transition: 0.2s;
     }
-    .stat-box h2 {
-      color: #00d4ff;
+
+    .stat-item:hover {
+      border-color: rgba(0, 212, 255, 0.3);
+      background: rgba(0, 212, 255, 0.05);
+    }
+
+    .stat-number {
       font-size: 2rem;
-      margin: 0;
-    }
-    .stat-box p {
-      color: #8892b0;
-      margin: 5px 0 0 0;
-      font-size: 0.9rem;
-    }
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 25px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 14px 32px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .btn-primary {
-      background: #00d4ff;
-      color: #0a192f;
-    }
-    .btn-primary:hover {
-      background: #00b4d8;
-      transform: scale(1.05);
-    }
-    .btn-secondary {
-      background: #5865F2;
-      color: #fff;
-    }
-    .btn-secondary:hover {
-      background: #4752c4;
-      transform: scale(1.05);
-    }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid #00d4ff;
+      font-weight: 700;
       color: #00d4ff;
+      letter-spacing: 0.5px;
     }
-    .btn-outline:hover {
-      background: #00d4ff;
-      color: #0a192f;
-      transform: scale(1.05);
-    }
-    .footer {
-      margin-top: 40px;
-      color: #495670;
+
+    .stat-label {
+      color: #8892b0;
       font-size: 0.85rem;
-      border-top: 1px solid #112240;
-      padding-top: 20px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
     }
+
+    /* ===== ÖZELLİKLER (KARTLAR) ===== */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      margin: 30px 0;
+      gap: 16px;
+      margin: 30px 0 35px 0;
     }
-    .feature {
-      background: #112240;
-      padding: 15px;
-      border-radius: 10px;
-      border-left: 3px solid #00d4ff;
-      text-align: left;
+
+    .feature-card {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(4px);
+      border-radius: 18px;
+      padding: 18px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: 0.25s ease;
+      cursor: default;
     }
-    .feature h4 {
+
+    .feature-card:hover {
+      background: rgba(0, 212, 255, 0.06);
+      border-color: rgba(0, 212, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .feature-title {
+      color: #e6f1ff;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+    }
+
+    .feature-desc {
+      color: #8892b0;
+      font-size: 0.8rem;
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    /* ===== BUTONLAR ===== */
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.2px;
+      min-width: 160px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00d4ff, #0090b8);
+      color: #0b1124;
+      box-shadow: 0 6px 20px rgba(0, 212, 255, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.35);
+    }
+
+    .btn-secondary {
+      background: #5865F2;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.25);
+    }
+
+    .btn-secondary:hover {
+      background: #4752c4;
+      transform: scale(1.04);
+      box-shadow: 0 8px 30px rgba(88, 101, 242, 0.35);
+    }
+
+    .btn-outline {
+      border: 1.5px solid rgba(0, 212, 255, 0.4);
       color: #00d4ff;
-      margin-bottom: 5px;
+      background: rgba(0, 212, 255, 0.04);
     }
-    .feature p {
-      color: #ccd6f6;
-      font-size: 0.9rem;
+
+    .btn-outline:hover {
+      background: rgba(0, 212, 255, 0.12);
+      border-color: #00d4ff;
+      transform: scale(1.04);
     }
-    @media (max-width: 500px) {
-      h1 { font-size: 2.2rem; }
-      .stats { gap: 20px; }
-      .stat-box { padding: 12px 20px; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      color: #495670;
+      font-size: 0.8rem;
+      letter-spacing: 0.4px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: #64748b;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover {
+      color: #00d4ff;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .card {
+        padding: 28px 18px;
+        border-radius: 28px;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+      }
+
+      .logo {
+        width: 90px;
+        height: 90px;
+      }
+
+      .stats {
+        gap: 14px;
+      }
+
+      .stat-item {
+        padding: 10px 18px;
+        min-width: 70px;
+      }
+
+      .stat-number {
+        font-size: 1.6rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .btn {
+        min-width: 130px;
+        padding: 12px 22px;
+        font-size: 0.85rem;
+      }
+
+      .button-group {
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Logo -->
-    <img class="logo" src="https://cdn.discordapp.com/attachments/1237301567259152404/1522931261461630996/Gemini_Generated_Image_9wuja89wuja89wuj.png?ex=6a4a43c3&is=6a48f243&hm=bd40a7c5da77a3148c20b87f59d9bf021661eadb55a7f495ea69456406145c1e&" alt="BetterBot 2.0 Logo">
+  <div class="card">
     
+    <!-- Logo -->
+    <div class="logo-wrapper">
+      <img class="logo" 
+           src="https://cdn.discordapp.com/attachments/1237301567259152404/1522931261461630996/Gemini_Generated_Image_9wuja89wuja89wuj.png?ex=6a4a43c3&is=6a48f243&hm=bd40a7c5da77a3148c20b87f59d9bf021661eadb55a7f495ea69456406145c1e&" 
+           alt="BetterBot 2.0 Logo" />
+    </div>
+
+    <!-- Başlık -->
     <h1>BetterBot 2.0</h1>
     <p class="tagline">Bağlantının ve Güvenin Yeni Adı</p>
-    
+
     <!-- İstatistikler -->
     <div class="stats">
-      <div class="stat-box">
-        <h2>19</h2>
-        <p>Sunucu</p>
+      <div class="stat-item">
+        <div class="stat-number">19</div>
+        <div class="stat-label">Sunucu</div>
       </div>
-      <div class="stat-box">
-        <h2>11.406</h2>
-        <p>Kullanıcı</p>
+      <div class="stat-item">
+        <div class="stat-number">11.406</div>
+        <div class="stat-label">Kullanıcı</div>
       </div>
-      <div class="stat-box">
-        <h2>7/24</h2>
-        <p>Hizmet</p>
+      <div class="stat-item">
+        <div class="stat-number">7/24</div>
+        <div class="stat-label">Hizmet</div>
       </div>
     </div>
-    
-    <!-- Öne Çıkan Özellikler -->
+
+    <!-- Özellikler -->
     <div class="features">
-      <div class="feature">
-        <h4>🛡️ Modersayon</h4>
-        <p>Sunucunu otomatik koru</p>
+      <div class="feature-card">
+        <span class="feature-icon">🛡️</span>
+        <div class="feature-title">Moderasyon</div>
+        <div class="feature-desc">Otomatik koruma</div>
       </div>
-      <div class="feature">
-        <h4>📈 İstatistik</h4>
-        <p>Anlık sunucu ve kullanıcı verileri</p>
+      <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <div class="feature-title">İstatistik</div>
+        <div class="feature-desc">Anlık veriler</div>
       </div>
-      <div class="feature">
-        <h4>🎮 Eğlence</h4>
-        <p>Oyunlar, anket, çekiliş</p>
+      <div class="feature-card">
+        <span class="feature-icon">🎮</span>
+        <div class="feature-title">Eğlence</div>
+        <div class="feature-desc">Oyun & aktivite</div>
       </div>
-      <div class="feature">
-        <h4>🔗 Otomatik</h4>
-        <p>Rol, hoş geldin, kurallar</p>
+      <div class="feature-card">
+        <span class="feature-icon">🔗</span>
+        <div class="feature-title">Otomasyon</div>
+        <div class="feature-desc">Rol & hoş geldin</div>
       </div>
     </div>
-    
+
     <!-- Butonlar -->
-    <div class="btn-group">
-      <a href="https://betternetwork-website-production.up.railway.app" class="btn btn-primary">🌐 Sitemizi Ziyaret Et</a>
-      <a href="https://discord.com/oauth2/authorize?client_id=1229120180253102140&permissions=8&integration_type=0&scope=bot" class="btn btn-secondary">🤖 Botu Ekle</a>
-      <a href="https://discord.gg/BRamjrrtvU" class="btn btn-outline">💬 Destek Sunucusu</a>
+    <div class="button-group">
+      <a href="https://betternetwork-website-production.up.railway.app" class="btn btn-primary">
+        🌐 Sitemi Ziyaret Et
+      </a>
+      <a href="https://discord.com/oauth2/authorize?client_id=1229120180253102140&permissions=8&integration_type=0&scope=bot" class="btn btn-secondary">
+        🤖 Botu Ekle
+      </a>
+      <a href="https://discord.gg/BRamjrrtvU" class="btn btn-outline">
+        💬 Destek
+      </a>
     </div>
-    
+
+    <!-- Footer -->
     <div class="footer">
-      BetterBot 2.0 &bull; BetterNetwork &bull; 2025
+      <span>BetterBot 2.0</span>
+      <span>•</span>
+      <span>BetterNetwork</span>
+      <span>•</span>
+      <span>2025</span>
+      <span>•</span>
+      <a href="https://betternetwork-website-production.up.railway.app/sunucu">Sunucu</a>
     </div>
+
   </div>
 </body>
 </html>
