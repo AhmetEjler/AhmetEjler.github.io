@@ -1,4 +1,3 @@
-# AhmetEJler.github.io
 # BetterBot 2.0 🚀
 
 BetterBot 2.0, Discord sunucunuzu yönetmek, güvence altına almak ve eğlendirmek için gelişmiş bir bottur.
