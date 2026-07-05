@@ -43,6 +43,7 @@
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
       transition: all 0.3s ease;
     }
+
     /* ===== HEADER ===== */
     .header {
       text-align: center;
@@ -91,6 +92,7 @@
       letter-spacing: 1px;
       margin-top: 12px;
     }
+
     /* ===== STATS ===== */
     .stats {
       display: flex;
@@ -119,6 +121,7 @@
       letter-spacing: 0.8px;
       font-weight: 400;
     }
+
     /* ===== TYPOGRAPHY ===== */
     h2 {
       font-size: 2rem;
@@ -138,56 +141,113 @@
       color: #00d4ff;
       font-weight: 600;
     }
-    /* ===== BUTTONS ===== */
+
+    /* ===== GRID ===== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0 14px;
+    }
+    @media (max-width: 650px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+    .grid-item {
+      background: #0d1a2f;
+      padding: 16px 20px;
+      border-radius: 16px;
+      border-left: 4px solid #00d4ff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #ccd6f6;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .grid-item:hover {
+      background: #112240;
+      transform: translateX(4px);
+    }
+    .grid-item span {
+      font-size: 1.4rem;
+    }
+
+    /* ===== QUOTE ===== */
+    .quote {
+      background: linear-gradient(145deg, #0d1a2f, #112240);
+      padding: 24px 32px;
+      border-radius: 20px;
+      border-left: 6px solid #a855f7;
+      margin: 30px 0;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #ccd6f6;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== LISTS ===== */
+    ul {
+      padding-left: 26px;
+      margin: 12px 0 18px;
+    }
+    ul li {
+      margin-bottom: 8px;
+      color: #ccd6f6;
+    }
+
+    /* ===== BUTONLAR (DÜZELTİLMİŞ) ===== */
     .btn-group {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 18px;
-      margin: 40px 0 25px;
+      align-items: center;
+      gap: 10px 14px;
+      margin: 30px 0 20px;
     }
     .btn {
       display: inline-block;
-      padding: 16px 38px;
-      border-radius: 60px;
+      padding: 10px 22px;
+      border-radius: 40px;
       text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
+      font-weight: 600;
+      font-size: 0.85rem;
       border: none;
       cursor: pointer;
-      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
       text-align: center;
-      min-width: 180px;
+      white-space: nowrap;
     }
     .btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.04);
     }
     .btn-discord {
       background: #5865f2;
       color: #fff;
-      box-shadow: 0 6px 30px rgba(88, 101, 242, 0.3);
+      box-shadow: 0 4px 16px rgba(88, 101, 242, 0.25);
     }
     .btn-discord:hover {
       background: #4752c4;
-      box-shadow: 0 8px 40px rgba(88, 101, 242, 0.45);
+      box-shadow: 0 6px 24px rgba(88, 101, 242, 0.35);
     }
     .btn-purple {
       background: #7b2fbe;
       color: #fff;
-      box-shadow: 0 6px 30px rgba(123, 47, 190, 0.3);
+      box-shadow: 0 4px 16px rgba(123, 47, 190, 0.25);
     }
     .btn-purple:hover {
       background: #6a26a5;
-      box-shadow: 0 8px 40px rgba(123, 47, 190, 0.45);
+      box-shadow: 0 6px 24px rgba(123, 47, 190, 0.35);
     }
     .btn-primary {
       background: #00d4ff;
       color: #0a192f;
-      box-shadow: 0 6px 30px rgba(0, 212, 255, 0.3);
+      box-shadow: 0 4px 16px rgba(0, 212, 255, 0.25);
     }
     .btn-primary:hover {
       background: #00b8e6;
-      box-shadow: 0 8px 40px rgba(0, 212, 255, 0.45);
+      box-shadow: 0 6px 24px rgba(0, 212, 255, 0.35);
     }
     .btn-outline {
       background: transparent;
@@ -198,8 +258,9 @@
     .btn-outline:hover {
       background: #00d4ff;
       color: #0a192f;
-      box-shadow: 0 8px 40px rgba(0, 212, 255, 0.3);
+      box-shadow: 0 6px 24px rgba(0, 212, 255, 0.3);
     }
+
     /* ===== FOOTER ===== */
     .footer {
       margin-top: 50px;
@@ -220,19 +281,51 @@
     .footer a:hover {
       color: #a855f7;
     }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
-      .container { padding: 28px 18px; border-radius: 28px; }
-      h1 { font-size: 2.4rem; }
-      h2 { font-size: 1.6rem; padding-left: 14px; }
-      .btn { padding: 14px 24px; font-size: 0.9rem; min-width: 140px; width: 100%; }
-      .stats { gap: 14px 30px; }
-      .stat-item .number { font-size: 2rem; }
-      .logo { width: 90px; height: 90px; }
+      .container {
+        padding: 28px 18px;
+        border-radius: 28px;
+      }
+      h1 {
+        font-size: 2.4rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+        padding-left: 14px;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        width: 100%;
+      }
+      .btn-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .stats {
+        gap: 14px 30px;
+      }
+      .stat-item .number {
+        font-size: 2rem;
+      }
+      .quote {
+        padding: 18px 20px;
+        font-size: 1rem;
+      }
+      .logo {
+        width: 90px;
+        height: 90px;
+      }
     }
     @media (max-width: 430px) {
-      h1 { font-size: 1.9rem; }
-      .sub { font-size: 0.95rem; }
+      h1 {
+        font-size: 1.9rem;
+      }
+      .sub {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
@@ -267,10 +360,77 @@
     Bugün <span class="highlight">19 sunucuda 11 binden fazla kullanıcıya</span> hizmet veriyoruz. Bu sayı her geçen gün artıyor çünkü BetterBot 2.0, güvenilirliği ve işlevselliği ile fark yaratıyor.
   </p>
 
-  <!-- ===== BUTONLAR (Özellikler & Komutlar eklendi) ===== -->
+  <!-- ===== NE SUNUYORUZ? ===== -->
+  <h2>🤝 Size Ne Sunuyoruz?</h2>
+  <p>BetterBot 2.0, bir Discord sunucusunun ihtiyaç duyabileceği neredeyse tüm araçları tek bir çatı altında toplar. İşte size sunduklarımız:</p>
+
+  <div class="grid-2">
+    <div class="grid-item"><span>🛡️</span> Gelişmiş Moderasyon (Ban, Uyarı, Mute, Sil)</div>
+    <div class="grid-item"><span>📊</span> Canlı Sunucu ve Kullanıcı İstatistikleri</div>
+    <div class="grid-item"><span>🎭</span> Eğlence Komutları (IQ, Aşk, Hackle, Dans, Karne)</div>
+    <div class="grid-item"><span>🔗</span> Otomatik Rol, Hoş Geldin ve Kurallar</div>
+    <div class="grid-item"><span>📝</span> Form Sistemleri (Başvuru, Şikayet, Öneri, YouTube)</div>
+    <div class="grid-item"><span>🎫</span> Destek Talebi (Ticket) Sistemi</div>
+    <div class="grid-item"><span>📢</span> Duyuru, Oylama ve Reklam Komutları</div>
+    <div class="grid-item"><span>⚙️</span> Otomatik Sunucu ve Rol Kurulumu</div>
+    <div class="grid-item"><span>📁</span> Kanal ve Rol Yönetimi</div>
+    <div class="grid-item"><span>🔄</span> Düzenli Güncellemeler</div>
+  </div>
+
+  <div class="quote">
+    “BetterBot 2.0, sadece bir bot değil; sunucunuzun kalbi ve beyni.”
+  </div>
+
+  <!-- ===== NEDEN BETTERBOT 2.0? ===== -->
+  <h2>💡 Neden BetterBot 2.0?</h2>
+  <p>Piyasada birçok bot var, peki BetterBot 2.0'ı diğerlerinden ayıran ne?</p>
+  <ul>
+    <li><span class="highlight">🔹 Kullanıcı Odaklı Tasarım:</span> Komutlar basit, anlaşılır ve herkesin rahatça kullanabileceği şekilde tasarlandı.</li>
+    <li><span class="highlight">🔹 Her Şey Tek Yerde:</span> Moderasyondan eğlenceye, otomasyondan form sistemlerine kadar ihtiyacınız olan tüm araçlar tek botta.</li>
+    <li><span class="highlight">🔹 Sürekli Gelişim:</span> Topluluktan gelen geri bildirimlerle sürekli güncellenir ve yeni özellikler eklenir.</li>
+    <li><span class="highlight">🔹 7/24 Destek:</span> Sorun yaşadığınızda yalnız değilsiniz. BetterNetwork destek sunucumuzdan anında yardım alabilirsiniz.</li>
+    <li><span class="highlight">🔹 Güvenlik ve Gizlilik:</span> Kullanıcı verileri önemsenir, hiçbir bilgi üçüncü taraflarla paylaşılmaz.</li>
+    <li><span class="highlight">🔹 Ücretsiz ve Gelişime Açık:</span> BetterBot 2.0 tamamen ücretsizdir ve topluluk katkılarıyla büyümeye devam eder.</li>
+  </ul>
+
+  <!-- ===== GELECEK PLANLARI (HEDEFLER) ===== -->
+  <h2>🎯 Hedeflerimiz ve Gelecek Planları</h2>
+  <p>BetterBot 2.0, sürekli gelişen bir proje. Hedeflerimiz ve önümüzdeki dönemde planladıklarımız:</p>
+  <ul>
+    <li>🔄 Yeni moderasyon araçları ve otomasyon sistemleri</li>
+    <li>🎮 Minecraft entegrasyonu ve oyun içi komutlar</li>
+    <li>📱 Mobil uyumlu bot kontrol paneli</li>
+    <li>🌍 Çok dilli destek (İngilizce, Almanca, vb.)</li>
+    <li>📊 Gelişmiş istatistik ve raporlama sistemleri</li>
+    <li>🤝 Topluluk etkinlikleri ve ödül sistemleri</li>
+    <li>🔐 Daha güçlü güvenlik ve gizlilik önlemleri</li>
+    <li>💰 Premium özellikler ile sürdürülebilir gelir modeli</li>
+  </ul>
+  <p>
+    <span class="highlight">Amacımız, BetterBot 2.0'ı Türkiye'nin en kapsamlı ve güvenilir Discord botlarından biri haline getirmek.</span> 
+    Bu yolda sizlerin desteği ve geri bildirimleri bizim için çok değerli.
+  </p>
+
+  <!-- ===== TOPLULUK ===== -->
+  <h2>🌐 BetterNetwork Topluluğu</h2>
+  <p>
+    BetterBot 2.0'ın kalbi, <span class="highlight">BetterNetwork</span> topluluğudur. Burası sadece bir bot sunucusu değil; 
+    fikir alışverişi yapabileceğiniz, yeni arkadaşlıklar kurabileceğiniz, oyunlar oynayabileceğiniz ve 
+    botla ilgili her türlü sorunuza anında çözüm bulabileceğiniz bir <span class="highlight">aile ortamı</span>dır.
+  </p>
+  <p>
+    Topluluğumuzda herkese saygı ve hoşgörü esastır. Moderasyon ekibimiz 7/24 aktiftir ve her türlü sorununuzla ilgilenir. 
+    Ayrıca düzenli olarak oyun etkinlikleri, çekilişler ve özel etkinlikler düzenliyoruz.
+  </p>
+
+  <div class="quote">
+    “BetterNetwork'te herkes birbirinin gelişimine katkı sağlar. Birlikte büyüyoruz, birlikte güçleniyoruz.”
+  </div>
+
+  <!-- ===== BUTONLAR ===== -->
   <div class="btn-group">
-    <a href="ozellikler.html" class="btn btn-outline">✨ Özellikler</a>
-    <a href="komutlar.html" class="btn btn-outline">📋 Komutlar</a>
+    <a href="features.html" class="btn btn-outline">✨ Özellikler</a>
+    <a href="commands.html" class="btn btn-outline">📋 Komutlar</a>
     <a href="https://discord.com/oauth2/authorize?client_id=1229120180253102140&permissions=8&integration_type=0&scope=bot" class="btn btn-discord">🤖 Botu Ekle</a>
     <a href="https://discord.gg/BRamjrrtvU" class="btn btn-purple">🚀 Sunucuya Katıl</a>
     <a href="https://betternetwork-website-production.up.railway.app" class="btn btn-primary">🌐 Ana Site</a>
@@ -280,6 +440,7 @@
   <div class="footer">
     <span>© 2025 <strong style="color:#00d4ff;">BetterBot 2.0</strong> &amp; <strong style="color:#00d4ff;">BetterNetwork</strong></span>
     <a href="https://github.com/AhmetEjler" target="_blank">🐙 GitHub</a>
+    <a href="gizlilik.html" target="_blank">🔒 Gizlilik Politikası</a>
   </div>
 
 </div>
