@@ -3,184 +3,2178 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BetterBot 2.0 – Özellikler</title>
-  <link rel="icon" href="https://cdn.discordapp.com/attachments/1237301567259152404/1522931261461630996/Gemini_Generated_Image_9wuja89wuja89wuj.png?ex=6a4a43c3&is=6a48f243&hm=bd40a7c5da77a3148c20b87f59d9bf021661eadb55a7f495ea69456406145c1e&" type="image/png" />
+  <title>BetterBot 2.0 – Tüm Özellikler | BetterNetwork</title>
+  <meta name="description" content="BetterBot 2.0'ın tüm özellikleri: moderasyon, eğlence, otomasyon, form sistemleri, ticket ve daha fazlası." />
+  <link rel="icon" href="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
     body {
       background: #0a192f;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       color: #e6f1ff;
       line-height: 1.6;
-      padding: 30px 20px;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse at 20% 30%, #112240 0%, #0a192f 80%),
+        radial-gradient(ellipse at 80% 70%, #1a1440 0%, transparent 60%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .navbar, .page-wrapper, #backToTop, #musicToggle, #toast, #loader, #modal {
+      position: relative;
+      z-index: 10;
+    }
+    .navbar { z-index: 1000; position: fixed; }
+    #backToTop { z-index: 900; position: fixed; }
+    #musicToggle { z-index: 901; position: fixed; }
+    #toast { z-index: 9998; position: fixed; }
+    #loader { z-index: 9999; position: fixed; }
+    #modal { z-index: 10000; position: fixed; }
+
+    /* ===== YÜKLEME EKRANI ===== */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #0a192f;
+      background-image:
+        radial-gradient(ellipse at 30% 40%, #112240 0%, #0a192f 70%),
+        radial-gradient(ellipse at 70% 60%, #1a1440 0%, transparent 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.7s ease, visibility 0.7s;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-content {
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      background-image: radial-gradient(ellipse at 20% 30%, #112240 0%, #0a192f 80%);
+      gap: 18px;
+      animation: loaderFadeIn 0.8s ease;
     }
-    .container {
-      max-width: 1100px;
-      width: 100%;
-      background: rgba(17, 34, 64, 0.6);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      padding: 50px 45px;
-      border-radius: 48px;
-      border: 1px solid rgba(26, 45, 74, 0.5);
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+    @keyframes loaderFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .back-link {
-      display: inline-block;
-      margin-bottom: 30px;
-      color: #00d4ff;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s;
+    .loader-logo-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
     }
-    .back-link:hover {
-      color: #a855f7;
+    .loader-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #00d4ff;
+      object-fit: cover;
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+      animation: loaderLogoPulse 2s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
     }
-    h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
+    @keyframes loaderLogoPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(0, 212, 255, 0.5); }
+      50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(0, 212, 255, 0.8), 0 0 100px rgba(168, 85, 247, 0.4); }
+    }
+    .loader-ring-outer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: #00d4ff;
+      border-right-color: #00d4ff;
+      animation: spinCW 1.5s linear infinite;
+    }
+    .loader-ring-inner {
+      position: absolute;
+      inset: 15px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-bottom-color: #a855f7;
+      border-left-color: #a855f7;
+      animation: spinCCW 2s linear infinite;
+    }
+    @keyframes spinCW { to { transform: rotate(360deg); } }
+    @keyframes spinCCW { to { transform: rotate(-360deg); } }
+    .loader-brand {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #e6f1ff;
+    }
+    .loader-brand span {
       background: linear-gradient(135deg, #00d4ff, #a855f7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 12px;
+      background-size: 200% 200%;
+      animation: gradientMove 3s ease infinite;
     }
-    .sub {
+    .loader-tagline {
+      font-size: 0.85rem;
       color: #8892b0;
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-    }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin: 20px 0 10px;
-    }
-    @media (max-width: 650px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-    }
-    .feature-card {
-      background: #0d1a2f;
-      padding: 20px 24px;
-      border-radius: 18px;
-      border-left: 5px solid #00d4ff;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      background: #112240;
-    }
-    .feature-card h3 {
-      font-size: 1.2rem;
-      color: #00d4ff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       margin-bottom: 6px;
+    }
+    .loader-bar-wrap {
+      width: 240px;
+      height: 4px;
+      background: rgba(0, 212, 255, 0.12);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00d4ff, #a855f7);
+      border-radius: 10px;
+      transition: width 0.15s ease;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+      position: relative;
+    }
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 40px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5));
+      animation: barShine 1s ease-in-out infinite;
+    }
+    @keyframes barShine {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+    .loader-percent {
+      font-size: 0.75rem;
+      color: #00d4ff;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    @media (max-width: 480px) {
+      .loader-logo-wrap { width: 130px; height: 130px; }
+      .loader-logo { width: 80px; height: 80px; }
+      .loader-brand { font-size: 1.5rem; }
+      .loader-tagline { font-size: 0.7rem; letter-spacing: 1.5px; }
+      .loader-bar-wrap { width: 180px; }
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(10, 25, 47, 0.95);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #e6f1ff;
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+    .nav-brand img {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid #00d4ff;
+    }
+    .nav-brand span {
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-right {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .feature-card p {
-      color: #ccd6f6;
-      font-size: 0.95rem;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #8892b0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.25s;
+    }
+    .nav-links a:hover {
+      color: #00d4ff;
+      background: rgba(0, 212, 255, 0.08);
+    }
+    .nav-cta {
+      background: #5865f2 !important;
+      color: #fff !important;
+      font-weight: 600;
+    }
+    .nav-cta:hover {
+      background: #4752c4 !important;
+      box-shadow: 0 4px 16px rgba(88, 101, 242, 0.4);
+    }
+
+    .lang-switcher {
+      display: flex;
+      gap: 4px;
+      background: rgba(13, 26, 47, 0.8);
+      border-radius: 30px;
+      padding: 4px;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: #8892b0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s;
+      letter-spacing: 0.5px;
+    }
+    .lang-btn:hover { color: #00d4ff; }
+    .lang-btn.active {
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      color: #0a192f;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #00d4ff;
+      font-size: 1.6rem;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 64px;
+        left: 0; right: 0;
+        flex-direction: column;
+        background: rgba(10, 25, 47, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 20px;
+        gap: 4px;
+        transform: translateY(-150%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+      }
+      .nav-links.open { transform: translateY(0); }
+      .nav-links a { width: 100%; text-align: center; padding: 14px; }
+    }
+
+    /* ===== PAGE ===== */
+    .page-wrapper {
+      padding: 100px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 1150px;
+      width: 100%;
+      background: rgba(17, 34, 64, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 60px 45px;
+      border-radius: 48px;
+      border: 1px solid rgba(26, 45, 74, 0.5);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ===== HEADER ===== */
+    .header { text-align: center; margin-bottom: 40px; }
+    .page-icon {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      border: 4px solid #00d4ff;
+      box-shadow: 0 0 70px rgba(0, 212, 255, 0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+      animation: float 6s ease-in-out infinite;
+    }
+    .page-icon svg {
+      width: 52px; height: 52px;
+      color: #00d4ff;
+      filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.6));
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      margin-top: 22px;
+      letter-spacing: -1.5px;
+      background: linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #00d4ff 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientMove 4s ease infinite;
+    }
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .sub {
+      font-size: 1.05rem;
+      color: #8892b0;
+      font-weight: 300;
+      letter-spacing: 1.5px;
+      margin-top: 8px;
+    }
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 212, 255, 0.12);
+      border: 1px solid #00d4ff;
+      color: #00d4ff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 16px;
+      border-radius: 40px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .badge.green {
+      background: rgba(0, 255, 136, 0.12);
+      border-color: #00ff88;
+      color: #00ff88;
+    }
+    .badge.purple {
+      background: rgba(168, 85, 247, 0.12);
+      border-color: #a855f7;
+      color: #a855f7;
+    }
+
+    /* ===== INFO ===== */
+    .info-hint {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(168, 85, 247, 0.08));
+      border: 1px dashed rgba(0, 212, 255, 0.35);
+      border-radius: 16px;
+      padding: 14px 22px;
+      margin: 30px 0 10px;
+      color: #8892b0;
+      font-size: 0.9rem;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+    .info-hint svg {
+      width: 20px; height: 20px;
+      color: #00d4ff;
+      flex-shrink: 0;
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+    .info-hint strong { color: #00d4ff; }
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    /* ===== FEATURE GRID ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 30px 0 14px;
+    }
+    .feature-card {
+      background: linear-gradient(145deg, #0d1a2f, #112240);
+      border-radius: 22px;
+      padding: 26px 24px;
+      border: 1px solid rgba(26, 45, 74, 0.8);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00d4ff, #a855f7);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -50%;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.12);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card:hover::after { opacity: 1; }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .feature-icon::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.3s;
+      filter: blur(8px);
+    }
+    .feature-card:hover .feature-icon {
+      transform: scale(1.08) rotate(-5deg);
+      border-color: transparent;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+    }
+    .feature-card:hover .feature-icon::before { opacity: 0.6; }
+    .feature-icon svg {
+      width: 26px;
+      height: 26px;
+      color: #00d4ff;
+      transition: color 0.3s;
+    }
+    .feature-card:hover .feature-icon svg { color: #0a192f; }
+
+    .feature-card h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: #e6f1ff;
+      letter-spacing: -0.2px;
+      line-height: 1.3;
       margin: 0;
     }
-    .footer {
-      margin-top: 50px;
-      padding-top: 28px;
-      border-top: 1px solid #1a2d4a;
-      text-align: center;
-      color: #495670;
+    .feature-card p {
+      font-size: 0.88rem;
+      color: #8892b0;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .feature-preview-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #00d4ff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(0, 212, 255, 0.2);
+      transition: gap 0.3s;
+    }
+    .feature-card:hover .feature-preview-hint { gap: 10px; }
+    .feature-preview-hint svg {
+      width: 14px; height: 14px;
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== MODAL ===== */
+    #modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    #modal.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-box {
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: linear-gradient(145deg, #0d1a2f, #112240);
+      border-radius: 26px;
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 60px rgba(0, 212, 255, 0.15);
+      padding: 28px;
+      transform: scale(0.94) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    #modal.active .modal-box {
+      transform: scale(1) translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      color: #00d4ff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s;
+      z-index: 5;
+      font-family: inherit;
+    }
+    .modal-close:hover {
+      background: #00d4ff;
+      color: #0a192f;
+      transform: rotate(90deg);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-right: 40px;
+    }
+    .modal-header .feature-icon {
+      width: 50px; height: 50px;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      border-color: transparent;
+      flex-shrink: 0;
+    }
+    .modal-header .feature-icon svg { color: #0a192f; }
+    .modal-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #e6f1ff;
+      letter-spacing: -0.4px;
+      line-height: 1.2;
+    }
+    .modal-sub {
+      font-size: 0.82rem;
+      color: #00d4ff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+    .modal-desc {
+      color: #ccd6f6;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+    .modal-desc strong { color: #00d4ff; }
+
+    .modal-section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #00d4ff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+    }
+    .modal-section-title svg { width: 16px; height: 16px; }
+
+    /* ===== DISCORD PREVIEW ===== */
+    .discord-preview {
+      background: #313338;
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      font-family: 'Inter', sans-serif;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+    }
+
+    .dc-user-msg {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .dc-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #5865f2, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+    .dc-avatar.bot {
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    .dc-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .dc-msg-body { flex: 1; min-width: 0; }
+    .dc-msg-head {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 3px;
+      flex-wrap: wrap;
+    }
+    .dc-username {
+      color: #f2f3f5;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .dc-bot-tag {
+      background: #5865f2;
+      color: #fff;
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .dc-bot-tag::before {
+      content: '✓';
+      font-size: 0.7rem;
+    }
+    .dc-timestamp {
+      color: #949ba4;
+      font-size: 0.72rem;
+    }
+    .dc-text {
+      color: #dbdee1;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+    .dc-text code {
+      background: #1e1f22;
+      color: #e6f1ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+    }
+    .dc-mention {
+      background: rgba(88, 101, 242, 0.3);
+      color: #dee0fc;
+      padding: 0 3px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .dc-mention.role {
+      background: rgba(0, 212, 255, 0.2);
+      color: #00d4ff;
+    }
+
+    /* Embed */
+    .dc-embed {
+      background: #2b2d31;
+      border-left: 4px solid #00d4ff;
+      border-radius: 5px;
+      padding: 14px 16px;
+      margin-top: 6px;
+      max-width: 100%;
+    }
+    .dc-embed.success { border-left-color: #00ff88; }
+    .dc-embed.danger { border-left-color: #ff4d4d; }
+    .dc-embed.purple { border-left-color: #a855f7; }
+    .dc-embed.warning { border-left-color: #ffcc00; }
+    .dc-embed-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: #f2f3f5;
+      font-weight: 700;
       font-size: 0.85rem;
+    }
+    .dc-embed-author svg { width: 18px; height: 18px; color: #00d4ff; }
+    .dc-embed-title {
+      color: #00d4ff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .dc-embed-desc {
+      color: #b5bac1;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+    .dc-embed-desc strong { color: #f2f3f5; }
+    .dc-embed-desc code {
+      background: #1e1f22;
+      color: #e6f1ff;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85em;
+    }
+    .dc-embed-field {
+      margin-bottom: 8px;
+    }
+    .dc-embed-field-name {
+      color: #f2f3f5;
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 3px;
+    }
+    .dc-embed-field-value {
+      color: #b5bac1;
+      font-size: 0.83rem;
+      line-height: 1.5;
+    }
+    .dc-embed-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.06);
+      margin: 10px 0;
+    }
+    .dc-embed-footer {
+      color: #949ba4;
+      font-size: 0.72rem;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dc-embed-footer-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #00ff88;
+      box-shadow: 0 0 6px #00ff88;
+    }
+
+    /* Buttons */
+    .dc-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .dc-btn {
+      background: #4e5058;
+      color: #fff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 5px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: default;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dc-btn.primary { background: #5865f2; }
+    .dc-btn.success { background: #248046; }
+    .dc-btn.danger { background: #da373c; }
+    .dc-btn svg { width: 14px; height: 14px; }
+
+    /* Reaction row */
+    .dc-reactions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .dc-reaction {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      color: #00d4ff;
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ===== MODAL FOOTER ===== */
+    .modal-footer-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .modal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      color: #00d4ff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+    .modal-tag.purple {
+      background: rgba(168, 85, 247, 0.12);
+      border-color: rgba(168, 85, 247, 0.3);
+      color: #a855f7;
+    }
+    .modal-tag.green {
+      background: rgba(0, 255, 136, 0.1);
+      border-color: rgba(0, 255, 136, 0.3);
+      color: #00ff88;
+    }
+
+    /* ===== BUTONLAR ===== */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 10px 14px;
+      margin: 45px 0 20px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .btn:hover { transform: translateY(-3px) scale(1.03); }
+    .btn svg { flex-shrink: 0; }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #00d4ff;
+      color: #00d4ff;
+    }
+    .btn-outline:hover {
+      background: #00d4ff;
+      color: #0a192f;
+    }
+    .btn-discord {
+      background: #5865f2;
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(88, 101, 242, 0.3);
+    }
+    .btn-discord:hover {
+      background: #4752c4;
+      box-shadow: 0 8px 28px rgba(88, 101, 242, 0.5);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 55px;
+      padding-top: 30px;
+      border-top: 1px solid #1a2d4a;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 16px 32px;
+      font-size: 0.85rem;
+      color: #495670;
     }
     .footer a {
       color: #00d4ff;
       text-decoration: none;
+      transition: color 0.25s, transform 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
     .footer a:hover {
       color: #a855f7;
+      transform: translateY(-1px);
     }
-    @media (max-width: 600px) {
-      .container { padding: 28px 18px; border-radius: 28px; }
-      h1 { font-size: 2rem; }
+    .footer a svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      stroke: currentColor;
     }
+
+    /* ===== BACK TO TOP ===== */
+    #backToTop {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      width: 50px; height: 50px;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(0, 212, 255, 0.4);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #backToTop.visible { opacity: 1; visibility: visible; }
+    #backToTop:hover { transform: translateY(-4px) scale(1.08); }
+
+    /* ===== MÜZİK BUTONU ===== */
+    #musicToggle {
+      position: fixed;
+      bottom: 30px; right: 90px;
+      width: 50px; height: 50px;
+      background: rgba(13, 26, 47, 0.9);
+      backdrop-filter: blur(10px);
+      color: #00d4ff;
+      border: 2px solid rgba(0, 212, 255, 0.4);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #musicToggle:hover {
+      transform: translateY(-3px) scale(1.08);
+      border-color: #00d4ff;
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
+    }
+    #musicToggle.playing {
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      color: #0a192f;
+      border-color: transparent;
+      animation: musicPulse 2s ease-in-out infinite;
+    }
+    #musicToggle svg { width: 20px; height: 20px; }
+    @keyframes musicPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+      50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6); }
+    }
+
+    /* ===== TOAST ===== */
+    #toast {
+      position: fixed;
+      bottom: 100px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #00d4ff;
+      color: #0a192f;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s;
+    }
+    #toast.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .page-wrapper { padding: 90px 16px 30px; }
+      .container { padding: 32px 20px; border-radius: 28px; }
+      h1 { font-size: 2.2rem; }
+      .page-icon { width: 88px; height: 88px; }
+      .page-icon svg { width: 40px; height: 40px; }
+      .btn { padding: 13px 22px; font-size: 0.9rem; width: 100%; justify-content: center; }
+      .btn-group { flex-direction: column; align-items: stretch; }
+      #backToTop { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+      #musicToggle { bottom: 20px; right: 74px; width: 44px; height: 44px; }
+      #musicToggle svg { width: 18px; height: 18px; }
+      .lang-switcher { padding: 3px; }
+      .lang-btn { padding: 4px 8px; font-size: 0.7rem; }
+      .modal-box { padding: 20px 16px; border-radius: 20px; }
+      .modal-title { font-size: 1.15rem; }
+      .features-grid { grid-template-columns: 1fr; gap: 14px; }
+      .dc-avatar { width: 34px; height: 34px; }
+    }
+    @media (max-width: 430px) {
+      h1 { font-size: 1.8rem; }
+      .sub { font-size: 0.9rem; letter-spacing: 1px; }
+      .badge { font-size: 0.65rem; padding: 4px 12px; }
+    }
+
+    /* Custom scrollbar for modal */
+    .modal-box::-webkit-scrollbar { width: 8px; }
+    .modal-box::-webkit-scrollbar-track { background: rgba(0, 212, 255, 0.05); border-radius: 10px; }
+    .modal-box::-webkit-scrollbar-thumb { background: linear-gradient(#00d4ff, #a855f7); border-radius: 10px; }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <a href="index.html" class="back-link">← Ana Sayfaya Dön</a>
-  <h1>✨ BetterBot 2.0 – Tüm Özellikler</h1>
-  <p class="sub">Discord sunucunuzu yönetmek, korumak ve eğlendirmek için ihtiyacınız olan her şey.</p>
+<canvas id="particles"></canvas>
 
-  <div class="grid-2">
-    <div class="feature-card">
-      <h3>🛡️ Gelişmiş Moderasyon</h3>
-      <p>Ban, uyarı, mute, mesaj silme ve otomatik moderasyon araçları.</p>
+<!-- YÜKLEME EKRANI -->
+<div id="loader">
+  <div class="loader-content">
+    <div class="loader-logo-wrap">
+      <div class="loader-ring-outer"></div>
+      <div class="loader-ring-inner"></div>
+      <img class="loader-logo" src="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" alt="BetterBot" />
     </div>
-    <div class="feature-card">
-      <h3>📊 Canlı İstatistikler</h3>
-      <p>Sunucu ve kullanıcı verilerini anlık olarak görüntüleyin.</p>
+    <div class="loader-brand">BetterBot <span>2.0</span></div>
+    <div class="loader-tagline" data-i18n="loader.tagline">Tüm Özellikler</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar"></div>
     </div>
-    <div class="feature-card">
-      <h3>🎭 Eğlence Komutları</h3>
-      <p>IQ, aşk testi, hackleme, dans, karne ve daha fazlası.</p>
-    </div>
-    <div class="feature-card">
-      <h3>🔗 Otomatik Sistemler</h3>
-      <p>Hoş geldin, otomatik rol, kurallar ve reklam/küfür engel.</p>
-    </div>
-    <div class="feature-card">
-      <h3>📝 Form Sistemleri</h3>
-      <p>Başvuru, şikayet, öneri ve YouTube başvuru formları.</p>
-    </div>
-    <div class="feature-card">
-      <h3>🎫 Destek Talebi (Ticket)</h3>
-      <p>Kullanıcıların sorunlarını iletmek için özel ticket sistemi.</p>
-    </div>
-    <div class="feature-card">
-      <h3>📢 Duyuru & Oylama</h3>
-      <p>Kolay duyuru ve oylama oluşturma araçları.</p>
-    </div>
-    <div class="feature-card">
-      <h3>⚙️ Otomatik Kurulum</h3>
-      <p>Sunucu ve rollerin otomatik olarak kurulması.</p>
-    </div>
-    <div class="feature-card">
-      <h3>📁 Kanal & Rol Yönetimi</h3>
-      <p>Anında kanal ve rol oluşturma, düzenleme ve silme.</p>
-    </div>
-    <div class="feature-card">
-      <h3>🔄 Düzenli Güncellemeler</h3>
-      <p>Haftalık iyileştirmeler ve yeni özellik eklemeleri.</p>
-    </div>
-    <div class="feature-card">
-      <h3>🤖 7/24 Destek</h3>
-      <p>BetterNetwork topluluğu ile anında yardım ve destek.</p>
-    </div>
-    <div class="feature-card">
-      <h3>🔐 Güvenlik & Gizlilik</h3>
-      <p>Kullanıcı verileri korunur, üçüncü taraflarla paylaşılmaz.</p>
-    </div>
-  </div>
-
-  <div class="footer">
-    <span>© 2025 BetterBot 2.0 &amp; BetterNetwork</span> &bull;
-    <a href="https://github.com/AhmetEjler" target="_blank">GitHub</a>
+    <div class="loader-percent" id="loaderPercent">0%</div>
   </div>
 </div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-brand">
+      <img src="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" alt="BetterBot Logo" />
+      <span>BetterBot 2.0</span>
+    </a>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="tr">TR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü">☰</button>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#biz-kimiz" data-i18n="nav.about">Hakkımızda</a></li>
+      <li><a href="index.html#ekip" data-i18n="nav.team">Ekip</a></li>
+      <li><a href="index.html#hedefler" data-i18n="nav.roadmap">Yol Haritası</a></li>
+      <li><a href="index.html#blog" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="index.html#sss" data-i18n="nav.faq">SSS</a></li>
+      <li>
+        <a href="https://discord.com/oauth2/authorize?client_id=1229120180253102140&permissions=8&integration_type=0&scope=bot" class="nav-cta" data-i18n="nav.addBot" style="display:inline-flex;align-items:center;gap:6px;">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;">
+            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+          </svg>
+          <span>Botu Ekle</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-wrapper">
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="page-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+          <path d="M20 3v4"/><path d="M22 5h-4"/>
+          <path d="M4 17v2"/><path d="M5 18H3"/>
+        </svg>
+      </div>
+      <h1 data-i18n="features.title">Tüm Özellikler</h1>
+      <p class="sub" data-i18n="features.sub">Discord sunucunuzu yönetmek, korumak ve eğlendirmek için ihtiyacınız olan her şey.</p>
+      <div class="badges">
+        <span class="badge green" data-i18n="features.badge1">12+ Özellik</span>
+        <span class="badge" data-i18n="features.badge2">Tıklanabilir Önizleme</span>
+        <span class="badge purple" data-i18n="features.badge3">Tamamen Ücretsiz</span>
+      </div>
+    </div>
+
+    <!-- HINT -->
+    <div class="info-hint reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 16v-4"/>
+        <path d="M12 8h.01"/>
+      </svg>
+      <span data-i18n="features.hint">Herhangi bir karta <strong>tıklayarak</strong> Discord üzerindeki gerçek kullanım önizlemesini görebilirsin!</span>
+    </div>
+
+    <!-- FEATURES GRID -->
+    <div class="features-grid reveal" id="featuresGrid">
+      <!-- Cards injected by JS -->
+    </div>
+
+    <!-- BUTONLAR -->
+    <div class="btn-group reveal">
+      <a href="index.html" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;">
+          <path d="m12 19-7-7 7-7"/>
+          <path d="M19 12H5"/>
+        </svg>
+        <span data-i18n="buttons.home">Ana Sayfaya Dön</span>
+      </a>
+      <a href="commands.html" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;">
+          <polyline points="4 17 10 11 4 5"/>
+          <line x1="12" y1="19" x2="20" y2="19"/>
+        </svg>
+        <span data-i18n="buttons.commands">Komut Listesi</span>
+      </a>
+      <a href="https://discord.gg/BRamjrrtvU" class="btn btn-discord">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;">
+          <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+        </svg>
+        <span data-i18n="buttons.join">Sunucuya Katıl</span>
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <span>© 2026 <strong style="color:#00d4ff;">BetterBot 2.0</strong> &amp; <strong style="color:#00d4ff;">BetterNetwork</strong></span>
+      <a href="https://github.com/AhmetEjler" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+          <path d="M9 18c-4.51 2-5-2-7-2"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+      <a href="gizlilik.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span data-i18n="footer.privacy">Gizlilik Politikası</span>
+      </a>
+      <a href="hizmet-kosullari.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span data-i18n="footer.terms">Hizmet Koşulları</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Kapat">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<button id="backToTop" aria-label="Yukarı çık">↑</button>
+
+<button id="musicToggle" title="Müziği Aç/Kapat">
+  <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18V5l12-2v13"/>
+    <circle cx="6" cy="18" r="3"/>
+    <circle cx="18" cy="16" r="3"/>
+  </svg>
+</button>
+
+<audio id="bgMusic" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg" />
+</audio>
+
+<div id="toast">✓ Kopyalandı!</div>
+
+<script>
+/* ================= FEATURE DATA ================= */
+const FEATURES = [
+  {
+    id: 'moderation',
+    icon: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>',
+    color: 'danger',
+    tr: {
+      title: 'Gelişmiş Moderasyon',
+      sub: 'Sunucu Güvenliği',
+      desc: 'BetterBot, <strong>ban</strong>, <strong>kick</strong>, <strong>mute</strong>, <strong>uyarı</strong>, <strong>toplu mesaj silme</strong> gibi tüm moderasyon araçlarını tek çatı altında sunar. Otomatik ceza sistemi ile belirli uyarı sayısına ulaşan kullanıcılar otomatik olarak cezalandırılır. Ayrıca reklam, küfür ve spam koruması 7/24 aktiftir.',
+      cmd: 'b!ban @kullanıcı sebep',
+      embedTitle: 'Kullanıcı Sunucudan Yasaklandı',
+      embedDesc: '<span class="dc-mention">@AhmetEjler</span> sunucudan kalıcı olarak yasaklandı.',
+      fields: [
+        { name: 'Kullanıcı', value: 'AhmetEjler#0001 (ID: 123456789)' },
+        { name: 'Yetkili', value: 'MehmetEjler#0002' },
+        { name: 'Sebep', value: 'Sunucu kurallarını ihlal etmek' },
+        { name: 'Süre', value: 'Kalıcı' }
+      ],
+      footer: 'BetterBot • Moderasyon Sistemi',
+      tags: ['Kick', 'Ban', 'Mute', 'Uyarı', 'Otomatik Ceza', 'Anti-Spam'],
+      usage: 'Sunucunuzu 7/24 korur, yetkililerin iş yükünü azaltır.'
+    },
+    en: {
+      title: 'Advanced Moderation',
+      sub: 'Server Security',
+      desc: 'BetterBot offers all moderation tools under one roof: <strong>ban</strong>, <strong>kick</strong>, <strong>mute</strong>, <strong>warn</strong>, <strong>bulk message delete</strong>. With the auto-punishment system, users who reach a certain number of warnings are automatically punished. Ad, profanity, and spam protection is active 24/7.',
+      cmd: 'b!ban @user reason',
+      embedTitle: 'User Banned from Server',
+      embedDesc: '<span class="dc-mention">@AhmetEjler</span> has been permanently banned from the server.',
+      fields: [
+        { name: 'User', value: 'AhmetEjler#0001 (ID: 123456789)' },
+        { name: 'Moderator', value: 'MehmetEjler#0002' },
+        { name: 'Reason', value: 'Violating server rules' },
+        { name: 'Duration', value: 'Permanent' }
+      ],
+      footer: 'BetterBot • Moderation System',
+      tags: ['Kick', 'Ban', 'Mute', 'Warn', 'Auto-Punish', 'Anti-Spam'],
+      usage: 'Protects your server 24/7 and reduces staff workload.'
+    }
+  },
+  {
+    id: 'stats',
+    icon: '<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/>',
+    color: 'success',
+    tr: {
+      title: 'Canlı İstatistikler',
+      sub: 'Sunucu Analizi',
+      desc: 'Üye sayısı, aktiflik oranı, mesaj istatistikleri, ses kanalı süreleri ve sunucu sağlığı gibi pek çok veri <strong>anlık</strong> olarak takip edilir. Detaylı haftalık raporlarla sunucunuzun büyümesini gözlemleyebilirsiniz.',
+      cmd: 'b!stats',
+      embedTitle: 'Sunucu İstatistikleri',
+      embedDesc: 'Anlık sunucu verileri aşağıda listelenmiştir.',
+      fields: [
+        { name: '👥 Toplam Üye', value: '11.299 üye' },
+        { name: '🟢 Çevrimiçi', value: '2.847 üye' },
+        { name: '💬 Günlük Mesaj', value: '48.392 mesaj' },
+        { name: '🎙️ Ses Kanalı', value: '812 kullanıcı' }
+      ],
+      footer: 'Son güncelleme: 2 saniye önce',
+      tags: ['Üye Sayısı', 'Aktiflik', 'Mesaj', 'Ses Süresi', 'Haftalık Rapor'],
+      usage: 'Sunucu büyümenizi ölçün, zayıf noktaları görün.'
+    },
+    en: {
+      title: 'Live Statistics',
+      sub: 'Server Analytics',
+      desc: 'Member count, activity rate, message statistics, voice channel durations, and server health are tracked <strong>in real-time</strong>. Observe your server\'s growth with detailed weekly reports.',
+      cmd: 'b!stats',
+      embedTitle: 'Server Statistics',
+      embedDesc: 'Live server data is listed below.',
+      fields: [
+        { name: '👥 Total Members', value: '11,299 members' },
+        { name: '🟢 Online', value: '2,847 members' },
+        { name: '💬 Daily Messages', value: '48,392 messages' },
+        { name: '🎙️ Voice Channels', value: '812 users' }
+      ],
+      footer: 'Last updated: 2 seconds ago',
+      tags: ['Member Count', 'Activity', 'Messages', 'Voice Time', 'Weekly Report'],
+      usage: 'Measure your server growth, spot weak points.'
+    }
+  },
+  {
+    id: 'fun',
+    icon: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>',
+    color: 'purple',
+    tr: {
+      title: 'Eğlence Komutları',
+      sub: 'Sosyal & Eğlence',
+      desc: 'IQ testi, aşk ölçer, hackleme simülasyonu, dans, karne, adam asmaca, 8top ve daha onlarca sosyal komut ile sunucunuzda eğlence hiç bitmez. Tüm komutlar <strong>Türkçe</strong> ve <strong>eğlenceli</strong> çıktılar üretir.',
+      cmd: 'b!iq @kullanıcı',
+      embedTitle: '🧠 IQ Testi Sonucu',
+      embedDesc: '<span class="dc-mention">@AhmetEjler</span> adlı kullanıcının IQ testi tamamlandı!',
+      fields: [
+        { name: '📊 IQ Puanı', value: '**142** (Dahi seviyesi!)' },
+        { name: '🏆 Rütbe', value: 'Sunucudaki en zeki 3. kişi' },
+        { name: '💡 Yorum', value: 'Einstein seni kıskanıyor!' }
+      ],
+      footer: 'BetterBot • Eğlence Sistemi',
+      tags: ['IQ', 'Aşk Ölçer', 'Dans', 'Hackle', 'Karne', '8Top'],
+      usage: 'Sunucunuzda sohbeti canlandırır, üyeler arası etkileşimi artırır.'
+    },
+    en: {
+      title: 'Fun Commands',
+      sub: 'Social & Fun',
+      desc: 'IQ test, love meter, hacking simulation, dance, report card, hangman, 8ball, and dozens of social commands keep the fun going on your server. All commands produce <strong>fun</strong> and <strong>localized</strong> outputs.',
+      cmd: 'b!iq @user',
+      embedTitle: '🧠 IQ Test Result',
+      embedDesc: '<span class="dc-mention">@AhmetEjler</span> has completed the IQ test!',
+      fields: [
+        { name: '📊 IQ Score', value: '**142** (Genius level!)' },
+        { name: '🏆 Rank', value: '3rd smartest on server' },
+        { name: '💡 Comment', value: 'Einstein is jealous of you!' }
+      ],
+      footer: 'BetterBot • Fun System',
+      tags: ['IQ', 'Love Meter', 'Dance', 'Hack', 'Report Card', '8Ball'],
+      usage: 'Enlivens chat and increases interaction between members.'
+    }
+  },
+  {
+    id: 'auto',
+    icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>',
+    color: 'success',
+    tr: {
+      title: 'Otomatik Sistemler',
+      sub: 'Otomasyon',
+      desc: 'Yeni üyeler sunucuya katıldığında <strong>otomatik karşılama mesajı</strong>, <strong>otomatik rol</strong>, <strong>kurallar</strong> gönderilir. Ayrıca otomatik reklam engel, küfür filtresi ve davet takip sistemi ile sunucunuz her zaman düzenli kalır.',
+      cmd: 'Yeni üye katıldı → otomatik mesaj',
+      embedTitle: '🎉 Sunucuya Hoş Geldin!',
+      embedDesc: '<span class="dc-mention">@YeniÜye</span> sunucumuza katıldı! Seni aramızda görmek harika.',
+      fields: [
+        { name: '📌 Kurallar', value: '<span class="dc-mention role">#kurallar</span> kanalını okumayı unutma' },
+        { name: '🎭 Rolün', value: '<span class="dc-mention role">@Üye</span> rolü otomatik verildi' },
+        { name: '💬 Sohbet', value: '<span class="dc-mention role">#genel-sohbet</span> kanalında tanış' }
+      ],
+      footer: 'BetterBot • Otomasyon Sistemi',
+      tags: ['Oto-Rol', 'Hoş Geldin', 'Reklam Engel', 'Küfür Filtresi', 'Davet Takip'],
+      usage: 'Manuel iş yükünü sıfıra indirir, yeni üyeleri anında karşılar.'
+    },
+    en: {
+      title: 'Automatic Systems',
+      sub: 'Automation',
+      desc: 'When new members join, an <strong>automatic welcome message</strong>, <strong>auto-role</strong>, and <strong>rules</strong> are sent. Auto ad-block, profanity filter, and invite tracking keep your server always organized.',
+      cmd: 'New member joined → auto message',
+      embedTitle: '🎉 Welcome to the Server!',
+      embedDesc: '<span class="dc-mention">@NewMember</span> joined our server! Great to see you here.',
+      fields: [
+        { name: '📌 Rules', value: 'Don\'t forget to read <span class="dc-mention role">#rules</span>' },
+        { name: '🎭 Your Role', value: '<span class="dc-mention role">@Member</span> role was auto-assigned' },
+        { name: '💬 Chat', value: 'Say hi in <span class="dc-mention role">#general-chat</span>' }
+      ],
+      footer: 'BetterBot • Automation System',
+      tags: ['Auto-Role', 'Welcome', 'Ad Block', 'Profanity Filter', 'Invite Track'],
+      usage: 'Reduces manual work to zero, greets new members instantly.'
+    }
+  },
+  {
+    id: 'forms',
+    icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>',
+    color: 'purple',
+    tr: {
+      title: 'Form Sistemleri',
+      sub: 'Başvuru & Şikayet',
+      desc: 'Yetkili başvurusu, şikayet, öneri ve YouTube başvuru formlarını <strong>tek tıkla</strong> oluşturun. Başvurular otomatik olarak yetkili kanalına düşer ve DM üzerinden de bildirim gönderilir.',
+      cmd: 'b!form yetkili-başvuru',
+      embedTitle: '📝 Yetkili Başvuru Formu',
+      embedDesc: 'Aşağıdaki butona tıklayarak başvuru formunu doldurun.',
+      fields: [
+        { name: '📋 Gerekli Bilgiler', value: 'İsim, yaş, deneyim, aktiflik süresi' },
+        { name: '⏱️ Süre', value: 'Ortalama 2 dakika' },
+        { name: '📬 Sonuç', value: '48 saat içinde DM ile bildirilir' }
+      ],
+      footer: 'BetterBot • Form Sistemi',
+      btnText: '📋 Başvuruyu Doldur',
+      tags: ['Yetkili Formu', 'Şikayet', 'Öneri', 'YouTube', 'DM Bildirimi'],
+      usage: 'Başvuruları profesyonel şekilde toplar, değerlendirme sürecini hızlandırır.'
+    },
+    en: {
+      title: 'Form Systems',
+      sub: 'Application & Report',
+      desc: 'Create staff applications, reports, suggestions, and YouTube forms with <strong>one click</strong>. Applications are automatically sent to the staff channel and notifications are sent via DM.',
+      cmd: 'b!form staff-apply',
+      embedTitle: '📝 Staff Application Form',
+      embedDesc: 'Click the button below to fill out the application form.',
+      fields: [
+        { name: '📋 Required Info', value: 'Name, age, experience, activity' },
+        { name: '⏱️ Duration', value: 'Average 2 minutes' },
+        { name: '📬 Result', value: 'Notified via DM within 48 hours' }
+      ],
+      footer: 'BetterBot • Form System',
+      btnText: '📋 Fill Application',
+      tags: ['Staff Form', 'Report', 'Suggestion', 'YouTube', 'DM Notify'],
+      usage: 'Collects applications professionally, speeds up evaluation.'
+    }
+  },
+  {
+    id: 'ticket',
+    icon: '<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><line x1="9" y1="12" x2="9.01" y2="12"/><line x1="15" y1="12" x2="15.01" y2="12"/>',
+    color: 'success',
+    tr: {
+      title: 'Destek Talebi (Ticket)',
+      sub: 'Özel Destek',
+      desc: 'Kullanıcılar sorunlarını <strong>özel bir kanalda</strong> yetkililere iletir. Her ticket için ayrı bir kanal açılır, yetkililer ve kullanıcı birebir konuşur. Ticket kapatıldığında tüm konuşma arşivlenir.',
+      cmd: 'b!ticket aç',
+      embedTitle: '🎫 Yeni Destek Talebi',
+      embedDesc: 'Merhaba! Talebiniz oluşturuldu. Yetkililer en kısa sürede ilgilenecek.',
+      fields: [
+        { name: '🎫 Ticket ID', value: '#0042' },
+        { name: '📌 Konu', value: 'Bot komutu çalışmıyor' },
+        { name: '⏱️ Oluşturulma', value: '2 saniye önce' }
+      ],
+      footer: 'BetterBot • Ticket Sistemi',
+      btnText: '🔒 Talebi Kapat',
+      tags: ['Özel Kanal', 'Arşivleme', 'Birebir Destek', 'SLA Takip'],
+      usage: 'Kullanıcı sorunlarını düzenli şekilde toplar, destek sürecini yönetir.'
+    },
+    en: {
+      title: 'Support Tickets',
+      sub: 'Private Support',
+      desc: 'Users send their issues to staff in a <strong>private channel</strong>. A separate channel is opened for each ticket, where staff and user talk one-on-one. When the ticket is closed, the entire conversation is archived.',
+      cmd: 'b!ticket open',
+      embedTitle: '🎫 New Support Ticket',
+      embedDesc: 'Hello! Your ticket has been created. Staff will respond shortly.',
+      fields: [
+        { name: '🎫 Ticket ID', value: '#0042' },
+        { name: '📌 Subject', value: 'Bot command not working' },
+        { name: '⏱️ Created', value: '2 seconds ago' }
+      ],
+      footer: 'BetterBot • Ticket System',
+      btnText: '🔒 Close Ticket',
+      tags: ['Private Channel', 'Archiving', 'One-on-One', 'SLA Tracking'],
+      usage: 'Collects user issues in an organized way, manages support process.'
+    }
+  },
+  {
+    id: 'announce',
+    icon: '<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+    color: 'warning',
+    tr: {
+      title: 'Duyuru & Oylama',
+      sub: 'Topluluk Yönetimi',
+      desc: 'Sunucunuzda <strong>toplu duyuru</strong>, <strong>anket</strong>, <strong>oylama</strong> ve <strong>çekiliş</strong> düzenleyin. Duyurular otomatik olarak belirtilen kanallara gönderilir, oylamalar emoji ile anında oylanır.',
+      cmd: 'b!duyuru #genel Yeni etkinlik!',
+      embedTitle: '📢 Önemli Duyuru',
+      embedDesc: 'Bu hafta sonu sunucumuzda büyük bir **Minecraft etkinliği** düzenlenecek! Katılmak için aşağıdaki emojiye tıklayın.',
+      fields: [
+        { name: '📅 Tarih', value: 'Cumartesi 20:00' },
+        { name: '🎮 Oyun', value: 'Minecraft Java Edition' },
+        { name: '🎁 Ödül', value: 'Sunucu içi özel rol' }
+      ],
+      footer: 'BetterBot • Duyuru Sistemi',
+      reactions: ['✅ 42', '❌ 3', '🤔 5'],
+      tags: ['Duyuru', 'Anket', 'Oylama', 'Çekiliş', 'Emoji Tepki'],
+      usage: 'Topluluğunuzu hızlıca bilgilendirin, geri bildirim toplayın.'
+    },
+    en: {
+      title: 'Announcements & Polls',
+      sub: 'Community Management',
+      desc: 'Organize <strong>mass announcements</strong>, <strong>surveys</strong>, <strong>polls</strong>, and <strong>giveaways</strong> on your server. Announcements are automatically sent to specified channels, polls are instantly voted with emojis.',
+      cmd: 'b!announce #general New event!',
+      embedTitle: '📢 Important Announcement',
+      embedDesc: 'A big **Minecraft event** will be held on our server this weekend! Click the emoji below to join.',
+      fields: [
+        { name: '📅 Date', value: 'Saturday 20:00' },
+        { name: '🎮 Game', value: 'Minecraft Java Edition' },
+        { name: '🎁 Reward', value: 'Special in-server role' }
+      ],
+      footer: 'BetterBot • Announcement System',
+      reactions: ['✅ 42', '❌ 3', '🤔 5'],
+      tags: ['Announce', 'Survey', 'Poll', 'Giveaway', 'Emoji React'],
+      usage: 'Inform your community quickly, collect feedback.'
+    }
+  },
+  {
+    id: 'setup',
+    icon: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+    color: 'success',
+    tr: {
+      title: 'Otomatik Kurulum',
+      sub: 'Hızlı Yapılandırma',
+      desc: 'Sunucunuzu <strong>saniyeler içinde</strong> yapılandırın: kanallar, roller, kategoriler, kurallar kanalı, hoş geldin mesajı ve log sistemi otomatik olarak kurulur. Kurulum bittikten sonra hazır şablonlarla hemen kullanmaya başlayın.',
+      cmd: 'b!kurulum yap',
+      embedTitle: '⚙️ Sunucu Kurulumu',
+      embedDesc: 'Sunucunuz için önerilen yapılandırma oluşturuluyor...',
+      fields: [
+        { name: '✅ Oluşturulan Kategoriler', value: '5 kategori' },
+        { name: '✅ Oluşturulan Kanallar', value: '18 kanal' },
+        { name: '✅ Oluşturulan Roller', value: '8 rol' },
+        { name: '⏱️ Süre', value: '2.4 saniye' }
+      ],
+      footer: 'BetterBot • Otomatik Kurulum',
+      btnText: '🎉 Kurulumu Tamamla',
+      tags: ['Kanal Kurulumu', 'Rol Kurulumu', 'Şablonlar', 'Hazır Yapı'],
+      usage: 'Yeni sunucuları profesyonel hale getirmek için dakikalar kazandırır.'
+    },
+    en: {
+      title: 'Automatic Setup',
+      sub: 'Quick Configuration',
+      desc: 'Configure your server in <strong>seconds</strong>: channels, roles, categories, rules channel, welcome message, and logging system are set up automatically. Start using right away with ready-made templates.',
+      cmd: 'b!setup run',
+      embedTitle: '⚙️ Server Setup',
+      embedDesc: 'Recommended configuration is being created for your server...',
+      fields: [
+        { name: '✅ Categories Created', value: '5 categories' },
+        { name: '✅ Channels Created', value: '18 channels' },
+        { name: '✅ Roles Created', value: '8 roles' },
+        { name: '⏱️ Duration', value: '2.4 seconds' }
+      ],
+      footer: 'BetterBot • Auto Setup',
+      btnText: '🎉 Finish Setup',
+      tags: ['Channel Setup', 'Role Setup', 'Templates', 'Ready Structure'],
+      usage: 'Saves minutes to make new servers professional.'
+    }
+  },
+  {
+    id: 'channel',
+    icon: '<path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16h8"/><path d="M7 11h12"/><path d="M7 6h3"/>',
+    color: 'purple',
+    tr: {
+      title: 'Kanal & Rol Yönetimi',
+      sub: 'Hızlı Düzenleme',
+      desc: 'Kanalları ve rolleri <strong>anında oluşturun</strong>, düzenleyin veya silin. Toplu işlemler, izin kopyalama, kanal taşıma ve rol hiyerarşisi düzenleme gibi tüm işlemler tek komutla yapılabilir.',
+      cmd: 'b!kanal-oluştur ses "Genel Sohbet"',
+      embedTitle: '✅ Kanal Oluşturuldu',
+      embedDesc: 'İstediğiniz kanal başarıyla oluşturuldu.',
+      fields: [
+        { name: '📁 Kanal Adı', value: '#genel-sohbet' },
+        { name: '🔊 Tür', value: 'Ses Kanalı' },
+        { name: '📂 Kategori', value: 'Sohbet' },
+        { name: '👤 Yetkili', value: 'AhmetEjler' }
+      ],
+      footer: 'BetterBot • Kanal Yönetimi',
+      tags: ['Kanal Oluştur', 'Rol Oluştur', 'Toplu İşlem', 'İzin Kopyala'],
+      usage: 'Zaman kaybettiren manuel kanal/rol işlemlerini tek komuta indirir.'
+    },
+    en: {
+      title: 'Channel & Role Management',
+      sub: 'Quick Editing',
+      desc: 'Create, edit, or delete channels and roles <strong>instantly</strong>. Bulk operations, permission copying, channel moving, and role hierarchy editing can all be done with a single command.',
+      cmd: 'b!channel-create voice "General Chat"',
+      embedTitle: '✅ Channel Created',
+      embedDesc: 'Your requested channel was created successfully.',
+      fields: [
+        { name: '📁 Channel Name', value: '#general-chat' },
+        { name: '🔊 Type', value: 'Voice Channel' },
+        { name: '📂 Category', value: 'Chat' },
+        { name: '👤 Moderator', value: 'AhmetEjler' }
+      ],
+      footer: 'BetterBot • Channel Management',
+      tags: ['Create Channel', 'Create Role', 'Bulk', 'Copy Permissions'],
+      usage: 'Reduces time-consuming manual channel/role operations to a single command.'
+    }
+  },
+  {
+    id: 'updates',
+    icon: '<path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/>',
+    color: 'purple',
+    tr: {
+      title: 'Düzenli Güncellemeler',
+      sub: 'Sürekli Gelişim',
+      desc: 'BetterBot <strong>haftalık güncellemelerle</strong> sürekli gelişir. Yeni komutlar, performans iyileştirmeleri, güvenlik yamaları ve topluluk istekleri düzenli olarak eklenir. Güncellemeler sunucunuza otomatik olarak yansır.',
+      cmd: 'b!changelog',
+      embedTitle: '🔄 Sürüm Notları – v2.0.7',
+      embedDesc: 'Bu haftanın güncellemesi yayında! İşte yenilikler:',
+      fields: [
+        { name: '✨ Yeni', value: 'Minecraft entegrasyonu (beta)' },
+        { name: '🐛 Düzeltme', value: 'Ticket kanalı bazen açılmıyordu' },
+        { name: '⚡ İyileştirme', value: 'Komut yanıt süresi %40 hızlandı' }
+      ],
+      footer: 'BetterBot • Sürüm Sistemi • v2.0.7',
+      tags: ['Haftalık Güncelleme', 'Yeni Komutlar', 'Performans', 'Hata Düzeltme'],
+      usage: 'Bot her hafta daha iyi hale gelir, hiçbir şey yapmanıza gerek yok.'
+    },
+    en: {
+      title: 'Regular Updates',
+      sub: 'Continuous Improvement',
+      desc: 'BetterBot keeps improving with <strong>weekly updates</strong>. New commands, performance improvements, security patches, and community requests are added regularly. Updates are automatically applied to your server.',
+      cmd: 'b!changelog',
+      embedTitle: '🔄 Release Notes – v2.0.7',
+      embedDesc: 'This week\'s update is live! Here\'s what\'s new:',
+      fields: [
+        { name: '✨ New', value: 'Minecraft integration (beta)' },
+        { name: '🐛 Fix', value: 'Ticket channel sometimes did not open' },
+        { name: '⚡ Improvement', value: 'Command response time sped up by 40%' }
+      ],
+      footer: 'BetterBot • Release System • v2.0.7',
+      tags: ['Weekly Update', 'New Commands', 'Performance', 'Bug Fix'],
+      usage: 'Bot gets better every week, no action needed from you.'
+    }
+  },
+  {
+    id: 'support',
+    icon: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>',
+    color: 'success',
+    tr: {
+      title: '7/24 Destek',
+      sub: 'Her Zaman Yanında',
+      desc: 'BetterNetwork topluluğu ve destek ekibimiz <strong>günün her saati</strong> yanınızda. Sorularınızı destek kanalından veya DM üzerinden iletebilirsiniz. Ortalama yanıt süresi <strong>5 dakikadan kısa</strong>.',
+      cmd: 'Destek sunucusuna katıl',
+      embedTitle: '🆘 Destek Ekibi Hazır',
+      embedDesc: 'Destek ekibimiz 7/24 hizmetinizde. Bize ulaşmak için aşağıdaki butona tıklayın.',
+      fields: [
+        { name: '💬 Ortalama Yanıt', value: '4 dakika 32 saniye' },
+        { name: '👨‍💻 Aktif Yetkili', value: '6 yetkili şu an çevrimiçi' },
+        { name: '📊 Memnuniyet', value: '%98 kullanıcı memnuniyeti' }
+      ],
+      footer: 'BetterBot • Destek Sistemi',
+      btnText: '💬 Destek Al',
+      tags: ['7/24 Destek', 'Hızlı Yanıt', 'Topluluk', 'Canlı Yardım'],
+      usage: 'Takıldığınız her konuda hızlıca yardım alın.'
+    },
+    en: {
+      title: '24/7 Support',
+      sub: 'Always By Your Side',
+      desc: 'The BetterNetwork community and our support team are by your side <strong>at all hours</strong>. Send your questions via the support channel or DM. Average response time is <strong>under 5 minutes</strong>.',
+      cmd: 'Join the support server',
+      embedTitle: '🆘 Support Team Ready',
+      embedDesc: 'Our support team is available 24/7. Click the button below to reach us.',
+      fields: [
+        { name: '💬 Average Response', value: '4 minutes 32 seconds' },
+        { name: '👨‍💻 Active Staff', value: '6 staff currently online' },
+        { name: '📊 Satisfaction', value: '98% user satisfaction' }
+      ],
+      footer: 'BetterBot • Support System',
+      btnText: '💬 Get Support',
+      tags: ['24/7 Support', 'Fast Response', 'Community', 'Live Help'],
+      usage: 'Get fast help on anything you get stuck on.'
+    }
+  },
+  {
+    id: 'security',
+    icon: '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+    color: 'purple',
+    tr: {
+      title: 'Güvenlik & Gizlilik',
+      sub: 'Veri Koruması',
+      desc: 'Kullanıcı verileri <strong>endüstri standardı şifreleme</strong> ile korunur, üçüncü taraflarla paylaşılmaz ve düzenli güvenlik denetimlerinden geçer. KVKK ve GDPR uyumluluğu tamdır. Mesaj içerikleri komut işlendikten sonra anında silinir.',
+      cmd: 'b!gizlilik',
+      embedTitle: '🔐 Gizlilik ve Güvenlik',
+      embedDesc: 'BetterBot\'un veri politikası özeti:',
+      fields: [
+        { name: '🔒 Şifreleme', value: 'AES-256 + TLS 1.3' },
+        { name: '📋 Uyumluluk', value: 'KVKK, GDPR, Discord ToS' },
+        { name: '🗑️ Veri Saklama', value: 'Komut sonrası anında silme' },
+        { name: '🛡️ Denetim', value: 'Aylık güvenlik taraması' }
+      ],
+      footer: 'BetterBot • Güvenlik Sistemi',
+      btnText: '📄 Politikayı Oku',
+      tags: ['Şifreleme', 'KVKK', 'GDPR', 'Denetim', 'Veri Silme'],
+      usage: 'Verilerinizin güvende olduğundan emin olun.'
+    },
+    en: {
+      title: 'Security & Privacy',
+      sub: 'Data Protection',
+      desc: 'User data is protected with <strong>industry-standard encryption</strong>, not shared with third parties, and undergoes regular security audits. Full GDPR and KVKK compliance. Message contents are deleted immediately after command processing.',
+      cmd: 'b!privacy',
+      embedTitle: '🔐 Privacy and Security',
+      embedDesc: 'Summary of BetterBot\'s data policy:',
+      fields: [
+        { name: '🔒 Encryption', value: 'AES-256 + TLS 1.3' },
+        { name: '📋 Compliance', value: 'GDPR, KVKK, Discord ToS' },
+        { name: '🗑️ Data Retention', value: 'Instant delete after command' },
+        { name: '🛡️ Audit', value: 'Monthly security scan' }
+      ],
+      footer: 'BetterBot • Security System',
+      btnText: '📄 Read Policy',
+      tags: ['Encryption', 'GDPR', 'KVKK', 'Audit', 'Data Deletion'],
+      usage: 'Be sure your data is safe.'
+    }
+  }
+];
+
+/* ================= TRANSLATIONS ================= */
+const translations = {
+  tr: {
+    "loader.tagline": "Tüm Özellikler",
+    "nav.about": "Hakkımızda",
+    "nav.team": "Ekip",
+    "nav.roadmap": "Yol Haritası",
+    "nav.blog": "Blog",
+    "nav.faq": "SSS",
+    "nav.addBot": "Botu Ekle",
+    "features.title": "Tüm Özellikler",
+    "features.sub": "Discord sunucunuzu yönetmek, korumak ve eğlendirmek için ihtiyacınız olan her şey.",
+    "features.badge1": "12+ Özellik",
+    "features.badge2": "Tıklanabilir Önizleme",
+    "features.badge3": "Tamamen Ücretsiz",
+    "features.hint": "Herhangi bir karta <strong>tıklayarak</strong> Discord üzerindeki gerçek kullanım önizlemesini görebilirsin!",
+    "features.clickPreview": "Önizlemeyi Gör",
+    "modal.preview": "Discord Önizleme",
+    "modal.usage": "Ne İşe Yarar?",
+    "modal.tags": "Etiketler",
+    "buttons.home": "Ana Sayfaya Dön",
+    "buttons.commands": "Komut Listesi",
+    "buttons.join": "Sunucuya Katıl",
+    "footer.privacy": "Gizlilik Politikası",
+    "footer.terms": "Hizmet Koşulları"
+  },
+  en: {
+    "loader.tagline": "All Features",
+    "nav.about": "About",
+    "nav.team": "Team",
+    "nav.roadmap": "Roadmap",
+    "nav.blog": "Blog",
+    "nav.faq": "FAQ",
+    "nav.addBot": "Add Bot",
+    "features.title": "All Features",
+    "features.sub": "Everything you need to manage, protect, and entertain your Discord server.",
+    "features.badge1": "12+ Features",
+    "features.badge2": "Clickable Preview",
+    "features.badge3": "Completely Free",
+    "features.hint": "<strong>Click</strong> any card to see a real Discord usage preview!",
+    "features.clickPreview": "See Preview",
+    "modal.preview": "Discord Preview",
+    "modal.usage": "What Does It Do?",
+    "modal.tags": "Tags",
+    "buttons.home": "Back to Home",
+    "buttons.commands": "Command List",
+    "buttons.join": "Join Server",
+    "footer.privacy": "Privacy Policy",
+    "footer.terms": "Terms of Service"
+  }
+};
+
+/* ================= CURRENT LANG ================= */
+let currentLang = localStorage.getItem('bb_lang') || 'tr';
+
+/* ================= RENDER CARDS ================= */
+function renderCards() {
+  const grid = document.getElementById('featuresGrid');
+  grid.innerHTML = '';
+  FEATURES.forEach((f, idx) => {
+    const data = f[currentLang];
+    const card = document.createElement('button');
+    card.className = 'feature-card';
+    card.setAttribute('data-feature-id', f.id);
+    card.setAttribute('data-index', idx);
+    card.innerHTML = `
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          ${f.icon}
+        </svg>
+      </div>
+      <h3>${data.title}</h3>
+      <p>${data.sub}</p>
+      <span class="feature-preview-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span>${translations[currentLang]['features.clickPreview']}</span>
+      </span>
+    `;
+    card.addEventListener('click', () => openModal(idx));
+    grid.appendChild(card);
+  });
+  // Re-observe reveals
+  document.querySelectorAll('.features-grid .feature-card').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  });
+}
+
+/* ================= MODAL ================= */
+const modal = document.getElementById('modal');
+const modalContent = document.getElementById('modalContent');
+const modalClose = document.getElementById('modalClose');
+
+function buildPreview(f, data) {
+  let fieldsHtml = '';
+  if (data.fields && data.fields.length) {
+    data.fields.forEach(field => {
+      fieldsHtml += `
+        <div class="dc-embed-field">
+          <div class="dc-embed-field-name">${field.name}</div>
+          <div class="dc-embed-field-value">${field.value}</div>
+        </div>
+      `;
+    });
+  }
+
+  let buttonsHtml = '';
+  if (data.btnText) {
+    buttonsHtml = `
+      <div class="dc-buttons">
+        <button class="dc-btn success" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          ${data.btnText}
+        </button>
+        <button class="dc-btn danger" type="button">✕</button>
+      </div>
+    `;
+  }
+
+  let reactionsHtml = '';
+  if (data.reactions) {
+    reactionsHtml = `<div class="dc-reactions">` + data.reactions.map(r => `<span class="dc-reaction">${r}</span>`).join('') + `</div>`;
+  }
+
+  // User command message or event
+  const userMsg = f.id === 'auto'
+    ? `<div class="dc-text">🔔 <em>${data.cmd}</em></div>`
+    : `<div class="dc-text"><code>${data.cmd}</code></div>`;
+
+  const avatarHtml = f.id === 'auto' || f.id === 'support'
+    ? `<div class="dc-avatar bot" style="font-size:0.6rem;text-align:center;line-height:1.1;">SYS</div>`
+    : `<div class="dc-avatar">A</div>`;
+
+  const username = f.id === 'auto' ? 'BetterBot Sistemi' : (f.id === 'support' ? 'BetterBot Destek' : 'AhmetEjler');
+
+  return `
+    <div class="discord-preview">
+      <!-- User message -->
+      <div class="dc-user-msg">
+        ${avatarHtml}
+        <div class="dc-msg-body">
+          <div class="dc-msg-head">
+            <span class="dc-username">${username}</span>
+            ${f.id !== 'auto' && f.id !== 'support' ? '<span class="dc-timestamp">bugün 20:14</span>' : '<span class="dc-timestamp">şimdi</span>'}
+          </div>
+          ${userMsg}
+        </div>
+      </div>
+
+      <!-- Bot response -->
+      <div class="dc-user-msg">
+        <div class="dc-avatar bot">
+          <img src="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" alt="BetterBot" />
+        </div>
+        <div class="dc-msg-body">
+          <div class="dc-msg-head">
+            <span class="dc-username">BetterBot</span>
+            <span class="dc-bot-tag">BOT</span>
+            <span class="dc-timestamp">bugün 20:14</span>
+          </div>
+          <div class="dc-embed ${f.color || ''}">
+            <div class="dc-embed-title">${data.embedTitle}</div>
+            <div class="dc-embed-desc">${data.embedDesc}</div>
+            ${fieldsHtml}
+            ${reactionsHtml}
+            ${buttonsHtml}
+            <div class="dc-embed-footer">
+              <span class="dc-embed-footer-dot"></span>
+              ${data.footer}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function openModal(index) {
+  const f = FEATURES[index];
+  const data = f[currentLang];
+  const tagsHtml = data.tags.map(t => `<span class="modal-tag ${f.color === 'purple' ? 'purple' : f.color === 'success' ? 'green' : ''}">${t}</span>`).join('');
+
+  modalContent.innerHTML = `
+    <div class="modal-header">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          ${f.icon}
+        </svg>
+      </div>
+      <div>
+        <div class="modal-title">${data.title}</div>
+        <div class="modal-sub">${data.sub}</div>
+      </div>
+    </div>
+
+    <p class="modal-desc">${data.desc}</p>
+
+    <div class="modal-section-title">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+        <line x1="8" y1="21" x2="16" y2="21"/>
+        <line x1="12" y1="17" x2="12" y2="21"/>
+      </svg>
+      <span>${translations[currentLang]['modal.preview']}</span>
+    </div>
+    ${buildPreview(f, data)}
+
+    <div class="modal-section-title" style="margin-top:20px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 16v-4"/>
+        <path d="M12 8h.01"/>
+      </svg>
+      <span>${translations[currentLang]['modal.usage']}</span>
+    </div>
+    <p class="modal-desc">${data.usage}</p>
+
+    <div class="modal-section-title" style="margin-top:18px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+        <line x1="7" y1="7" x2="7.01" y2="7"/>
+      </svg>
+      <span>${translations[currentLang]['modal.tags']}</span>
+    </div>
+    <div class="modal-footer-info">${tagsHtml}</div>
+  `;
+
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+});
+
+/* ================= LANGUAGE ================= */
+function applyLang(lang) {
+  currentLang = lang;
+  const dict = translations[lang] || translations.tr;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key]) {
+      if (dict[key].includes('<')) el.innerHTML = dict[key];
+      else el.textContent = dict[key];
+    }
+  });
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  localStorage.setItem('bb_lang', lang);
+  renderCards();
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+/* ================= PARTICLES ================= */
+(function initParticles() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let w, h;
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const PARTICLE_COUNT = window.innerWidth < 768 ? 30 : 60;
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 1.8 + 0.5
+    });
+  }
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 212, 255, 0.5)';
+      ctx.fill();
+    });
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 130) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0, 212, 255, ${0.15 * (1 - dist / 130)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ================= MUSIC ================= */
+(function initMusic() {
+  const music = document.getElementById('bgMusic');
+  const toggle = document.getElementById('musicToggle');
+  const icon = document.getElementById('musicIcon');
+  let isPlaying = false;
+  music.volume = 0.15;
+  const PLAY_ICON = '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>';
+  const MUTE_ICON = '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2.5"/>';
+  function setPlaying(state) {
+    isPlaying = state;
+    if (state) {
+      music.play().then(() => {
+        toggle.classList.add('playing');
+        icon.innerHTML = PLAY_ICON;
+      }).catch(() => {
+        toggle.classList.remove('playing');
+        icon.innerHTML = MUTE_ICON;
+        isPlaying = false;
+      });
+    } else {
+      music.pause();
+      toggle.classList.remove('playing');
+      icon.innerHTML = MUTE_ICON;
+    }
+  }
+  toggle.addEventListener('click', () => setPlaying(!isPlaying));
+  setPlaying(true);
+  document.body.addEventListener('click', function once() {
+    if (!isPlaying) setPlaying(true);
+    document.body.removeEventListener('click', once);
+  }, { once: true });
+  window.addEventListener('beforeunload', () => music.pause());
+})();
+
+/* ================= LOADER ================= */
+(function initLoader() {
+  const loader = document.getElementById('loader');
+  const bar = document.getElementById('loaderBar');
+  const percent = document.getElementById('loaderPercent');
+  let progress = 0;
+  let pageLoaded = false;
+  const fakeProgress = setInterval(() => {
+    if (pageLoaded && progress >= 90) return;
+    if (progress < 90) {
+      progress += Math.random() * 8 + 3;
+      if (progress > 90) progress = 90;
+      bar.style.width = progress + '%';
+      percent.textContent = Math.floor(progress) + '%';
+    }
+  }, 120);
+  window.addEventListener('load', () => {
+    pageLoaded = true;
+    clearInterval(fakeProgress);
+    progress = 100;
+    bar.style.width = '100%';
+    percent.textContent = '100%';
+    setTimeout(() => loader.classList.add('hidden'), 600);
+  });
+  setTimeout(() => {
+    if (!loader.classList.contains('hidden')) loader.classList.add('hidden');
+  }, 4000);
+})();
+
+/* ================= NAVBAR SCROLL ================= */
+const navbar = document.getElementById('navbar');
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+  if (window.scrollY > 400) backToTop.classList.add('visible');
+  else backToTop.classList.remove('visible');
+});
+
+/* ================= MOBILE MENU ================= */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+/* ================= REVEAL ================= */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ================= BACK TO TOP ================= */
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ================= INIT ================= */
+applyLang(currentLang);
+</script>
 
 </body>
 </html>
