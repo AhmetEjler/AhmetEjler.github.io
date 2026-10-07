@@ -43,25 +43,157 @@
     #toast { z-index: 9998; position: fixed; }
     #loader { z-index: 9999; position: fixed; }
 
+    /* ===== YÜKLEME EKRANI ===== */
     #loader {
       position: fixed;
       inset: 0;
       background: #0a192f;
+      background-image:
+        radial-gradient(ellipse at 30% 40%, #112240 0%, #0a192f 70%),
+        radial-gradient(ellipse at 70% 60%, #1a1440 0%, transparent 60%);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.6s ease, visibility 0.6s;
+      transition: opacity 0.7s ease, visibility 0.7s;
     }
-    #loader.hidden { opacity: 0; visibility: hidden; }
-    .loader-ring {
-      width: 60px; height: 60px;
-      border: 4px solid rgba(0, 212, 255, 0.15);
-      border-top-color: #00d4ff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      animation: loaderFadeIn 0.8s ease;
+    }
+    @keyframes loaderFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
+    .loader-logo-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .loader-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #00d4ff;
+      object-fit: cover;
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+      animation: loaderLogoPulse 2s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes loaderLogoPulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 60px rgba(0, 212, 255, 0.8), 0 0 100px rgba(168, 85, 247, 0.4);
+      }
+    }
+
+    .loader-ring-outer {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: #00d4ff;
+      border-right-color: #00d4ff;
+      animation: spinCW 1.5s linear infinite;
+    }
+    .loader-ring-inner {
+      position: absolute;
+      inset: 15px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-bottom-color: #a855f7;
+      border-left-color: #a855f7;
+      animation: spinCCW 2s linear infinite;
+    }
+    @keyframes spinCW { to { transform: rotate(360deg); } }
+    @keyframes spinCCW { to { transform: rotate(-360deg); } }
+
+    .loader-brand {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #e6f1ff;
+    }
+    .loader-brand span {
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradientMove 3s ease infinite;
+    }
+    .loader-tagline {
+      font-size: 0.85rem;
+      color: #8892b0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .loader-bar-wrap {
+      width: 240px;
+      height: 4px;
+      background: rgba(0, 212, 255, 0.12);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00d4ff, #a855f7);
+      border-radius: 10px;
+      transition: width 0.15s ease;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+      position: relative;
+    }
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 40px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5));
+      animation: barShine 1s ease-in-out infinite;
+    }
+    @keyframes barShine {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+    .loader-percent {
+      font-size: 0.75rem;
+      color: #00d4ff;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    @media (max-width: 480px) {
+      .loader-logo-wrap { width: 130px; height: 130px; }
+      .loader-logo { width: 80px; height: 80px; }
+      .loader-brand { font-size: 1.5rem; }
+      .loader-tagline { font-size: 0.7rem; letter-spacing: 1.5px; }
+      .loader-bar-wrap { width: 180px; }
+    }
+
+    /* ===== NAVBAR ===== */
     .navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -194,6 +326,7 @@
       .nav-links a { width: 100%; text-align: center; padding: 14px; }
     }
 
+    /* ===== PAGE ===== */
     .page-wrapper {
       padding: 100px 20px 40px;
       display: flex;
@@ -212,6 +345,7 @@
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
     }
 
+    /* ===== HEADER ===== */
     .header { text-align: center; margin-bottom: 40px; }
     .logo {
       width: 130px; height: 130px;
@@ -292,6 +426,7 @@
       50% { opacity: 0.6; transform: scale(1.2); }
     }
 
+    /* ===== STATS ===== */
     .stats {
       display: flex;
       flex-wrap: wrap;
@@ -319,6 +454,7 @@
       font-weight: 500;
     }
 
+    /* ===== TYPOGRAPHY ===== */
     h2 {
       display: flex;
       align-items: center;
@@ -351,6 +487,7 @@
     }
     .highlight { color: #00d4ff; font-weight: 600; }
 
+    /* ===== REVEAL ===== */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -359,32 +496,108 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .grid-2 {
+    /* ===== YENİ ÖZELLİK KARTLARI ===== */
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin: 24px 0 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin: 28px 0 14px;
     }
-    .grid-item {
-      background: #0d1a2f;
-      padding: 18px 22px;
-      border-radius: 16px;
-      border-left: 4px solid #00d4ff;
+    .feature-card {
+      background: linear-gradient(145deg, #0d1a2f, #112240);
+      border-radius: 20px;
+      padding: 26px 24px;
+      border: 1px solid rgba(26, 45, 74, 0.8);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00d4ff, #a855f7);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -50%;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.12);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card:hover::after { opacity: 1; }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
+      border: 1px solid rgba(0, 212, 255, 0.25);
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-size: 0.95rem;
-      color: #ccd6f6;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
     }
-    .grid-item:hover {
-      background: #112240;
-      transform: translateX(6px);
-      border-left-color: #a855f7;
-      box-shadow: 0 6px 20px rgba(0, 212, 255, 0.08);
+    .feature-icon::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.3s;
+      filter: blur(8px);
     }
-    .grid-item .icon { font-size: 1.6rem; flex-shrink: 0; }
+    .feature-card:hover .feature-icon {
+      transform: scale(1.08) rotate(-5deg);
+      border-color: transparent;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+    }
+    .feature-card:hover .feature-icon::before { opacity: 0.6; }
+    .feature-icon svg {
+      width: 26px;
+      height: 26px;
+      color: #00d4ff;
+      transition: color 0.3s;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .feature-card:hover .feature-icon svg { color: #0a192f; }
 
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #e6f1ff;
+      letter-spacing: -0.2px;
+      line-height: 1.3;
+      margin: 0;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: #8892b0;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ===== QUOTE ===== */
     .quote {
       background: linear-gradient(145deg, #0d1a2f, #112240);
       padding: 26px 34px;
@@ -411,6 +624,7 @@
     ul { padding-left: 26px; margin: 12px 0 18px; }
     ul li { margin-bottom: 10px; color: #ccd6f6; }
 
+    /* ===== FAQ ===== */
     .faq-item {
       background: #0d1a2f;
       border-radius: 14px;
@@ -461,6 +675,7 @@
       padding: 0 22px 20px;
     }
 
+    /* ===== EKİP ===== */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -523,6 +738,7 @@
       line-height: 1.6;
     }
 
+    /* ===== ROADMAP ===== */
     .roadmap {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -584,6 +800,7 @@
     .roadmap-col.done .roadmap-list li::before { color: #00ff88; content: '✓'; font-size: 0.85rem; }
     .roadmap-col.now .roadmap-list li::before { color: #ffcc00; content: '▶'; font-size: 0.7rem; }
 
+    /* ===== BLOG ===== */
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -641,6 +858,7 @@
     }
     .blog-meta .read { color: #00d4ff; font-weight: 600; }
 
+    /* ===== OY VER ===== */
     .vote-box {
       background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(168, 85, 247, 0.08));
       border: 2px solid rgba(0, 212, 255, 0.3);
@@ -705,6 +923,7 @@
       width: 18px; height: 18px;
     }
 
+    /* ===== BUTONLAR ===== */
     .btn-group {
       display: flex;
       flex-wrap: wrap;
@@ -761,6 +980,7 @@
       color: #0a192f;
     }
 
+    /* ===== FOOTER ===== */
     .footer {
       margin-top: 55px;
       padding-top: 30px;
@@ -779,6 +999,7 @@
     }
     .footer a:hover { color: #a855f7; }
 
+    /* ===== BACK TO TOP ===== */
     #backToTop {
       position: fixed;
       bottom: 30px; right: 30px;
@@ -800,6 +1021,7 @@
     #backToTop.visible { opacity: 1; visibility: visible; }
     #backToTop:hover { transform: translateY(-4px) scale(1.08); }
 
+    /* ===== MÜZİK BUTONU ===== */
     #musicToggle {
       position: fixed;
       bottom: 30px; right: 90px;
@@ -834,6 +1056,7 @@
       50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6); }
     }
 
+    /* ===== TOAST ===== */
     #toast {
       position: fixed;
       bottom: 100px; left: 50%;
@@ -855,6 +1078,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .page-wrapper { padding: 90px 16px 30px; }
       .container { padding: 32px 20px; border-radius: 28px; }
@@ -885,10 +1109,24 @@
 
 <canvas id="particles"></canvas>
 
+<!-- YÜKLEME EKRANI -->
 <div id="loader">
-  <div class="loader-ring"></div>
+  <div class="loader-content">
+    <div class="loader-logo-wrap">
+      <div class="loader-ring-outer"></div>
+      <div class="loader-ring-inner"></div>
+      <img class="loader-logo" src="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" alt="BetterBot" />
+    </div>
+    <div class="loader-brand">BetterBot <span>2.0</span></div>
+    <div class="loader-tagline">Bağlantının ve Güvenin Yeni Adı</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <div class="loader-percent" id="loaderPercent">0%</div>
+  </div>
 </div>
 
+<!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <div class="nav-container">
     <a href="#" class="nav-brand">
@@ -916,6 +1154,7 @@
 <div class="page-wrapper">
   <div class="container">
 
+    <!-- HEADER -->
     <div class="header">
       <img class="logo" src="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" alt="BetterBot 2.0 Logo" />
       <h1>BetterBot 2.0</h1>
@@ -927,6 +1166,7 @@
       </div>
     </div>
 
+    <!-- STATS -->
     <div class="stats">
       <div class="stat-item"><span class="number" data-count="19">0</span><span class="label" data-i18n="stats.servers">Sunucu</span></div>
       <div class="stat-item"><span class="number" data-count="11299">0</span><span class="label" data-i18n="stats.users">Kullanıcı</span></div>
@@ -951,7 +1191,7 @@
       </p>
     </section>
 
-    <!-- ÖZELLİKLER -->
+    <!-- ÖZELLİKLER (YENİ) -->
     <section id="ozellikler" class="reveal">
       <h2>
         <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -962,16 +1202,106 @@
         <span data-i18n="features.title">Size Neler Sunuyoruz?</span>
       </h2>
       <p data-i18n="features.desc">Moderasyondan eğlenceye, otomasyondan topluluk yönetimine kadar bir Discord sunucusunun ihtiyaç duyduğu her şey, tek bir botta toplandı:</p>
-      <div class="grid-2">
-        <div class="grid-item"><span class="icon">🛡️</span> <span data-i18n="features.f1">Gelişmiş Moderasyon Sistemi</span></div>
-        <div class="grid-item"><span class="icon">📊</span> <span data-i18n="features.f2">Canlı Sunucu İstatistikleri</span></div>
-        <div class="grid-item"><span class="icon">🎭</span> <span data-i18n="features.f3">Eğlence ve Sosyal Komutlar</span></div>
-        <div class="grid-item"><span class="icon">🔗</span> <span data-i18n="features.f4">Otomatik Rol ve Karşılama</span></div>
-        <div class="grid-item"><span class="icon">📝</span> <span data-i18n="features.f5">Form ve Başvuru Sistemleri</span></div>
-        <div class="grid-item"><span class="icon">🎫</span> <span data-i18n="features.f6">Destek Talebi (Ticket) Sistemi</span></div>
-        <div class="grid-item"><span class="icon">📢</span> <span data-i18n="features.f7">Duyuru ve Oylama Araçları</span></div>
-        <div class="grid-item"><span class="icon">⚙️</span> <span data-i18n="features.f8">Otomatik Sunucu Kurulumu</span></div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+            </svg>
+          </div>
+          <h3 data-i18n="features.f1">Gelişmiş Moderasyon</h3>
+          <p data-i18n="features.f1d">Ban, mute, uyarı ve otomatik ceza sistemleriyle sunucunuzu güvende tutun.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+              <path d="M7 16h8"/>
+              <path d="M7 11h12"/>
+              <path d="M7 6h3"/>
+            </svg>
+          </div>
+          <h3 data-i18n="features.f2">Canlı İstatistikler</h3>
+          <p data-i18n="features.f2d">Üye sayısı, mesaj aktivitesi, sunucu sağlığı ve daha fazlasını takip edin.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+              <line x1="9" y1="9" x2="9.01" y2="9"/>
+              <line x1="15" y1="9" x2="15.01" y2="9"/>
+            </svg>
+          </div>
+          <h3 data-i18n="features.f3">Eğlence Komutları</h3>
+          <p data-i18n="features.f3d">IQ testi, aşk ölçer, dans, hackle ve onlarca sosyal eğlence komutu.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="19" y1="8" x2="19" y2="14"/>
+              <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </div>
+          <h3 data-i18n="features.f4">Otomatik Rol & Karşılama</h3>
+          <p data-i18n="features.f4d">Yeni üyeler otomatik rol alır, kişiselleştirilmiş karşılama mesajı görür.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <h3 data-i18n="features.f5">Form & Başvuru Sistemleri</h3>
+          <p data-i18n="features.f5d">Yetkili başvurusu, şikayet, öneri ve YouTube formları tek tıkla.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
+              <line x1="9" y1="12" x2="9.01" y2="12"/>
+              <line x1="15" y1="12" x2="15.01" y2="12"/>
+            </svg>
+          </div>
+          <h3 data-i18n="features.f6">Destek Talebi (Ticket)</h3>
+          <p data-i18n="features.f6d">Özel kanallarda birebir destek. Talep aç, yetkililer anında cevaplasın.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 11 18-5v12L3 14v-3z"/>
+              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+            </svg>
+          </div>
+          <h3 data-i18n="features.f7">Duyuru & Oylama</h3>
+          <p data-i18n="features.f7d">Toplu duyuru, anket ve oylama araçlarıyla topluluğunuzu bilgilendirin.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h3 data-i18n="features.f8">Otomatik Kurulum</h3>
+          <p data-i18n="features.f8d">Kanal, rol ve kategori yapılandırmasını saniyeler içinde otomatik kurun.</p>
+        </div>
       </div>
+
       <div class="quote" data-i18n="features.quote">
         "BetterBot 2.0, sadece bir bot değil; sunucunuzun kalbi ve beyni."
       </div>
@@ -1198,6 +1528,7 @@
       </div>
     </section>
 
+    <!-- BUTONLAR -->
     <div class="btn-group reveal">
       <a href="ozellikler.html" class="btn btn-outline" data-i18n="buttons.features">Özellikler</a>
       <a href="commands.html" class="btn btn-outline" data-i18n="buttons.commands">Komutlar</a>
@@ -1205,6 +1536,7 @@
       <a href="https://discord.gg/BRamjrrtvU" class="btn btn-purple" data-i18n="buttons.join">Sunucuya Katıl</a>
     </div>
 
+    <!-- FOOTER -->
     <div class="footer">
       <span>© 2026 <strong style="color:#00d4ff;">BetterBot 2.0</strong> &amp; <strong style="color:#00d4ff;">BetterNetwork</strong></span>
       <a href="https://github.com/AhmetEjler" target="_blank">GitHub</a>
@@ -1253,14 +1585,22 @@ const translations = {
     "about.p2": "Kısa sürede 19 sunucuda 11.000'den fazla kullanıcıya ulaştık. Bu büyümenin ardındaki en büyük etken, yalnızca güçlü bir bot değil; aynı zamanda aktif bir topluluk ve sürekli gelişen bir ekosistem inşa ediyor olmamız.",
     "features.title": "Size Neler Sunuyoruz?",
     "features.desc": "Moderasyondan eğlenceye, otomasyondan topluluk yönetimine kadar bir Discord sunucusunun ihtiyaç duyduğu her şey, tek bir botta toplandı:",
-    "features.f1": "Gelişmiş Moderasyon Sistemi",
-    "features.f2": "Canlı Sunucu İstatistikleri",
-    "features.f3": "Eğlence ve Sosyal Komutlar",
-    "features.f4": "Otomatik Rol ve Karşılama",
-    "features.f5": "Form ve Başvuru Sistemleri",
-    "features.f6": "Destek Talebi (Ticket) Sistemi",
-    "features.f7": "Duyuru ve Oylama Araçları",
-    "features.f8": "Otomatik Sunucu Kurulumu",
+    "features.f1": "Gelişmiş Moderasyon",
+    "features.f1d": "Ban, mute, uyarı ve otomatik ceza sistemleriyle sunucunuzu güvende tutun.",
+    "features.f2": "Canlı İstatistikler",
+    "features.f2d": "Üye sayısı, mesaj aktivitesi, sunucu sağlığı ve daha fazlasını takip edin.",
+    "features.f3": "Eğlence Komutları",
+    "features.f3d": "IQ testi, aşk ölçer, dans, hackle ve onlarca sosyal eğlence komutu.",
+    "features.f4": "Otomatik Rol & Karşılama",
+    "features.f4d": "Yeni üyeler otomatik rol alır, kişiselleştirilmiş karşılama mesajı görür.",
+    "features.f5": "Form & Başvuru Sistemleri",
+    "features.f5d": "Yetkili başvurusu, şikayet, öneri ve YouTube formları tek tıkla.",
+    "features.f6": "Destek Talebi (Ticket)",
+    "features.f6d": "Özel kanallarda birebir destek. Talep aç, yetkililer anında cevaplasın.",
+    "features.f7": "Duyuru & Oylama",
+    "features.f7d": "Toplu duyuru, anket ve oylama araçlarıyla topluluğunuzu bilgilendirin.",
+    "features.f8": "Otomatik Kurulum",
+    "features.f8d": "Kanal, rol ve kategori yapılandırmasını saniyeler içinde otomatik kurun.",
     "features.quote": "\"BetterBot 2.0, sadece bir bot değil; sunucunuzun kalbi ve beyni.\"",
     "team.title": "Arkamızdaki Ekip",
     "team.desc": "BetterBot 2.0'ı geliştiren, test eden ve her gün daha iyi hale getiren tutkulu ekibimiz:",
@@ -1347,14 +1687,22 @@ const translations = {
     "about.p2": "In a short time, we reached over 11,000 users across 19 servers. The biggest factor behind this growth is that we're not just building a powerful bot; we're also building an active community and a constantly evolving ecosystem.",
     "features.title": "What Do We Offer?",
     "features.desc": "Everything a Discord server needs — from moderation to entertainment, from automation to community management — is gathered in one bot:",
-    "features.f1": "Advanced Moderation System",
-    "features.f2": "Live Server Statistics",
-    "features.f3": "Fun and Social Commands",
-    "features.f4": "Auto Role and Welcome",
-    "features.f5": "Form and Application Systems",
-    "features.f6": "Support Ticket System",
-    "features.f7": "Announcement and Polling Tools",
-    "features.f8": "Automatic Server Setup",
+    "features.f1": "Advanced Moderation",
+    "features.f1d": "Keep your server safe with ban, mute, warn, and automated punishment systems.",
+    "features.f2": "Live Statistics",
+    "features.f2d": "Track member count, message activity, server health, and much more.",
+    "features.f3": "Fun Commands",
+    "features.f3d": "IQ tests, love meters, dance, hack, and dozens of social fun commands.",
+    "features.f4": "Auto Role & Welcome",
+    "features.f4d": "New members get roles automatically and see personalized welcome messages.",
+    "features.f5": "Form & Application Systems",
+    "features.f5d": "Staff applications, reports, suggestions, and YouTube forms in one click.",
+    "features.f6": "Support Tickets",
+    "features.f6d": "One-on-one support in private channels. Open a ticket, staff replies instantly.",
+    "features.f7": "Announcement & Polling",
+    "features.f7d": "Inform your community with mass announcements, polls, and voting tools.",
+    "features.f8": "Automatic Setup",
+    "features.f8d": "Set up channels, roles, and category structures automatically in seconds.",
     "features.quote": "\"BetterBot 2.0 is not just a bot; it's the heart and brain of your server.\"",
     "team.title": "The Team Behind Us",
     "team.desc": "Our passionate team that develops, tests, and improves BetterBot 2.0 every day:",
@@ -1583,12 +1931,43 @@ const translations = {
   applyLang(currentLang);
 })();
 
-/* ===== LOADER ===== */
-window.addEventListener('load', () => {
+/* ===== YÜKLEME EKRANI ===== */
+(function initLoader() {
+  const loader = document.getElementById('loader');
+  const bar = document.getElementById('loaderBar');
+  const percent = document.getElementById('loaderPercent');
+  let progress = 0;
+  let pageLoaded = false;
+
+  const fakeProgress = setInterval(() => {
+    if (pageLoaded && progress >= 90) return;
+    if (progress < 90) {
+      progress += Math.random() * 8 + 3;
+      if (progress > 90) progress = 90;
+      bar.style.width = progress + '%';
+      percent.textContent = Math.floor(progress) + '%';
+    }
+  }, 120);
+
+  window.addEventListener('load', () => {
+    pageLoaded = true;
+    clearInterval(fakeProgress);
+
+    progress = 100;
+    bar.style.width = '100%';
+    percent.textContent = '100%';
+
+    setTimeout(() => {
+      loader.classList.add('hidden');
+    }, 600);
+  });
+
   setTimeout(() => {
-    document.getElementById('loader').classList.add('hidden');
-  }, 500);
-});
+    if (!loader.classList.contains('hidden')) {
+      loader.classList.add('hidden');
+    }
+  }, 4000);
+})();
 
 /* ===== NAVBAR SCROLL ===== */
 const navbar = document.getElementById('navbar');
