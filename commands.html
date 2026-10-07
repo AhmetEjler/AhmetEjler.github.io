@@ -4,16 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BetterBot 2.0 – Komutlar</title>
-  <link rel="icon" href="https://cdn.discordapp.com/attachments/1237301567259152404/1522931261461630996/Gemini_Generated_Image_9wuja89wuja89wuj.png?ex=6a4a43c3&is=6a48f243&hm=bd40a7c5da77a3148c20b87f59d9bf021661eadb55a7f495ea69456406145c1e&" type="image/png" />
+  <link rel="icon" href="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       background: #0a192f;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -24,12 +22,24 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      background-image: radial-gradient(ellipse at 20% 30%, #112240 0%, #0a192f 80%);
+      background-image:
+        radial-gradient(ellipse at 20% 30%, #112240 0%, #0a192f 80%),
+        radial-gradient(ellipse at 80% 70%, #1a1440 0%, transparent 60%);
     }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
     .container {
+      position: relative;
+      z-index: 1;
       max-width: 1100px;
       width: 100%;
-      background: rgba(17, 34, 64, 0.6);
+      background: rgba(17, 34, 64, 0.55);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       padding: 50px 45px;
@@ -37,64 +47,120 @@
       border: 1px solid rgba(26, 45, 74, 0.5);
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
     }
+
     .back-link {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       margin-bottom: 30px;
       color: #00d4ff;
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
     }
-    .back-link:hover {
-      color: #a855f7;
-    }
+    .back-link:hover { color: #a855f7; transform: translateX(-3px); }
+    .back-link svg { width: 16px; height: 16px; }
+
     h1 {
+      display: flex;
+      align-items: center;
+      gap: 14px;
       font-size: 2.8rem;
-      font-weight: 800;
+      font-weight: 900;
       background: linear-gradient(135deg, #00d4ff, #a855f7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 8px;
+      letter-spacing: -1px;
     }
+    h1 svg { width: 40px; height: 40px; color: #00d4ff; -webkit-text-fill-color: initial; }
     .sub {
       color: #8892b0;
       font-size: 1.1rem;
+      margin-bottom: 22px;
+    }
+
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
       margin-bottom: 30px;
     }
     .prefix-box {
       background: #0d1a2f;
-      padding: 10px 20px;
+      padding: 10px 22px;
       border-radius: 40px;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       border: 1px solid #00d4ff;
       color: #00d4ff;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 30px;
     }
+    .prefix-box strong { color: #a855f7; }
+
+    .search-box {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      background: #0d1a2f;
+      border: 1px solid rgba(26, 45, 74, 0.9);
+      color: #e6f1ff;
+      padding: 12px 18px 12px 44px;
+      border-radius: 40px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: all 0.25s;
+      outline: none;
+    }
+    .search-box input:focus {
+      border-color: #00d4ff;
+      box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+    }
+    .search-box input::placeholder { color: #495670; }
+    .search-box svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: #495670;
+      pointer-events: none;
+    }
+
     .category {
       margin-top: 30px;
       padding-top: 20px;
       border-top: 1px solid rgba(26, 45, 74, 0.6);
     }
+    .category:first-of-type { border-top: none; padding-top: 0; }
     .category h2 {
-      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.4rem;
       color: #00d4ff;
       border-left: 4px solid #a855f7;
       padding-left: 16px;
       margin-bottom: 16px;
+      letter-spacing: -0.3px;
     }
+    .category h2 svg { width: 22px; height: 22px; color: #00d4ff; }
+
     .command-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    @media (max-width: 650px) {
-      .command-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    @media (max-width: 650px) { .command-grid { grid-template-columns: 1fr; } }
+
     .command-item {
       background: #0d1a2f;
       padding: 14px 20px;
@@ -105,22 +171,443 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 8px;
-      transition: background 0.2s;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .command-item::after {
+      content: '→';
+      position: absolute;
+      right: 14px;
+      opacity: 0;
+      color: #00d4ff;
+      font-weight: 700;
+      transition: all 0.25s;
     }
     .command-item:hover {
       background: #112240;
+      border-left-color: #a855f7;
+      transform: translateX(4px);
     }
+    .command-item:hover::after { opacity: 1; }
+    .command-item:hover .desc { margin-right: 18px; }
     .command-item .cmd {
       font-weight: 700;
       color: #00d4ff;
-      font-size: 1rem;
+      font-size: 0.98rem;
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
     }
     .command-item .desc {
-      color: #ccd6f6;
-      font-size: 0.9rem;
+      color: #8892b0;
+      font-size: 0.88rem;
       flex: 1;
       text-align: right;
+      transition: margin 0.25s;
     }
+    @media (max-width: 600px) {
+      .command-item { flex-direction: column; align-items: flex-start; }
+      .command-item .desc { text-align: left; margin: 0 !important; }
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 8, 20, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: linear-gradient(160deg, #0d1a2f, #112240);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      border-radius: 24px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 80px rgba(0, 212, 255, 0.1);
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    .modal-overlay.open .modal {
+      transform: scale(1) translateY(0);
+    }
+    .modal::-webkit-scrollbar { width: 8px; }
+    .modal::-webkit-scrollbar-track { background: transparent; }
+    .modal::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #00d4ff, #a855f7);
+      border-radius: 4px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 22px 26px;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+      background: rgba(10, 25, 47, 0.5);
+      border-radius: 24px 24px 0 0;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+    .modal-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #00d4ff;
+    }
+    .modal-title svg { width: 20px; height: 20px; color: #a855f7; }
+    .modal-close {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #8892b0;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s;
+      flex-shrink: 0;
+    }
+    .modal-close:hover {
+      background: rgba(255, 80, 80, 0.15);
+      color: #ff5050;
+      border-color: rgba(255, 80, 80, 0.3);
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* Discord Chat Preview */
+    .discord-preview {
+      background: #313338;
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+    .discord-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: #b5bac1;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .discord-header svg { width: 14px; height: 14px; color: #5865f2; }
+
+    .discord-message {
+      display: flex;
+      gap: 12px;
+      padding: 8px 4px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .discord-message:hover { background: rgba(255, 255, 255, 0.02); }
+    .discord-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #5865f2, #a855f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 0.9rem;
+      overflow: hidden;
+    }
+    .discord-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .discord-avatar.bot-avatar {
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+    }
+    .discord-content { flex: 1; min-width: 0; }
+    .discord-name {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+      font-size: 0.92rem;
+    }
+    .discord-name .username {
+      font-weight: 600;
+      color: #f2f3f5;
+    }
+    .discord-name .username.user-color { color: #00d4ff; }
+    .discord-name .username.bot-color { color: #a855f7; }
+    .discord-bot-tag {
+      background: #5865f2;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 3px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .discord-time {
+      color: #949ba4;
+      font-size: 0.72rem;
+      margin-left: 4px;
+    }
+    .discord-text {
+      color: #dbdee1;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      word-wrap: break-word;
+    }
+    .discord-text .mention {
+      background: rgba(88, 101, 242, 0.3);
+      color: #c9cdfb;
+      padding: 1px 3px;
+      border-radius: 3px;
+      font-weight: 600;
+    }
+    .discord-text .cmd-highlight {
+      background: #2b2d31;
+      color: #00d4ff;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    /* Embed (Bot reply card) */
+    .discord-embed {
+      background: #2b2d31;
+      border-left: 4px solid #00d4ff;
+      border-radius: 4px;
+      padding: 12px 14px;
+      margin-top: 6px;
+      max-width: 480px;
+    }
+    .discord-embed .embed-title {
+      color: #00d4ff;
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .discord-embed .embed-desc {
+      color: #b5bac1;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .discord-embed.success { border-left-color: #00ff88; }
+    .discord-embed.success .embed-title { color: #00ff88; }
+    .discord-embed.error { border-left-color: #ff5050; }
+    .discord-embed.error .embed-title { color: #ff5050; }
+    .discord-embed.warning { border-left-color: #ffaa00; }
+    .discord-embed.warning .embed-title { color: #ffaa00; }
+
+    /* Info Sections */
+    .info-section {
+      background: rgba(13, 26, 47, 0.6);
+      border-radius: 14px;
+      padding: 18px 20px;
+      border-left: 4px solid #a855f7;
+    }
+    .info-section h4 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #a855f7;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .info-section h4 svg { width: 14px; height: 14px; }
+    .info-section p {
+      color: #ccd6f6;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .info-section.purpose { border-left-color: #00d4ff; }
+    .info-section.purpose h4 { color: #00d4ff; }
+
+    /* Code Block */
+    .code-section {
+      background: #0a0f1c;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 212, 255, 0.15);
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 16px;
+      background: rgba(0, 212, 255, 0.06);
+      border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+    }
+    .code-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #00d4ff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .code-header-left svg { width: 14px; height: 14px; }
+    .code-header-left .dots {
+      display: flex;
+      gap: 4px;
+      margin-right: 6px;
+    }
+    .code-header-left .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27c93f; }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      color: #0a192f;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    .copy-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+    }
+    .copy-btn.copied {
+      background: linear-gradient(135deg, #00ff88, #00d4ff);
+    }
+    .copy-btn svg { width: 13px; height: 13px; }
+
+    .code-body {
+      padding: 16px 18px;
+      font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+      font-size: 0.85rem;
+      color: #a8c5e0;
+      line-height: 1.65;
+      overflow-x: auto;
+      white-space: pre;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .code-body::-webkit-scrollbar { width: 8px; height: 8px; }
+    .code-body::-webkit-scrollbar-track { background: transparent; }
+    .code-body::-webkit-scrollbar-thumb {
+      background: rgba(0, 212, 255, 0.3);
+      border-radius: 4px;
+    }
+    .code-body .placeholder {
+      color: #495670;
+      font-style: italic;
+    }
+
+    .modal-footer {
+      padding: 14px 26px 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .modal-footer button {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #8892b0;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .modal-footer button:hover {
+      background: rgba(0, 212, 255, 0.1);
+      color: #00d4ff;
+      border-color: rgba(0, 212, 255, 0.3);
+    }
+
+    /* Empty state */
+    .no-result {
+      text-align: center;
+      padding: 40px 20px;
+      color: #495670;
+      font-style: italic;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      color: #0a192f;
+      padding: 12px 26px;
+      border-radius: 40px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 40px rgba(0, 212, 255, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10000;
+      pointer-events: none;
+    }
+    #toast.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
     .footer {
       margin-top: 50px;
       padding-top: 28px;
@@ -129,135 +616,1104 @@
       color: #495670;
       font-size: 0.85rem;
     }
-    .footer a {
-      color: #00d4ff;
-      text-decoration: none;
-    }
-    .footer a:hover {
-      color: #a855f7;
-    }
+    .footer a { color: #00d4ff; text-decoration: none; transition: color 0.25s; }
+    .footer a:hover { color: #a855f7; }
+
     @media (max-width: 600px) {
       .container { padding: 28px 18px; border-radius: 28px; }
-      h1 { font-size: 2rem; }
-      .command-item { flex-direction: column; align-items: flex-start; }
-      .command-item .desc { text-align: left; }
+      h1 { font-size: 2rem; gap: 10px; }
+      h1 svg { width: 28px; height: 28px; }
+      .sub { font-size: 1rem; }
+      .modal-body { padding: 18px; }
+      .modal-header { padding: 16px 18px; }
+      .modal-title { font-size: 1rem; }
+      .discord-avatar { width: 34px; height: 34px; font-size: 0.8rem; }
+      .discord-text { font-size: 0.85rem; }
+      .code-body { font-size: 0.78rem; }
     }
   </style>
 </head>
 <body>
 
+<canvas id="particles"></canvas>
+
 <div class="container">
-  <a href="index.html" class="back-link">← Ana Sayfaya Dön</a>
-  <h1>📋 BetterBot 2.0 – Komutlar</h1>
-  <p class="sub">Tüm komutları kategoriler halinde keşfedin.</p>
-  <div class="prefix-box">🔹 Prefix: <strong>b!</strong></div>
+  <a href="index.html" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m12 19-7-7 7-7"/>
+      <path d="M19 12H5"/>
+    </svg>
+    <span>Ana Sayfaya Dön</span>
+  </a>
+
+  <h1>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4 17 10 11 4 5"/>
+      <line x1="12" y1="19" x2="20" y2="19"/>
+    </svg>
+    BetterBot 2.0 – Komutlar
+  </h1>
+  <p class="sub">Komutlara tıklayarak detayları, Discord önizlemesini ve kodu görebilirsiniz.</p>
+
+  <div class="top-bar">
+    <div class="prefix-box">🔹 Prefix: <strong>b!</strong></div>
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Komut ara..." autocomplete="off" />
+    </div>
+  </div>
 
   <!-- ===== MODERASYON ===== -->
-  <div class="category">
-    <h2>🛡️ Moderasyon</h2>
+  <div class="category" data-category="moderasyon">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+      </svg>
+      Moderasyon
+    </h2>
     <div class="command-grid">
-      <div class="command-item"><span class="cmd">b!ban</span><span class="desc">Kullanıcıyı yasaklar</span></div>
-      <div class="command-item"><span class="cmd">b!unban</span><span class="desc">Yasağı kaldırır</span></div>
-      <div class="command-item"><span class="cmd">b!uyarı</span><span class="desc">Kullanıcıyı uyarır</span></div>
-      <div class="command-item"><span class="cmd">b!sil</span><span class="desc">Mesaj siler (maks. 100)</span></div>
-      <div class="command-item"><span class="cmd">b!rol ver</span><span class="desc">Rol verir</span></div>
-      <div class="command-item"><span class="cmd">b!rol al</span><span class="desc">Rol alır</span></div>
-      <div class="command-item"><span class="cmd">b!kilit aç</span><span class="desc">Kanalı kilitler</span></div>
-      <div class="command-item"><span class="cmd">b!kilit kapat</span><span class="desc">Kanalın kilidini açar</span></div>
-      <div class="command-item"><span class="cmd">b!mute</span><span class="desc">Kullanıcıyı susturur</span></div>
-      <div class="command-item"><span class="cmd">b!reklam engel aç/kapat</span><span class="desc">Reklam engelini açar/kapatır</span></div>
-      <div class="command-item"><span class="cmd">b!küfürengel aç/kapat</span><span class="desc">Küfür engelini açar/kapatır</span></div>
+      <div class="command-item" data-cmd="b!ban"><span class="cmd">b!ban</span><span class="desc">Kullanıcıyı yasaklar</span></div>
+      <div class="command-item" data-cmd="b!unban"><span class="cmd">b!unban</span><span class="desc">Yasağı kaldırır</span></div>
+      <div class="command-item" data-cmd="b!uyarı"><span class="cmd">b!uyarı</span><span class="desc">Kullanıcıyı uyarır</span></div>
+      <div class="command-item" data-cmd="b!sil"><span class="cmd">b!sil</span><span class="desc">Mesaj siler (maks. 100)</span></div>
+      <div class="command-item" data-cmd="b!rol ver"><span class="cmd">b!rol ver</span><span class="desc">Rol verir</span></div>
+      <div class="command-item" data-cmd="b!rol al"><span class="cmd">b!rol al</span><span class="desc">Rol alır</span></div>
+      <div class="command-item" data-cmd="b!kilit aç"><span class="cmd">b!kilit aç</span><span class="desc">Kanalı kilitler</span></div>
+      <div class="command-item" data-cmd="b!kilit kapat"><span class="cmd">b!kilit kapat</span><span class="desc">Kanalın kilidini açar</span></div>
+      <div class="command-item" data-cmd="b!mute"><span class="cmd">b!mute</span><span class="desc">Kullanıcıyı susturur</span></div>
+      <div class="command-item" data-cmd="b!reklam engel"><span class="cmd">b!reklam engel aç/kapat</span><span class="desc">Reklam engelini açar/kapatır</span></div>
+      <div class="command-item" data-cmd="b!küfürengel"><span class="cmd">b!küfürengel aç/kapat</span><span class="desc">Küfür engelini açar/kapatır</span></div>
     </div>
   </div>
 
   <!-- ===== YETKİLİ ===== -->
-  <div class="category">
-    <h2>👮 Yetkili</h2>
+  <div class="category" data-category="yetkili">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      Yetkili
+    </h2>
     <div class="command-grid">
-      <div class="command-item"><span class="cmd">b!rol oluştur</span><span class="desc">Rol oluşturur</span></div>
-      <div class="command-item"><span class="cmd">b!metin kanalı oluştur</span><span class="desc">Metin kanalı oluşturur</span></div>
-      <div class="command-item"><span class="cmd">b!ses kanalı oluştur</span><span class="desc">Ses kanalı oluşturur</span></div>
-      <div class="command-item"><span class="cmd">b!duyuru</span><span class="desc">Duyuru gönderir</span></div>
-      <div class="command-item"><span class="cmd">b!oylama</span><span class="desc">Oylama başlatır</span></div>
-      <div class="command-item"><span class="cmd">b!set mute rol</span><span class="desc">Mute rolünü ayarlar</span></div>
-      <div class="command-item"><span class="cmd">b!set butonlu rol</span><span class="desc">Butonlu rol sistemini ayarlar</span></div>
-      <div class="command-item"><span class="cmd">b!form başvur</span><span class="desc">Yetkili başvuru formu</span></div>
-      <div class="command-item"><span class="cmd">b!form şikayet</span><span class="desc">Şikayet formu</span></div>
-      <div class="command-item"><span class="cmd">b!form öneri</span><span class="desc">Öneri formu</span></div>
-      <div class="command-item"><span class="cmd">b!form youtube</span><span class="desc">YouTube başvuru formu</span></div>
-      <div class="command-item"><span class="cmd">b!destek sistemi aç</span><span class="desc">Ticket sistemini açar</span></div>
-      <div class="command-item"><span class="cmd">b!kapat</span><span class="desc">Ticket kanalını kapatır</span></div>
+      <div class="command-item" data-cmd="b!rol oluştur"><span class="cmd">b!rol oluştur</span><span class="desc">Rol oluşturur</span></div>
+      <div class="command-item" data-cmd="b!metin kanalı oluştur"><span class="cmd">b!metin kanalı oluştur</span><span class="desc">Metin kanalı oluşturur</span></div>
+      <div class="command-item" data-cmd="b!ses kanalı oluştur"><span class="cmd">b!ses kanalı oluştur</span><span class="desc">Ses kanalı oluşturur</span></div>
+      <div class="command-item" data-cmd="b!duyuru"><span class="cmd">b!duyuru</span><span class="desc">Duyuru gönderir</span></div>
+      <div class="command-item" data-cmd="b!oylama"><span class="cmd">b!oylama</span><span class="desc">Oylama başlatır</span></div>
+      <div class="command-item" data-cmd="b!set mute rol"><span class="cmd">b!set mute rol</span><span class="desc">Mute rolünü ayarlar</span></div>
+      <div class="command-item" data-cmd="b!set butonlu rol"><span class="cmd">b!set butonlu rol</span><span class="desc">Butonlu rol sistemini ayarlar</span></div>
+      <div class="command-item" data-cmd="b!form başvur"><span class="cmd">b!form başvur</span><span class="desc">Yetkili başvuru formu</span></div>
+      <div class="command-item" data-cmd="b!form şikayet"><span class="cmd">b!form şikayet</span><span class="desc">Şikayet formu</span></div>
+      <div class="command-item" data-cmd="b!form öneri"><span class="cmd">b!form öneri</span><span class="desc">Öneri formu</span></div>
+      <div class="command-item" data-cmd="b!form youtube"><span class="cmd">b!form youtube</span><span class="desc">YouTube başvuru formu</span></div>
+      <div class="command-item" data-cmd="b!destek sistemi aç"><span class="cmd">b!destek sistemi aç</span><span class="desc">Ticket sistemini açar</span></div>
+      <div class="command-item" data-cmd="b!kapat"><span class="cmd">b!kapat</span><span class="desc">Ticket kanalını kapatır</span></div>
     </div>
   </div>
 
   <!-- ===== SUNUCU KURMA ===== -->
-  <div class="category">
-    <h2>⚙️ Sunucu Kurma</h2>
+  <div class="category" data-category="kurulum">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+      Sunucu Kurma
+    </h2>
     <div class="command-grid">
-      <div class="command-item"><span class="cmd">b!sunucukur</span><span class="desc">Sunucuyu otomatik kurar (30 sn)</span></div>
-      <div class="command-item"><span class="cmd">b!rolkur</span><span class="desc">Rolleri otomatik kurar (3 sn)</span></div>
+      <div class="command-item" data-cmd="b!sunucukur"><span class="cmd">b!sunucukur</span><span class="desc">Sunucuyu otomatik kurar (30 sn)</span></div>
+      <div class="command-item" data-cmd="b!rolkur"><span class="cmd">b!rolkur</span><span class="desc">Rolleri otomatik kurar (3 sn)</span></div>
     </div>
   </div>
 
   <!-- ===== EĞLENCE ===== -->
-  <div class="category">
-    <h2>🎭 Eğlence</h2>
+  <div class="category" data-category="eglence">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+        <line x1="9" y1="9" x2="9.01" y2="9"/>
+        <line x1="15" y1="9" x2="15.01" y2="9"/>
+      </svg>
+      Eğlence
+    </h2>
     <div class="command-grid">
-      <div class="command-item"><span class="cmd">b!ıq</span><span class="desc">IQ seviyesini ölçer</span></div>
-      <div class="command-item"><span class="cmd">b!hackle</span><span class="desc">Şaka amaçlı hackler</span></div>
-      <div class="command-item"><span class="cmd">b!aşk</span><span class="desc">Aşk uyumunu gösterir</span></div>
-      <div class="command-item"><span class="cmd">b!dans</span><span class="desc">Rastgele dans figürleri</span></div>
-      <div class="command-item"><span class="cmd">b!ciddileşme</span><span class="desc">Ciddileşme efekti</span></div>
-      <div class="command-item"><span class="cmd">b!sunucu sil</span><span class="desc">Sunucuyu silme efekti</span></div>
-      <div class="command-item"><span class="cmd">b!korona</span><span class="desc">Korona testi</span></div>
-      <div class="command-item"><span class="cmd">b!karne not</span><span class="desc">Karne notunu gösterir</span></div>
-      <div class="command-item"><span class="cmd">b!say</span><span class="desc">Bota kelime söyletir</span></div>
+      <div class="command-item" data-cmd="b!ıq"><span class="cmd">b!ıq</span><span class="desc">IQ seviyesini ölçer</span></div>
+      <div class="command-item" data-cmd="b!hackle"><span class="cmd">b!hackle</span><span class="desc">Şaka amaçlı hackler</span></div>
+      <div class="command-item" data-cmd="b!aşk"><span class="cmd">b!aşk</span><span class="desc">Aşk uyumunu gösterir</span></div>
+      <div class="command-item" data-cmd="b!dans"><span class="cmd">b!dans</span><span class="desc">Rastgele dans figürleri</span></div>
+      <div class="command-item" data-cmd="b!ciddileşme"><span class="cmd">b!ciddileşme</span><span class="desc">Ciddileşme efekti</span></div>
+      <div class="command-item" data-cmd="b!sunucu sil"><span class="cmd">b!sunucu sil</span><span class="desc">Sunucuyu silme efekti</span></div>
+      <div class="command-item" data-cmd="b!korona"><span class="cmd">b!korona</span><span class="desc">Korona testi</span></div>
+      <div class="command-item" data-cmd="b!karne not"><span class="cmd">b!karne not</span><span class="desc">Karne notunu gösterir</span></div>
+      <div class="command-item" data-cmd="b!say"><span class="cmd">b!say</span><span class="desc">Bota kelime söyletir</span></div>
     </div>
   </div>
 
   <!-- ===== KULLANICI ===== -->
-  <div class="category">
-    <h2>👥 Kullanıcı</h2>
+  <div class="category" data-category="kullanici">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      Kullanıcı
+    </h2>
     <div class="command-grid">
-      <div class="command-item"><span class="cmd">b!avatar</span><span class="desc">Kullanıcı avatarını gösterir</span></div>
-      <div class="command-item"><span class="cmd">b!öneri</span><span class="desc">Öneri gönderir</span></div>
-      <div class="command-item"><span class="cmd">b!şikayet</span><span class="desc">Şikayet gönderir</span></div>
-      <div class="command-item"><span class="cmd">b!canlı destek</span><span class="desc">Kuruculara bildirim gönderir</span></div>
-      <div class="command-item"><span class="cmd">b!afk</span><span class="desc">AFK moduna geçer</span></div>
-      <div class="command-item"><span class="cmd">b!unafk</span><span class="desc">AFK modundan çıkar</span></div>
-      <div class="command-item"><span class="cmd">b!dm</span><span class="desc">Özel mesaj gönderir</span></div>
-      <div class="command-item"><span class="cmd">b!butonlu rol</span><span class="desc">Butonlu rol sistemini çalıştırır</span></div>
-      <div class="command-item"><span class="cmd">b!otocevap aç/kapat</span><span class="desc">Sa-As cevap sistemini açar/kapatır</span></div>
+      <div class="command-item" data-cmd="b!avatar"><span class="cmd">b!avatar</span><span class="desc">Kullanıcı avatarını gösterir</span></div>
+      <div class="command-item" data-cmd="b!öneri"><span class="cmd">b!öneri</span><span class="desc">Öneri gönderir</span></div>
+      <div class="command-item" data-cmd="b!şikayet"><span class="cmd">b!şikayet</span><span class="desc">Şikayet gönderir</span></div>
+      <div class="command-item" data-cmd="b!canlı destek"><span class="cmd">b!canlı destek</span><span class="desc">Kuruculara bildirim gönderir</span></div>
+      <div class="command-item" data-cmd="b!afk"><span class="cmd">b!afk</span><span class="desc">AFK moduna geçer</span></div>
+      <div class="command-item" data-cmd="b!unafk"><span class="cmd">b!unafk</span><span class="desc">AFK modundan çıkar</span></div>
+      <div class="command-item" data-cmd="b!dm"><span class="cmd">b!dm</span><span class="desc">Özel mesaj gönderir</span></div>
+      <div class="command-item" data-cmd="b!butonlu rol"><span class="cmd">b!butonlu rol</span><span class="desc">Butonlu rol sistemini çalıştırır</span></div>
+      <div class="command-item" data-cmd="b!otocevap"><span class="cmd">b!otocevap aç/kapat</span><span class="desc">Sa-As cevap sistemini açar/kapatır</span></div>
     </div>
   </div>
 
   <!-- ===== BİLGİ ===== -->
-  <div class="category">
-    <h2>🔖 Bilgi</h2>
+  <div class="category" data-category="bilgi">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+      Bilgi
+    </h2>
     <div class="command-grid">
-      <div class="command-item"><span class="cmd">b!kullanıcı bilgi</span><span class="desc">Kullanıcı bilgilerini gösterir</span></div>
-      <div class="command-item"><span class="cmd">b!sunucu bilgi</span><span class="desc">Sunucu bilgilerini gösterir</span></div>
-      <div class="command-item"><span class="cmd">b!bot bilgi</span><span class="desc">Bot bilgilerini gösterir</span></div>
-      <div class="command-item"><span class="cmd">b!rol liste</span><span class="desc">Sunucudaki rolleri listeler</span></div>
+      <div class="command-item" data-cmd="b!kullanıcı bilgi"><span class="cmd">b!kullanıcı bilgi</span><span class="desc">Kullanıcı bilgilerini gösterir</span></div>
+      <div class="command-item" data-cmd="b!sunucu bilgi"><span class="cmd">b!sunucu bilgi</span><span class="desc">Sunucu bilgilerini gösterir</span></div>
+      <div class="command-item" data-cmd="b!bot bilgi"><span class="cmd">b!bot bilgi</span><span class="desc">Bot bilgilerini gösterir</span></div>
+      <div class="command-item" data-cmd="b!rol liste"><span class="cmd">b!rol liste</span><span class="desc">Sunucudaki rolleri listeler</span></div>
     </div>
   </div>
 
   <!-- ===== REKLAM & BOT ===== -->
-  <div class="category">
-    <h2>🎬 Reklam & Bot</h2>
+  <div class="category" data-category="reklam">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m3 11 18-5v12L3 14v-3z"/>
+        <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+      </svg>
+      Reklam & Bot
+    </h2>
     <div class="command-grid">
-      <div class="command-item"><span class="cmd">b!reklam ver</span><span class="desc">Reklam yapar (6 saatte bir)</span></div>
-      <div class="command-item"><span class="cmd">b!oyver</span><span class="desc">Top.gg oy verir</span></div>
-      <div class="command-item"><span class="cmd">b!bot güncellemeleri</span><span class="desc">Güncellemeleri gösterir</span></div>
-      <div class="command-item"><span class="cmd">b!bot kurucuları</span><span class="desc">Bot sahiplerini gösterir</span></div>
+      <div class="command-item" data-cmd="b!reklam ver"><span class="cmd">b!reklam ver</span><span class="desc">Reklam yapar (6 saatte bir)</span></div>
+      <div class="command-item" data-cmd="b!oyver"><span class="cmd">b!oyver</span><span class="desc">Top.gg oy verir</span></div>
+      <div class="command-item" data-cmd="b!bot güncellemeleri"><span class="cmd">b!bot güncellemeleri</span><span class="desc">Güncellemeleri gösterir</span></div>
+      <div class="command-item" data-cmd="b!bot kurucuları"><span class="cmd">b!bot kurucuları</span><span class="desc">Bot sahiplerini gösterir</span></div>
     </div>
   </div>
 
   <div class="footer">
-    <span>© 2025 BetterBot 2.0 &amp; BetterNetwork</span> &bull;
+    <span>© 2026 BetterBot 2.0 &amp; BetterNetwork</span> &bull;
     <a href="https://github.com/AhmetEjler" target="_blank">GitHub</a>
   </div>
 </div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 17 10 11 4 5"/>
+          <line x1="12" y1="19" x2="20" y2="19"/>
+        </svg>
+        <span id="modalCmdName">b!komut</span>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Kapat">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Discord Önizleme -->
+      <div>
+        <div class="info-section purpose" style="margin-bottom:12px;">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            Amacı
+          </h4>
+          <p id="modalPurpose">Bu komut, sunucunuzda belirtilen işlemi gerçekleştirir.</p>
+        </div>
+
+        <div class="discord-preview">
+          <div class="discord-header">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286z"/>
+            </svg>
+            Discord Önizleme
+          </div>
+          <div id="discordChat"></div>
+        </div>
+      </div>
+
+      <!-- Mantık / Açıklama -->
+      <div class="info-section">
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <path d="M12 17h.01"/>
+          </svg>
+          Mantığı / Nasıl Çalışır?
+        </h4>
+        <p id="modalLogic">Komut çalıştırıldığında bot gerekli kontrolleri yapar ve işlemi gerçekleştirir.</p>
+      </div>
+
+      <!-- Kod -->
+      <div class="code-section">
+        <div class="code-header">
+          <div class="code-header-left">
+            <div class="dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <span>Kod</span>
+          </div>
+          <button class="copy-btn" id="copyBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+              <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <span>Kopyala</span>
+          </button>
+        </div>
+        <div class="code-body" id="modalCode"></div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button id="modalFooterClose">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="toast">✓ Kopyalandı!</div>
+
+<script>
+/* ======================================================
+   KOMUT VERİLERİ
+   ------------------------------------------------------
+   Buradaki her komut için:
+   - purpose: Komutun amacı (kısa açıklama)
+   - logic:   Komutun mantığı (nasıl çalışır)
+   - chat:    Discord sohbet önizlemesi (dizi halinde)
+   - code:    Kopyalanacak kod (buraya kendi kodunu yaz)
+   ====================================================== */
+const commandData = {
+
+  "b!ban": {
+    purpose: "Sunucudan bir kullanıcıyı kalıcı olarak yasaklar.",
+    logic: "Bot, komutu kullanan kişinin yetkisini kontrol eder, ardından belirtilen kullanıcıyı yasaklar ve yasaklama sebebini log kanalına gönderir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!ban @KotuKullanici Spam yapıyor' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kullanıcı Yasaklandı", desc: "@KotuKullanici sunucudan kalıcı olarak yasaklandı.\n**Sebep:** Spam yapıyor" } }
+    ],
+    code: "// b!ban komutunun kodu buraya gelecek\n// Örnek:\n// module.exports = {\n//   name: 'ban',\n//   execute(message, args) {\n//     // ...\n//   }\n// }"
+  },
+
+  "b!unban": {
+    purpose: "Yasaklanmış bir kullanıcının yasağını kaldırır.",
+    logic: "Bot, yasaklı kullanıcı listesinden ilgili ID'yi bulur ve yasağı kaldırır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!unban 123456789012345678' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Yasak Kaldırıldı", desc: "Kullanıcının yasağı başarıyla kaldırıldı." } }
+    ],
+    code: "// b!unban komutunun kodu buraya gelecek"
+  },
+
+  "b!uyarı": {
+    purpose: "Bir kullanıcıyı kural ihlali sebebiyle uyarır.",
+    logic: "Bot, kullanıcıya DM üzerinden uyarı gönderir ve uyarı sayısını veritabanına kaydeder. Belirli sayıda uyarı alan kullanıcı otomatik olarak mute veya banlanabilir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!uyarı @Kullanici Küfür' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "Kullanıcı Uyarıldı", desc: "@Kullanici 1. uyarısını aldı.\n**Sebep:** Küfür" } }
+    ],
+    code: "// b!uyarı komutunun kodu buraya gelecek"
+  },
+
+  "b!sil": {
+    purpose: "Belirtilen sayıda mesajı kanaldan siler.",
+    logic: "Bot, komutun kullanıldığı kanalda belirtilen sayıda mesajı toplu olarak siler. Maksimum 100 mesaj sınırı vardır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!sil 50' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Mesajlar Silindi", desc: "50 mesaj başarıyla silindi." } }
+    ],
+    code: "// b!sil komutunun kodu buraya gelecek"
+  },
+
+  "b!rol ver": {
+    purpose: "Belirtilen kullanıcıya belirtilen rolü verir.",
+    logic: "Bot, komutu kullanan kişinin rol verme yetkisini kontrol eder ve belirtilen üyeye rolü atar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!rol ver @Kullanici Üye' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Rol Verildi", desc: "@Kullanici kullanıcısına **Üye** rolü verildi." } }
+    ],
+    code: "// b!rol ver komutunun kodu buraya gelecek"
+  },
+
+  "b!rol al": {
+    purpose: "Belirtilen kullanıcıdan belirtilen rolü alır.",
+    logic: "Bot, kullanıcının rollerini kontrol eder ve belirtilen rolü kaldırır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!rol al @Kullanici Üye' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Rol Alındı", desc: "@Kullanici kullanıcısından **Üye** rolü alındı." } }
+    ],
+    code: "// b!rol al komutunun kodu buraya gelecek"
+  },
+
+  "b!kilit aç": {
+    purpose: "Belirtilen kanalı @everyone için kilitler, kimse mesaj gönderemez.",
+    logic: "Bot, kanalın izinlerini güncelleyerek @everyone rolünün mesaj gönderme yetkisini kapatır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!kilit aç' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Kilitlendi", desc: "Bu kanal artık kilitli. Mesaj gönderilemez." } }
+    ],
+    code: "// b!kilit aç komutunun kodu buraya gelecek"
+  },
+
+  "b!kilit kapat": {
+    purpose: "Daha önce kilitlenmiş kanalın kilidini açar.",
+    logic: "Bot, kanalın izinlerini eski haline getirir ve @everyone mesaj gönderebilir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!kilit kapat' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kilit Açıldı", desc: "Bu kanalın kilidi açıldı. Mesaj gönderilebilir." } }
+    ],
+    code: "// b!kilit kapat komutunun kodu buraya gelecek"
+  },
+
+  "b!mute": {
+    purpose: "Bir kullanıcıyı belirtilen süre boyunca susturur.",
+    logic: "Bot, mute rolünü kullanıcıya atar ve süre bitince otomatik olarak rolü kaldırır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!mute @Kullanici 10m Spam' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "Kullanıcı Susturuldu", desc: "@Kullanici 10 dakika boyunca susturuldu.\n**Sebep:** Spam" } }
+    ],
+    code: "// b!mute komutunun kodu buraya gelecek"
+  },
+
+  "b!reklam engel": {
+    purpose: "Sunucuda reklam engelini açar veya kapatır.",
+    logic: "Bot, aktiflik durumunu değiştirir. Aktifken reklam içeren mesajları otomatik olarak siler.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!reklam engel aç' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Reklam Engel Aktif", desc: "Sunucuda reklam engelleme sistemi aktif edildi." } }
+    ],
+    code: "// b!reklam engel komutunun kodu buraya gelecek"
+  },
+
+  "b!küfürengel": {
+    purpose: "Sunucuda küfür engelini açar veya kapatır.",
+    logic: "Bot, aktiflik durumunu değiştirir. Aktifken küfür içeren mesajları filtreler.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!küfürengel aç' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Küfür Engel Aktif", desc: "Sunucuda küfür engelleme sistemi aktif edildi." } }
+    ],
+    code: "// b!küfürengel komutunun kodu buraya gelecek"
+  },
+
+  "b!rol oluştur": {
+    purpose: "Sunucuda yeni bir rol oluşturur.",
+    logic: "Bot, belirtilen isim ve renk ile yeni bir rol oluşturur.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!rol oluştur Yetkili #ff0000' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Rol Oluşturuldu", desc: "**Yetkili** rolü başarıyla oluşturuldu." } }
+    ],
+    code: "// b!rol oluştur komutunun kodu buraya gelecek"
+  },
+
+  "b!metin kanalı oluştur": {
+    purpose: "Sunucuda yeni bir metin kanalı oluşturur.",
+    logic: "Bot, belirtilen isimle yeni bir metin kanalı açar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!metin kanalı oluştur duyurular' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Oluşturuldu", desc: "**#duyurular** metin kanalı oluşturuldu." } }
+    ],
+    code: "// b!metin kanalı oluştur komutunun kodu buraya gelecek"
+  },
+
+  "b!ses kanalı oluştur": {
+    purpose: "Sunucuda yeni bir ses kanalı oluşturur.",
+    logic: "Bot, belirtilen isimle yeni bir ses kanalı açar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!ses kanalı oluştur Sohbet' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Oluşturuldu", desc: "**🔊 Sohbet** ses kanalı oluşturuldu." } }
+    ],
+    code: "// b!ses kanalı oluştur komutunun kodu buraya gelecek"
+  },
+
+  "b!duyuru": {
+    purpose: "Belirtilen kanala duyuru gönderir.",
+    logic: "Bot, duyuruyu belirtilen kanala embed formatında gönderir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!duyuru #genel Yeni etkinlik bu akşam!' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📢 Duyuru", desc: "Yeni etkinlik bu akşam!" } }
+    ],
+    code: "// b!duyuru komutunun kodu buraya gelecek"
+  },
+
+  "b!oylama": {
+    purpose: "Belirtilen konuda oylama başlatır.",
+    logic: "Bot, mesajı tepki emojileri ile gönderir ve oyları takip eder.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!oylama Sunucuya yeni kanal eklensin mi?' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🗳️ Oylama Başladı", desc: "Sunucuya yeni kanal eklensin mi?\n\n👍 Evet\n👎 Hayır" } }
+    ],
+    code: "// b!oylama komutunun kodu buraya gelecek"
+  },
+
+  "b!set mute rol": {
+    purpose: "Mute için kullanılacak rolü ayarlar.",
+    logic: "Bot, sunucu ayarlarında mute rolü olarak belirtilen rolü kaydeder.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!set mute rol @Muted' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Mute Rolü Ayarlandı", desc: "Mute rolü olarak **@Muted** seçildi." } }
+    ],
+    code: "// b!set mute rol komutunun kodu buraya gelecek"
+  },
+
+  "b!set butonlu rol": {
+    purpose: "Butonlu rol sistemini kurar.",
+    logic: "Bot, belirtilen mesajı butonlarla birlikte gönderir ve butona tıklayanlara rol atar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!set butonlu rol #roller' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Butonlu Rol Kuruldu", desc: "Rol seçim sistemi **#roller** kanalında oluşturuldu." } }
+    ],
+    code: "// b!set butonlu rol komutunun kodu buraya gelecek"
+  },
+
+  "b!form başvur": {
+    purpose: "Yetkili başvuru formunu açar.",
+    logic: "Bot, kullanıcıya bir modal açar ve başvuru bilgilerini toplar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!form başvur' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📝 Başvuru Formu", desc: "Form modalı açıldı. Bilgilerini doldur ve gönder." } }
+    ],
+    code: "// b!form başvur komutunun kodu buraya gelecek"
+  },
+
+  "b!form şikayet": {
+    purpose: "Şikayet formunu açar.",
+    logic: "Bot, kullanıcıdan şikayet konusunu ve detayını alır, yetkililere iletir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!form şikayet' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "📝 Şikayet Formu", desc: "Form modalı açıldı. Şikayetini detaylıca yaz." } }
+    ],
+    code: "// b!form şikayet komutunun kodu buraya gelecek"
+  },
+
+  "b!form öneri": {
+    purpose: "Öneri formunu açar.",
+    logic: "Bot, kullanıcıdan önerisini alır ve öneri kanalına iletir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!form öneri' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "💡 Öneri Formu", desc: "Form modalı açıldı. Önerini yaz ve gönder." } }
+    ],
+    code: "// b!form öneri komutunun kodu buraya gelecek"
+  },
+
+  "b!form youtube": {
+    purpose: "YouTube başvuru formunu açar.",
+    logic: "Bot, kullanıcıdan YouTube kanal bilgilerini alır ve yetkililere iletir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!form youtube' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🎬 YouTube Başvuru Formu", desc: "Form modalı açıldı. Kanal bilgilerini doldur." } }
+    ],
+    code: "// b!form youtube komutunun kodu buraya gelecek"
+  },
+
+  "b!destek sistemi aç": {
+    purpose: "Ticket (destek talebi) sistemini kurar.",
+    logic: "Bot, destek talebi kategorisi ve kanalı oluşturur.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!destek sistemi aç' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🎫 Destek Sistemi Kuruldu", desc: "Ticket sistemi aktif edildi. Destek kanalından talep açabilirsiniz." } }
+    ],
+    code: "// b!destek sistemi aç komutunun kodu buraya gelecek"
+  },
+
+  "b!kapat": {
+    purpose: "Aktif ticket kanalını kapatır.",
+    logic: "Bot, ticket kanalını siler ve log kaydı oluşturur.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!kapat' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🎫 Ticket Kapatıldı", desc: "Bu destek talebi kapatıldı. Kanal 5 saniye içinde silinecek." } }
+    ],
+    code: "// b!kapat komutunun kodu buraya gelecek"
+  },
+
+  "b!sunucukur": {
+    purpose: "Sunucuyu tek komutla otomatik kurar.",
+    logic: "Bot, kategoriler, kanallar ve roller oluşturur. Yaklaşık 30 saniye sürer.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!sunucukur' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "⚙️ Sunucu Kuruluyor", desc: "Kategoriler, kanallar ve roller oluşturuluyor...\n\n✅ Genel kategorisi\n✅ Yetkili kategorisi\n✅ 12 kanal\n✅ 8 rol\n\n**Tamamlandı! (30s)**" } }
+    ],
+    code: "// b!sunucukur komutunun kodu buraya gelecek"
+  },
+
+  "b!rolkur": {
+    purpose: "Tüm rolleri otomatik olarak kurar.",
+    logic: "Bot, hazır rol şablonlarını hiyerarşiye uygun şekilde oluşturur.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!rolkur' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "⚙️ Roller Kuruluyor", desc: "✅ Kurucu\n✅ Yönetici\n✅ Moderatör\n✅ Rehber\n✅ Üye\n\n**Tamamlandı! (3s)**" } }
+    ],
+    code: "// b!rolkur komutunun kodu buraya gelecek"
+  },
+
+  "b!ıq": {
+    purpose: "Kullanıcıya rastgele bir IQ değeri atar.",
+    logic: "Bot, kullanıcı için rastgele bir sayı üretir ve bunu eğlence amaçlı gösterir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!ıq' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🧠 IQ Testi", desc: "**AhmetEjler**'in IQ seviyesi: **142** 🎉" } }
+    ],
+    code: "// b!ıq komutunun kodu buraya gelecek"
+  },
+
+  "b!hackle": {
+    purpose: "Şaka amaçlı hack simülasyonu yapar.",
+    logic: "Bot, sahte bir 'hack' animasyonu oynatır ve sonunda şaka olduğunu belirtir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!hackle @Kullanici' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "💻 Hackleniyor...", desc: "@Kullanici'nin sistemi hackleniyor...\n\n`%10`\n`%30`\n`%60`\n`%100`\n\n🎉 Şaka! Hiçbir şey hacklenmedi 😄" } }
+    ],
+    code: "// b!hackle komutunun kodu buraya gelecek"
+  },
+
+  "b!aşk": {
+    purpose: "İki kullanıcı arasındaki aşk uyumunu gösterir.",
+    logic: "Bot, iki isim arasında rastgele bir uyum yüzdesi hesaplar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!aşk @Kullanici' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "❤️ Aşk Uyumu", desc: "**AhmetEjler** ❤️ **Kullanici**\n\nUyum: **%87** 💕" } }
+    ],
+    code: "// b!aşk komutunun kodu buraya gelecek"
+  },
+
+  "b!dans": {
+    purpose: "Rastgele dans figürleri gönderir.",
+    logic: "Bot, GIF veya resim formatında rastgele dans figürleri paylaşır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!dans' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "💃 Dans Zamanı!", desc: "🕺 AhmetEjler dans ediyor!" } }
+    ],
+    code: "// b!dans komutunun kodu buraya gelecek"
+  },
+
+  "b!ciddileşme": {
+    purpose: "Şaka amaçlı ciddileşme efekti gönderir.",
+    logic: "Bot, kullanıcıya 'ciddi' bir uyarı mesajı gönderir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!ciddileşme' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "😐 Ciddi Mod", desc: "**AhmetEjler** artık ciddi moda geçti. Şaka yok!" } }
+    ],
+    code: "// b!ciddileşme komutunun kodu buraya gelecek"
+  },
+
+  "b!sunucu sil": {
+    purpose: "Şaka amaçlı sunucu silme efekti.",
+    logic: "Bot, sahte bir 'sunucu siliniyor' animasyonu oynatır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!sunucu sil' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "error", title: "⚠️ SUNUCU SİLİNİYOR...", desc: "`%25`\n`%50`\n`%75`\n`%100`\n\n😅 Şaka! Sunucu sapasağlam duruyor." } }
+    ],
+    code: "// b!sunucu sil komutunun kodu buraya gelecek"
+  },
+
+  "b!korona": {
+    purpose: "Şaka amaçlı korona testi yapar.",
+    logic: "Bot, rastgele bir sonuç gösterir (pozitif/negatif).",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!korona' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🦠 Korona Testi", desc: "**AhmetEjler**'in test sonucu: **Negatif** ✅" } }
+    ],
+    code: "// b!korona komutunun kodu buraya gelecek"
+  },
+
+  "b!karne not": {
+    purpose: "Şaka amaçlı karne notu gösterir.",
+    logic: "Bot, rastgele bir karne notu ve eğlenceli bir yorum gönderir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!karne not' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📜 Karne Notu", desc: "**AhmetEjler**'in karne notu: **95** 🎉\n\nTebrikler, takdir aldın!" } }
+    ],
+    code: "// b!karne not komutunun kodu buraya gelecek"
+  },
+
+  "b!say": {
+    purpose: "Bota istediğiniz kelimeyi söyletir.",
+    logic: "Bot, kullanıcının verdiği mesajı yazar ve orijinal mesajı siler.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!say Merhaba dünya!' },
+      { type: "bot", name: "BetterBot 2.0", message: "Merhaba dünya!" }
+    ],
+    code: "// b!say komutunun kodu buraya gelecek"
+  },
+
+  "b!avatar": {
+    purpose: "Belirtilen kullanıcının avatarını gösterir.",
+    logic: "Bot, kullanıcının profil fotoğrafını büyük boyutta gönderir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!avatar @Kullanici' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🖼️ Avatar", desc: "**Kullanici**'nin avatarı aşağıda gösteriliyor." } }
+    ],
+    code: "// b!avatar komutunun kodu buraya gelecek"
+  },
+
+  "b!öneri": {
+    purpose: "Sunucuya öneri gönderir.",
+    logic: "Bot, öneriyi öneri kanalına iletir ve kullanıcıya onay mesajı gönderir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!öneri Yeni bir etkinlik kanalı açılsın' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "💡 Öneriniz Alındı", desc: "Öneriniz yetkililere iletildi. Teşekkürler!" } }
+    ],
+    code: "// b!öneri komutunun kodu buraya gelecek"
+  },
+
+  "b!şikayet": {
+    purpose: "Bir kullanıcıyı şikayet eder.",
+    logic: "Bot, şikayeti yetkili kanalına iletir ve gizliliği korur.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!şikayet @Kullanici Küfür ediyor' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "⚠️ Şikayetiniz Alındı", desc: "Şikayetiniz yetkililere iletildi. Gizliliğiniz korunacaktır." } }
+    ],
+    code: "// b!şikayet komutunun kodu buraya gelecek"
+  },
+
+  "b!canlı destek": {
+    purpose: "Kuruculara anlık bildirim gönderir.",
+    logic: "Bot, kullanıcının sorununu kuruculara DM olarak iletir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!canlı destek Sunucumda bir sorun var' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📞 Destek Talebi Gönderildi", desc: "Talebiniz kuruculara iletildi. En kısa sürede dönüş yapılacak." } }
+    ],
+    code: "// b!canlı destek komutunun kodu buraya gelecek"
+  },
+
+  "b!afk": {
+    purpose: "Kullanıcıyı AFK (uzakta) moduna geçirir.",
+    logic: "Bot, kullanıcıya AFK rolü atar ve etiketlenince bilgilendirme yapar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!afk Yemek yiyorum' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "💤 AFK Modu", desc: "**AhmetEjler** artık AFK. Sebep: Yemek yiyorum" } }
+    ],
+    code: "// b!afk komutunun kodu buraya gelecek"
+  },
+
+  "b!unafk": {
+    purpose: "Kullanıcıyı AFK modundan çıkarır.",
+    logic: "Bot, kullanıcının AFK rolünü kaldırır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!unafk' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "✅ AFK Modundan Çıktı", desc: "**AhmetEjler** artık aktif." } }
+    ],
+    code: "// b!unafk komutunun kodu buraya gelecek"
+  },
+
+  "b!dm": {
+    purpose: "Belirtilen kullanıcıya özel mesaj gönderir.",
+    logic: "Bot, kullanıcıya DM üzerinden mesaj iletir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!dm @Kullanici Merhaba!' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📨 DM Gönderildi", desc: "**Kullanici** kullanıcısına mesaj gönderildi." } }
+    ],
+    code: "// b!dm komutunun kodu buraya gelecek"
+  },
+
+  "b!butonlu rol": {
+    purpose: "Butonlu rol sistemini çalıştırır.",
+    logic: "Bot, belirtilen rolün butonunu gönderir ve tıklayanlara rol atar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!butonlu rol' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🎭 Rol Seçimi", desc: "Aşağıdaki butonlardan birine tıklayarak rol alabilirsin." } }
+    ],
+    code: "// b!butonlu rol komutunun kodu buraya gelecek"
+  },
+
+  "b!otocevap": {
+    purpose: "Sa-As otomatik cevap sistemini açar veya kapatır.",
+    logic: "Bot, aktiflik durumunu değiştirir. Aktifken sa/as mesajlarına otomatik yanıt verir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!otocevap aç' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🤖 Otocevap Aktif", desc: "Sa-As otomatik cevap sistemi açıldı." } }
+    ],
+    code: "// b!otocevap komutunun kodu buraya gelecek"
+  },
+
+  "b!kullanıcı bilgi": {
+    purpose: "Bir kullanıcı hakkında detaylı bilgi gösterir.",
+    logic: "Bot, kullanıcı ID'si, katılım tarihi, roller ve aktivite bilgilerini embed olarak gösterir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!kullanıcı bilgi @Kullanici' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "👤 Kullanıcı Bilgisi", desc: "**İsim:** Kullanici\n**ID:** 1234567890\n**Katılım:** 15.08.2024\n**Roller:** Üye, Aktif" } }
+    ],
+    code: "// b!kullanıcı bilgi komutunun kodu buraya gelecek"
+  },
+
+  "b!sunucu bilgi": {
+    purpose: "Sunucu hakkında detaylı bilgi gösterir.",
+    logic: "Bot, sunucu adı, üye sayısı, kanal sayısı, oluşturulma tarihi ve sunucu sahibi bilgilerini gösterir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!sunucu bilgi' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🏠 Sunucu Bilgisi", desc: "**Sunucu:** BetterNetwork\n**Üye:** 11.299\n**Kanal:** 45\n**Sahip:** AhmetEjler" } }
+    ],
+    code: "// b!sunucu bilgi komutunun kodu buraya gelecek"
+  },
+
+  "b!bot bilgi": {
+    purpose: "Bot hakkında detaylı bilgi gösterir.",
+    logic: "Bot, sürüm, geliştirici, toplam sunucu ve kullanıcı sayısını gösterir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!bot bilgi' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🤖 Bot Bilgisi", desc: "**Sürüm:** v2.0\n**Geliştirici:** BetterNetwork\n**Sunucu:** 19\n**Kullanıcı:** 11.299" } }
+    ],
+    code: "// b!bot bilgi komutunun kodu buraya gelecek"
+  },
+
+  "b!rol liste": {
+    purpose: "Sunucudaki tüm rolleri listeler.",
+    logic: "Bot, hiyerarşiye göre sıralanmış rol listesini embed olarak gönderir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!rol liste' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📋 Rol Listesi", desc: "1. @Kurucu\n2. @Yönetici\n3. @Moderatör\n4. @Rehber\n5. @Üye" } }
+    ],
+    code: "// b!rol liste komutunun kodu buraya gelecek"
+  },
+
+  "b!reklam ver": {
+    purpose: "Sunucunuzu reklam kanalında tanıtır.",
+    logic: "Bot, 6 saatte bir kullanılabilir ve sunucu bilgilerini embed olarak paylaşır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!reklam ver' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📢 Reklam Gönderildi", desc: "Sunucunuz reklam kanalında tanıtıldı. Sonraki reklam: 6 saat sonra." } }
+    ],
+    code: "// b!reklam ver komutunun kodu buraya gelecek"
+  },
+
+  "b!oyver": {
+    purpose: "Top.gg üzerinde bota oy verir.",
+    logic: "Bot, kullanıcıya oy verme linkini gönderir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!oyver' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🗳️ Oy Verme Linki", desc: "Bota oy vermek için: https://top.gg/bot/1229120180253102140/vote" } }
+    ],
+    code: "// b!oyver komutunun kodu buraya gelecek"
+  },
+
+  "b!bot güncellemeleri": {
+    purpose: "Botun son güncellemelerini gösterir.",
+    logic: "Bot, changelog bilgilerini embed olarak paylaşır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!bot güncellemeleri' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🔄 Son Güncellemeler", desc: "**v2.0** (15.09.2026)\n• Yeni komutlar\n• Performans iyileştirmeleri\n• Bug düzeltmeleri" } }
+    ],
+    code: "// b!bot güncellemeleri komutunun kodu buraya gelecek"
+  },
+
+  "b!bot kurucuları": {
+    purpose: "Botun kurucularını ve geliştiricilerini gösterir.",
+    logic: "Bot, ekip üyelerini listeler ve iletişim bilgilerini paylaşır.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'b!bot kurucuları' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "👑 Bot Kurucuları", desc: "**Kurucu:** AhmetEjler\n**Geliştirici:** BuseEjler\n**Moderatör:** MehmetEjler" } }
+    ],
+    code: "// b!bot kurucuları komutunun kodu buraya gelecek"
+  }
+
+};
+
+/* ===== MODAL ELEMANLARI ===== */
+const modalOverlay = document.getElementById('modalOverlay');
+const modalCmdName = document.getElementById('modalCmdName');
+const modalPurpose = document.getElementById('modalPurpose');
+const modalLogic = document.getElementById('modalLogic');
+const modalCode = document.getElementById('modalCode');
+const discordChat = document.getElementById('discordChat');
+const modalClose = document.getElementById('modalClose');
+const modalFooterClose = document.getElementById('modalFooterClose');
+const copyBtn = document.getElementById('copyBtn');
+const toast = document.getElementById('toast');
+
+let currentCode = "";
+
+/* ===== MODAL AÇ ===== */
+function openModal(cmdKey) {
+  const data = commandData[cmdKey];
+  if (!data) {
+    // Veri yoksa placeholder göster
+    modalCmdName.textContent = cmdKey;
+    modalPurpose.textContent = "Bu komut için henüz açıklama eklenmedi.";
+    modalLogic.textContent = "Bu komutun mantığı henüz eklenmedi.";
+    discordChat.innerHTML = '<div class="no-result">Bu komut için Discord önizlemesi henüz eklenmedi.</div>';
+    modalCode.innerHTML = '<span class="placeholder">// ' + cmdKey + ' komutunun kodu buraya gelecek</span>';
+    currentCode = "// " + cmdKey + " komutunun kodu buraya gelecek";
+  } else {
+    modalCmdName.textContent = cmdKey;
+    modalPurpose.textContent = data.purpose || "Açıklama yok.";
+    modalLogic.textContent = data.logic || "Mantık yok.";
+    renderDiscordChat(data.chat || []);
+    modalCode.innerHTML = escapeHtml(data.code || "// Kod buraya gelecek");
+    currentCode = data.code || "";
+  }
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+/* ===== MODAL KAPAT ===== */
+function closeModal() {
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ===== DISCORD SOHBET RENDER ===== */
+function renderDiscordChat(chat) {
+  if (!chat.length) {
+    discordChat.innerHTML = '<div class="no-result">Önizleme yok.</div>';
+    return;
+  }
+
+  let html = '';
+  const now = new Date();
+  const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+  chat.forEach(msg => {
+    if (msg.type === 'user') {
+      html += `
+        <div class="discord-message">
+          <div class="discord-avatar">${(msg.name || '?').charAt(0).toUpperCase()}</div>
+          <div class="discord-content">
+            <div class="discord-name">
+              <span class="username user-color">${escapeHtml(msg.name)}</span>
+              <span class="discord-time">Bugün ${timeStr}</span>
+            </div>
+            <div class="discord-text">${formatMessage(msg.message)}</div>
+          </div>
+        </div>
+      `;
+    } else if (msg.type === 'bot') {
+      html += `
+        <div class="discord-message">
+          <div class="discord-avatar bot-avatar">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;color:#fff;">
+              <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
+            </svg>
+          </div>
+          <div class="discord-content">
+            <div class="discord-name">
+              <span class="username bot-color">${escapeHtml(msg.name || 'BetterBot 2.0')}</span>
+              <span class="discord-bot-tag">BOT</span>
+              <span class="discord-time">Bugün ${timeStr}</span>
+            </div>
+            ${msg.embed ? renderEmbed(msg.embed) : (msg.message ? '<div class="discord-text">' + formatMessage(msg.message) + '</div>' : '')}
+          </div>
+        </div>
+      `;
+    }
+  });
+
+  discordChat.innerHTML = html;
+}
+
+/* ===== EMBED RENDER ===== */
+function renderEmbed(embed) {
+  const type = embed.type || 'success';
+  return `
+    <div class="discord-embed ${type}">
+      <div class="embed-title">${escapeHtml(embed.title || '')}</div>
+      <div class="embed-desc">${formatMessage(embed.desc || '')}</div>
+    </div>
+  `;
+}
+
+/* ===== MESAJ FORMATLA (kod, mention, satır sonu) ===== */
+function formatMessage(text) {
+  if (!text) return '';
+  let html = escapeHtml(text);
+  // \n -> <br>
+  html = html.replace(/\n/g, '<br>');
+  // `kod` -> cmd-highlight
+  html = html.replace(/`([^`]+)`/g, '<span class="cmd-highlight">$1</span>');
+  // **bold**
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // @mention
+  html = html.replace(/(^|\s)(@[\w]+)/g, '$1<span class="mention">$2</span>');
+  return html;
+}
+
+/* ===== HTML ESCAPE ===== */
+function escapeHtml(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+/* ===== KOMUT TIKLAMA ===== */
+document.querySelectorAll('.command-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const cmdKey = item.getAttribute('data-cmd');
+    if (cmdKey) openModal(cmdKey);
+  });
+});
+
+/* ===== KAPATMA ===== */
+modalClose.addEventListener('click', closeModal);
+modalFooterClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
+    closeModal();
+  }
+});
+
+/* ===== KOPYALA ===== */
+copyBtn.addEventListener('click', () => {
+  if (!currentCode) {
+    showToast('⚠ Kopyalanacak kod yok');
+    return;
+  }
+  const onSuccess = () => {
+    copyBtn.classList.add('copied');
+    copyBtn.querySelector('span').textContent = 'Kopyalandı!';
+    showToast('✓ Kod kopyalandı!');
+    setTimeout(() => {
+      copyBtn.classList.remove('copied');
+      copyBtn.querySelector('span').textContent = 'Kopyala';
+    }, 2000);
+  };
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(currentCode).then(onSuccess).catch(() => {
+      fallbackCopy(currentCode, onSuccess);
+    });
+  } else {
+    fallbackCopy(currentCode, onSuccess);
+  }
+});
+
+function fallbackCopy(text, cb) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    cb();
+  } catch (e) {
+    showToast('⚠ Kopyalanamadı');
+  }
+  document.body.removeChild(ta);
+}
+
+/* ===== TOAST ===== */
+let toastTimer;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('visible'), 2200);
+}
+
+/* ===== ARAMA ===== */
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.category').forEach(cat => {
+    let visibleCount = 0;
+    cat.querySelectorAll('.command-item').forEach(item => {
+      const cmd = item.getAttribute('data-cmd').toLowerCase();
+      const desc = item.querySelector('.desc').textContent.toLowerCase();
+      if (cmd.includes(q) || desc.includes(q)) {
+        item.style.display = '';
+        visibleCount++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+    cat.style.display = visibleCount > 0 ? '' : 'none';
+  });
+});
+
+/* ===== PARTİKÜL ===== */
+(function initParticles() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const COUNT = window.innerWidth < 768 ? 25 : 55;
+  for (let i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 1.8 + 0.5
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 212, 255, 0.4)';
+      ctx.fill();
+    });
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 130) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0, 212, 255, ${0.12 * (1 - dist / 130)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
 
 </body>
 </html>
