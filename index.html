@@ -26,7 +26,6 @@
       position: relative;
     }
 
-    /* ===== PARTİKÜL CANVAS ===== */
     #particles {
       position: fixed;
       inset: 0;
@@ -34,7 +33,6 @@
       pointer-events: none;
     }
 
-    /* İçerik partikülün üstünde kalsın */
     .navbar, .page-wrapper, #backToTop, #musicToggle, #toast, #loader {
       position: relative;
       z-index: 10;
@@ -45,7 +43,6 @@
     #toast { z-index: 9998; position: fixed; }
     #loader { z-index: 9999; position: fixed; }
 
-    /* ===== LOADER ===== */
     #loader {
       position: fixed;
       inset: 0;
@@ -65,7 +62,6 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ===== NAVBAR ===== */
     .navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -142,7 +138,6 @@
       box-shadow: 0 4px 16px rgba(88, 101, 242, 0.4);
     }
 
-    /* Dil Değiştirici */
     .lang-switcher {
       display: flex;
       gap: 4px;
@@ -199,7 +194,6 @@
       .nav-links a { width: 100%; text-align: center; padding: 14px; }
     }
 
-    /* ===== PAGE ===== */
     .page-wrapper {
       padding: 100px 20px 40px;
       display: flex;
@@ -218,7 +212,6 @@
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
     }
 
-    /* ===== HEADER ===== */
     .header { text-align: center; margin-bottom: 40px; }
     .logo {
       width: 130px; height: 130px;
@@ -299,7 +292,6 @@
       50% { opacity: 0.6; transform: scale(1.2); }
     }
 
-    /* ===== STATS ===== */
     .stats {
       display: flex;
       flex-wrap: wrap;
@@ -327,8 +319,10 @@
       font-weight: 500;
     }
 
-    /* ===== TYPOGRAPHY ===== */
     h2 {
+      display: flex;
+      align-items: center;
+      gap: 14px;
       font-size: 2.1rem;
       font-weight: 800;
       color: #00d4ff;
@@ -336,6 +330,18 @@
       border-left: 5px solid #a855f7;
       padding-left: 22px;
       letter-spacing: -0.5px;
+    }
+    h2 svg.h2-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      color: #00d4ff;
+      filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
     }
     p {
       color: #ccd6f6;
@@ -345,7 +351,6 @@
     }
     .highlight { color: #00d4ff; font-weight: 600; }
 
-    /* ===== REVEAL ===== */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -354,7 +359,6 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ===== GRID ===== */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -381,7 +385,6 @@
     }
     .grid-item .icon { font-size: 1.6rem; flex-shrink: 0; }
 
-    /* ===== QUOTE ===== */
     .quote {
       background: linear-gradient(145deg, #0d1a2f, #112240);
       padding: 26px 34px;
@@ -405,11 +408,9 @@
       line-height: 1;
     }
 
-    /* ===== LISTS ===== */
     ul { padding-left: 26px; margin: 12px 0 18px; }
     ul li { margin-bottom: 10px; color: #ccd6f6; }
 
-    /* ===== FAQ ===== */
     .faq-item {
       background: #0d1a2f;
       border-radius: 14px;
@@ -460,7 +461,6 @@
       padding: 0 22px 20px;
     }
 
-    /* ===== EKİP ===== */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -523,7 +523,6 @@
       line-height: 1.6;
     }
 
-    /* ===== ROADMAP ===== */
     .roadmap {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -551,9 +550,16 @@
       align-items: center;
       gap: 8px;
     }
+    .roadmap-col h3 svg {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+    }
     .roadmap-col.done h3 { color: #00ff88; }
+    .roadmap-col.done h3 svg { color: #00ff88; }
     .roadmap-col.now h3 { color: #ffcc00; }
+    .roadmap-col.now h3 svg { color: #ffcc00; }
     .roadmap-col.next h3 { color: #a855f7; }
+    .roadmap-col.next h3 svg { color: #a855f7; }
     .roadmap-list {
       list-style: none;
       padding: 0;
@@ -578,7 +584,6 @@
     .roadmap-col.done .roadmap-list li::before { color: #00ff88; content: '✓'; font-size: 0.85rem; }
     .roadmap-col.now .roadmap-list li::before { color: #ffcc00; content: '▶'; font-size: 0.7rem; }
 
-    /* ===== BLOG ===== */
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -636,7 +641,6 @@
     }
     .blog-meta .read { color: #00d4ff; font-weight: 600; }
 
-    /* ===== OY VER ===== */
     .vote-box {
       background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(168, 85, 247, 0.08));
       border: 2px solid rgba(0, 212, 255, 0.3);
@@ -658,10 +662,22 @@
     @keyframes rotate { to { transform: rotate(360deg); } }
     .vote-box > * { position: relative; z-index: 1; }
     .vote-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
       font-size: 1.5rem;
       font-weight: 800;
       color: #00d4ff;
       margin-bottom: 8px;
+    }
+    .vote-title svg {
+      width: 34px;
+      height: 34px;
+      color: #00d4ff;
+      filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.6));
+      animation: iconFloat 3s ease-in-out infinite;
+      flex-shrink: 0;
     }
     .vote-desc {
       color: #8892b0;
@@ -685,8 +701,10 @@
       transform: translateY(-3px) scale(1.04);
       box-shadow: 0 12px 40px rgba(0, 212, 255, 0.6);
     }
+    .vote-btn svg {
+      width: 18px; height: 18px;
+    }
 
-    /* ===== BUTONLAR ===== */
     .btn-group {
       display: flex;
       flex-wrap: wrap;
@@ -743,7 +761,6 @@
       color: #0a192f;
     }
 
-    /* ===== FOOTER ===== */
     .footer {
       margin-top: 55px;
       padding-top: 30px;
@@ -762,7 +779,6 @@
     }
     .footer a:hover { color: #a855f7; }
 
-    /* ===== BACK TO TOP ===== */
     #backToTop {
       position: fixed;
       bottom: 30px; right: 30px;
@@ -784,7 +800,6 @@
     #backToTop.visible { opacity: 1; visibility: visible; }
     #backToTop:hover { transform: translateY(-4px) scale(1.08); }
 
-    /* ===== MÜZİK BUTONU ===== */
     #musicToggle {
       position: fixed;
       bottom: 30px; right: 90px;
@@ -813,12 +828,12 @@
       border-color: transparent;
       animation: musicPulse 2s ease-in-out infinite;
     }
+    #musicToggle svg { width: 20px; height: 20px; }
     @keyframes musicPulse {
       0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
       50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6); }
     }
 
-    /* ===== TOAST ===== */
     #toast {
       position: fixed;
       bottom: 100px; left: 50%;
@@ -840,12 +855,13 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .page-wrapper { padding: 90px 16px 30px; }
       .container { padding: 32px 20px; border-radius: 28px; }
       h1 { font-size: 2.4rem; }
-      h2 { font-size: 1.55rem; padding-left: 14px; margin-top: 42px; }
+      h2 { font-size: 1.55rem; padding-left: 14px; margin-top: 42px; gap: 10px; }
+      h2 svg.h2-icon { width: 24px; height: 24px; }
+      .vote-title svg { width: 26px; height: 26px; }
       .stats { gap: 16px 28px; }
       .stat-item .number { font-size: 2rem; }
       .logo { width: 95px; height: 95px; }
@@ -853,7 +869,8 @@
       .btn-group { flex-direction: column; align-items: stretch; }
       .quote { padding: 20px 22px; font-size: 1rem; }
       #backToTop { bottom: 20px; right: 20px; width: 44px; height: 44px; }
-      #musicToggle { bottom: 20px; right: 74px; width: 44px; height: 44px; font-size: 1rem; }
+      #musicToggle { bottom: 20px; right: 74px; width: 44px; height: 44px; }
+      #musicToggle svg { width: 18px; height: 18px; }
       .lang-switcher { padding: 3px; }
       .lang-btn { padding: 4px 8px; font-size: 0.7rem; }
     }
@@ -866,15 +883,12 @@
 </head>
 <body>
 
-<!-- ===== PARTİKÜL CANVAS ===== -->
 <canvas id="particles"></canvas>
 
-<!-- ===== LOADING ===== -->
 <div id="loader">
   <div class="loader-ring"></div>
 </div>
 
-<!-- ===== NAVBAR ===== -->
 <nav class="navbar" id="navbar">
   <div class="nav-container">
     <a href="#" class="nav-brand">
@@ -894,28 +908,25 @@
       <li><a href="#hedefler" data-i18n="nav.roadmap">Yol Haritası</a></li>
       <li><a href="#blog" data-i18n="nav.blog">Blog</a></li>
       <li><a href="#sss" data-i18n="nav.faq">SSS</a></li>
-      <li><a href="https://discord.com/oauth2/authorize?client_id=1229120180253102140&permissions=8&integration_type=0&scope=bot" class="nav-cta" data-i18n="nav.addBot">🤖 Botu Ekle</a></li>
+      <li><a href="https://discord.com/oauth2/authorize?client_id=1229120180253102140&permissions=8&integration_type=0&scope=bot" class="nav-cta" data-i18n="nav.addBot">Botu Ekle</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- ===== PAGE ===== -->
 <div class="page-wrapper">
   <div class="container">
 
-    <!-- HEADER -->
     <div class="header">
       <img class="logo" src="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" alt="BetterBot 2.0 Logo" />
       <h1>BetterBot 2.0</h1>
       <p class="sub" data-i18n="header.sub">Bağlantının ve Güvenin Yeni Adı</p>
       <div class="badges">
         <span class="badge live green" data-i18n="header.badge1">7/24 Aktif</span>
-        <span class="badge" data-i18n="header.badge2">🚀 v2.0 Yayında</span>
-        <span class="badge" data-i18n="header.badge3">💯 Ücretsiz</span>
+        <span class="badge" data-i18n="header.badge2">v2.0 Yayında</span>
+        <span class="badge" data-i18n="header.badge3">Tamamen Ücretsiz</span>
       </div>
     </div>
 
-    <!-- STATS -->
     <div class="stats">
       <div class="stat-item"><span class="number" data-count="19">0</span><span class="label" data-i18n="stats.servers">Sunucu</span></div>
       <div class="stat-item"><span class="number" data-count="11299">0</span><span class="label" data-i18n="stats.users">Kullanıcı</span></div>
@@ -926,28 +937,40 @@
 
     <!-- BİZ KİMİZ -->
     <section id="biz-kimiz" class="reveal">
-      <h2 data-i18n="about.title">🌟 Biz Kimiz?</h2>
+      <h2>
+        <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+        </svg>
+        <span data-i18n="about.title">Biz Kimiz?</span>
+      </h2>
       <p data-i18n="about.p1">
-        <span class="highlight">BetterNetwork</span> ekibi olarak, Discord topluluklarını daha güvenli, düzenli ve eğlenceli hale getirmek için yola çıktık. BetterBot 2.0, bu vizyonun bir ürünü. Sadece bir bot değil, aynı zamanda bir topluluk projesi.
+        <span class="highlight">BetterBot 2.0</span>, Discord sunucularının yönetim yükünü hafifletmek ve her ölçekten topluluğun ihtiyaç duyduğu araçları tek bir çatı altında sunmak için geliştirildi. Amacımız basit: sunucu sahiplerinin teknik detaylarla boğuşmasını engellemek, onlara güvenli ve düzenli bir topluluk yönetimi deneyimi sunmak.
       </p>
       <p data-i18n="about.p2">
-        Bugün 19 sunucuda 11 binden fazla kullanıcıya hizmet veriyoruz. Bu sayı her geçen gün artıyor çünkü BetterBot 2.0, güvenilirliği ve işlevselliği ile fark yaratıyor.
+        Kısa sürede <span class="highlight">19 sunucuda 11.000'den fazla kullanıcıya</span> ulaştık. Bu büyümenin ardındaki en büyük etken, yalnızca güçlü bir bot değil; aynı zamanda aktif bir topluluk ve sürekli gelişen bir ekosistem inşa ediyor olmamız.
       </p>
     </section>
 
     <!-- ÖZELLİKLER -->
     <section id="ozellikler" class="reveal">
-      <h2 data-i18n="features.title">🤝 Size Ne Sunuyoruz?</h2>
-      <p data-i18n="features.desc">BetterBot 2.0, bir Discord sunucusunun ihtiyaç duyabileceği neredeyse tüm araçları tek bir çatı altında toplar:</p>
+      <h2>
+        <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+          <path d="M20 3v4"/><path d="M22 5h-4"/>
+          <path d="M4 17v2"/><path d="M5 18H3"/>
+        </svg>
+        <span data-i18n="features.title">Size Neler Sunuyoruz?</span>
+      </h2>
+      <p data-i18n="features.desc">Moderasyondan eğlenceye, otomasyondan topluluk yönetimine kadar bir Discord sunucusunun ihtiyaç duyduğu her şey, tek bir botta toplandı:</p>
       <div class="grid-2">
-        <div class="grid-item"><span class="icon">🛡️</span> <span data-i18n="features.f1">Gelişmiş Moderasyon (Ban, Uyarı, Mute, Sil)</span></div>
-        <div class="grid-item"><span class="icon">📊</span> <span data-i18n="features.f2">Canlı Sunucu ve Kullanıcı İstatistikleri</span></div>
-        <div class="grid-item"><span class="icon">🎭</span> <span data-i18n="features.f3">Eğlence Komutları (IQ, Aşk, Hackle, Dans)</span></div>
-        <div class="grid-item"><span class="icon">🔗</span> <span data-i18n="features.f4">Otomatik Rol, Hoş Geldin ve Kurallar</span></div>
-        <div class="grid-item"><span class="icon">📝</span> <span data-i18n="features.f5">Form Sistemleri (Başvuru, Şikayet, Öneri)</span></div>
+        <div class="grid-item"><span class="icon">🛡️</span> <span data-i18n="features.f1">Gelişmiş Moderasyon Sistemi</span></div>
+        <div class="grid-item"><span class="icon">📊</span> <span data-i18n="features.f2">Canlı Sunucu İstatistikleri</span></div>
+        <div class="grid-item"><span class="icon">🎭</span> <span data-i18n="features.f3">Eğlence ve Sosyal Komutlar</span></div>
+        <div class="grid-item"><span class="icon">🔗</span> <span data-i18n="features.f4">Otomatik Rol ve Karşılama</span></div>
+        <div class="grid-item"><span class="icon">📝</span> <span data-i18n="features.f5">Form ve Başvuru Sistemleri</span></div>
         <div class="grid-item"><span class="icon">🎫</span> <span data-i18n="features.f6">Destek Talebi (Ticket) Sistemi</span></div>
-        <div class="grid-item"><span class="icon">📢</span> <span data-i18n="features.f7">Duyuru, Oylama ve Reklam Komutları</span></div>
-        <div class="grid-item"><span class="icon">⚙️</span> <span data-i18n="features.f8">Otomatik Sunucu ve Rol Kurulumu</span></div>
+        <div class="grid-item"><span class="icon">📢</span> <span data-i18n="features.f7">Duyuru ve Oylama Araçları</span></div>
+        <div class="grid-item"><span class="icon">⚙️</span> <span data-i18n="features.f8">Otomatik Sunucu Kurulumu</span></div>
       </div>
       <div class="quote" data-i18n="features.quote">
         "BetterBot 2.0, sadece bir bot değil; sunucunuzun kalbi ve beyni."
@@ -956,15 +979,23 @@
 
     <!-- EKİP -->
     <section id="ekip" class="reveal">
-      <h2 data-i18n="team.title">👥 Ekibimiz</h2>
-      <p data-i18n="team.desc">BetterBot 2.0'ı geliştiren ve sürekli iyileştiren tutkulu ekibimiz:</p>
+      <h2>
+        <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span data-i18n="team.title">Arkamızdaki Ekip</span>
+      </h2>
+      <p data-i18n="team.desc">BetterBot 2.0'ı geliştiren, test eden ve her gün daha iyi hale getiren tutkulu ekibimiz:</p>
 
       <div class="team-grid">
         <div class="team-card">
           <img class="team-avatar" src="https://mc-heads.net/avatar/AhmetEjler/160" alt="AhmetEjler" />
           <div class="team-name">AhmetEjler</div>
           <div class="team-role" data-i18n="team.role.founder">Kurucu & Geliştirici</div>
-          <div class="team-desc" data-i18n="team.desc.founder">BetterBot 2.0'ın mimarı. Sunucu yönetimi, backend geliştirme ve topluluk yönetimi.</div>
+          <div class="team-desc" data-i18n="team.desc.founder">Projenin mimarı. Backend geliştirme, sunucu yönetimi ve topluluk liderliği.</div>
         </div>
         <div class="team-card">
           <img class="team-avatar" src="https://mc-heads.net/avatar/BuseEjler/160" alt="BuseEjler" />
@@ -982,19 +1013,31 @@
           <img class="team-avatar" src="https://mc-heads.net/avatar/Rutben/160" alt="Rutben" />
           <div class="team-name">Rutben</div>
           <div class="team-role" data-i18n="team.role.designer">Tasarımcı</div>
-          <div class="team-desc" data-i18n="team.desc.designer">Logo, ikon, web sitesi tasarımı ve görsel kimlik.</div>
+          <div class="team-desc" data-i18n="team.desc.designer">Logo, ikon, web sitesi tasarımı ve görsel kimlik yönetimi.</div>
         </div>
       </div>
     </section>
 
     <!-- YOL HARİTASI -->
     <section id="hedefler" class="reveal">
-      <h2 data-i18n="roadmap.title">🎯 Yol Haritası</h2>
-      <p data-i18n="roadmap.desc">BetterBot 2.0'ın bugünü, yarını ve geleceği:</p>
+      <h2>
+        <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="6"/>
+          <circle cx="12" cy="12" r="2"/>
+        </svg>
+        <span data-i18n="roadmap.title">Yol Haritamız</span>
+      </h2>
+      <p data-i18n="roadmap.desc">BetterBot 2.0 statik bir proje değil. Sürekli güncellenen, yeni özelliklerle büyüyen ve topluluğun geri bildirimleriyle şekillenen canlı bir ekosistem.</p>
 
       <div class="roadmap">
         <div class="roadmap-col done">
-          <h3>✅ <span data-i18n="roadmap.done">Tamamlandı</span></h3>
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span data-i18n="roadmap.done">Tamamlandı</span>
+          </h3>
           <ul class="roadmap-list">
             <li data-i18n="roadmap.d1">Kararlı v2.0 sürümü</li>
             <li data-i18n="roadmap.d2">50+ temel komut</li>
@@ -1004,7 +1047,13 @@
           </ul>
         </div>
         <div class="roadmap-col now">
-          <h3>🚧 <span data-i18n="roadmap.now">Devam Ediyor</span></h3>
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span data-i18n="roadmap.now">Devam Ediyor</span>
+          </h3>
           <ul class="roadmap-list">
             <li data-i18n="roadmap.n1">Minecraft entegrasyonu</li>
             <li data-i18n="roadmap.n2">Web kontrol paneli</li>
@@ -1013,7 +1062,15 @@
           </ul>
         </div>
         <div class="roadmap-col next">
-          <h3>🔮 <span data-i18n="roadmap.next">Gelecek</span></h3>
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+            </svg>
+            <span data-i18n="roadmap.next">Gelecek</span>
+          </h3>
           <ul class="roadmap-list">
             <li data-i18n="roadmap.f1">Çok dilli destek (EN, DE)</li>
             <li data-i18n="roadmap.f2">Mobil uygulama</li>
@@ -1027,8 +1084,16 @@
 
     <!-- BLOG -->
     <section id="blog" class="reveal">
-      <h2 data-i18n="blog.title">📰 Blog & Haberler</h2>
-      <p data-i18n="blog.desc">BetterBot 2.0 ve BetterNetwork hakkında son gelişmeler:</p>
+      <h2>
+        <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+          <path d="M18 14h-8"/>
+          <path d="M15 18h-5"/>
+          <path d="M10 6h8v4h-8V6Z"/>
+        </svg>
+        <span data-i18n="blog.title">Blog ve Haberler</span>
+      </h2>
+      <p data-i18n="blog.desc">BetterBot 2.0 ve BetterNetwork hakkında en güncel gelişmeler, duyurular ve güncellemeler:</p>
 
       <div class="blog-grid">
         <a href="#" class="blog-card">
@@ -1036,16 +1101,16 @@
           <div class="blog-title" data-i18n="blog.post1.title">v2.0 Kararlı Sürüm Yayında!</div>
           <div class="blog-desc" data-i18n="blog.post1.desc">BetterBot 2.0'ın kararlı sürümü yayında. Yeni özellikler, performans iyileştirmeleri ve daha fazlası.</div>
           <div class="blog-meta">
-            <span>📅 15 Eylül 2026</span>
+            <span>15 Eylül 2026</span>
             <span class="read" data-i18n="blog.readMore">Devamını oku →</span>
           </div>
         </a>
         <a href="#" class="blog-card">
           <span class="blog-tag" data-i18n="blog.tag.milestone">Kilometre Taşı</span>
-          <div class="blog-title" data-i18n="blog.post2.title">11.000 Kullanıcıya Ulaştık! 🎉</div>
+          <div class="blog-title" data-i18n="blog.post2.title">11.000 Kullanıcıya Ulaştık</div>
           <div class="blog-desc" data-i18n="blog.post2.desc">Topluluğumuz büyümeye devam ediyor. 19 sunucuda 11 binden fazla kullanıcıya hizmet veriyoruz.</div>
           <div class="blog-meta">
-            <span>📅 1 Eylül 2026</span>
+            <span>1 Eylül 2026</span>
             <span class="read" data-i18n="blog.readMore">Devamını oku →</span>
           </div>
         </a>
@@ -1054,7 +1119,7 @@
           <div class="blog-title" data-i18n="blog.post3.title">Minecraft Entegrasyonu Yolda</div>
           <div class="blog-desc" data-i18n="blog.post3.desc">Discord ve Minecraft arasında köprü kuran yeni özelliğimiz çok yakında. Oyun içi sohbet Discord'a düşecek.</div>
           <div class="blog-meta">
-            <span>📅 20 Ağustos 2026</span>
+            <span>20 Ağustos 2026</span>
             <span class="read" data-i18n="blog.readMore">Devamını oku →</span>
           </div>
         </a>
@@ -1064,10 +1129,19 @@
     <!-- OY VER -->
     <section class="reveal">
       <div class="vote-box">
-        <div class="vote-title" data-i18n="vote.title">💎 BetterBot'u Destekle</div>
+        <div class="vote-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3h12l4 6-10 13L2 9Z"/>
+            <path d="M11 3 8 9l4 13 4-13-3-6"/>
+            <path d="M2 9h20"/>
+          </svg>
+          <span data-i18n="vote.title">BetterBot'u Destekle</span>
+        </div>
         <p class="vote-desc" data-i18n="vote.desc">Her oyunuz botumuzun büyümesine yardımcı olur. Sadece 10 saniyenizi alır!</p>
         <a href="https://top.gg/bot/1229120180253102140/vote" target="_blank" class="vote-btn">
-          <span>🗳️</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
           <span data-i18n="vote.button">Oy Ver ve Destekle</span>
         </a>
       </div>
@@ -1075,75 +1149,88 @@
 
     <!-- SSS -->
     <section id="sss" class="reveal">
-      <h2 data-i18n="faq.title">❓ Sıkça Sorulan Sorular</h2>
+      <h2>
+        <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <path d="M12 17h.01"/>
+        </svg>
+        <span data-i18n="faq.title">Sıkça Sorulan Sorular</span>
+      </h2>
 
       <div class="faq-item">
         <button class="faq-question"><span data-i18n="faq.q1">BetterBot 2.0 ücretli mi?</span><span class="arrow">▼</span></button>
-        <div class="faq-answer" data-i18n="faq.a1">Hayır, tamamen ücretsizdir. Tüm temel özellikler için ödeme yapmanıza gerek yoktur.</div>
+        <div class="faq-answer" data-i18n="faq.a1">Hayır, tamamen ücretsizdir. Tüm temel özellikler için ödeme yapmanıza gerek yoktur. Gelecekte opsiyonel premium özellikler eklenebilir ancak mevcut özellikler her zaman ücretsiz kalacaktır.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question"><span data-i18n="faq.q2">Botu nasıl eklerim?</span><span class="arrow">▼</span></button>
-        <div class="faq-answer" data-i18n="faq.a2">"Botu Ekle" butonuna tıklayıp sunucunuzu seçin ve izinleri onaylayın. Otomatik olarak eklenir.</div>
+        <div class="faq-answer" data-i18n="faq.a2">"Botu Ekle" butonuna tıklayıp Discord yetkilendirme ekranında sunucunuzu seçin ve gerekli izinleri onaylayın. Bot, sunucunuza otomatik olarak eklenir.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question"><span data-i18n="faq.q3">Hangi komutlar mevcut?</span><span class="arrow">▼</span></button>
-        <div class="faq-answer" data-i18n="faq.a3">50'den fazla komut: moderasyon, eğlence, otomasyon, form sistemleri, ticket sistemi ve daha fazlası.</div>
+        <div class="faq-answer" data-i18n="faq.a3">50'den fazla komut mevcut: moderasyon (ban, mute, uyarı), eğlence (IQ, aşk, dans), otomasyon (oto-rol, hoş geldin), form sistemleri, ticket sistemi ve daha fazlası. Detaylı liste için "Komutlar" sayfasına göz atın.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question"><span data-i18n="faq.q4">Verilerim güvende mi?</span><span class="arrow">▼</span></button>
-        <div class="faq-answer" data-i18n="faq.a4">Kesinlikle. Veriler şifrelenir, üçüncü taraflarla paylaşılmaz. Düzenli güvenlik denetimleri yapılır.</div>
+        <div class="faq-answer" data-i18n="faq.a4">Kesinlikle. Kullanıcı verileri şifrelenir, üçüncü taraflarla paylaşılmaz ve düzenli olarak güvenlik denetimleri yapılır.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question"><span data-i18n="faq.q5">Destek nasıl alabilirim?</span><span class="arrow">▼</span></button>
-        <div class="faq-answer" data-i18n="faq.a5">BetterNetwork Discord sunucumuza katılın. Destek kanallarımızdan 7/24 yardım alabilirsiniz.</div>
+        <div class="faq-answer" data-i18n="faq.a5">BetterNetwork Discord sunucumuza katılın. Destek kanallarımızdan 7/24 yardım alabilir veya yetkililere doğrudan mesaj atabilirsiniz.</div>
       </div>
     </section>
 
     <!-- TOPLULUK -->
     <section class="reveal">
-      <h2 data-i18n="community.title">🌐 BetterNetwork Topluluğu</h2>
+      <h2>
+        <svg class="h2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+          <path d="M2 12h20"/>
+        </svg>
+        <span data-i18n="community.title">Topluluğumuz</span>
+      </h2>
       <p data-i18n="community.p1">
-        BetterBot 2.0'ın kalbi, BetterNetwork topluluğudur. Burası sadece bir bot sunucusu değil; fikir alışverişi yapabileceğiniz, yeni arkadaşlıklar kurabileceğiniz bir aile ortamıdır.
+        BetterBot 2.0'ın kalbi, BetterNetwork topluluğudur. Burası yalnızca bir bot sunucusu değil; fikir alışverişi yapabileceğiniz, yeni arkadaşlıklar kurabileceğiniz ve birlikte büyüyebileceğiniz bir aile ortamıdır.
       </p>
       <div class="quote" data-i18n="community.quote">
         "BetterNetwork'te herkes birbirinin gelişimine katkı sağlar. Birlikte büyüyoruz, birlikte güçleniyoruz."
       </div>
     </section>
 
-    <!-- BUTONLAR -->
     <div class="btn-group reveal">
-      <a href="ozellikler.html" class="btn btn-outline" data-i18n="buttons.features">✨ Özellikler</a>
-      <a href="commands.html" class="btn btn-outline" data-i18n="buttons.commands">📋 Komutlar</a>
-      <button class="btn btn-discord" id="copyInvite" data-i18n="buttons.addBot">🤖 Botu Ekle</button>
-      <a href="https://discord.gg/BRamjrrtvU" class="btn btn-purple" data-i18n="buttons.join">🚀 Sunucuya Katıl</a>
+      <a href="ozellikler.html" class="btn btn-outline" data-i18n="buttons.features">Özellikler</a>
+      <a href="commands.html" class="btn btn-outline" data-i18n="buttons.commands">Komutlar</a>
+      <button class="btn btn-discord" id="copyInvite" data-i18n="buttons.addBot">Botu Ekle</button>
+      <a href="https://discord.gg/BRamjrrtvU" class="btn btn-purple" data-i18n="buttons.join">Sunucuya Katıl</a>
     </div>
 
-    <!-- FOOTER -->
     <div class="footer">
       <span>© 2026 <strong style="color:#00d4ff;">BetterBot 2.0</strong> &amp; <strong style="color:#00d4ff;">BetterNetwork</strong></span>
-      <a href="https://github.com/AhmetEjler" target="_blank">🐙 GitHub</a>
-      <a href="gizlilik.html" target="_blank" data-i18n="footer.privacy">🔒 Gizlilik Politikası</a>
+      <a href="https://github.com/AhmetEjler" target="_blank">GitHub</a>
+      <a href="gizlilik.html" target="_blank" data-i18n="footer.privacy">Gizlilik Politikası</a>
     </div>
 
   </div>
 </div>
 
-<!-- BACK TO TOP -->
 <button id="backToTop" aria-label="Yukarı çık">↑</button>
 
-<!-- MÜZİK TOGGLE -->
-<button id="musicToggle" title="Müziği Aç/Kapat">🎵</button>
+<button id="musicToggle" title="Müziği Aç/Kapat">
+  <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18V5l12-2v13"/>
+    <circle cx="6" cy="18" r="3"/>
+    <circle cx="18" cy="16" r="3"/>
+  </svg>
+</button>
 
-<!-- MÜZİK AUDIO -->
 <audio id="bgMusic" loop preload="auto">
   <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg" />
 </audio>
 
-<!-- TOAST -->
 <div id="toast">✓ Kopyalandı!</div>
 
 <script>
-/* ===== ÇEVİRİLER ===== */
 const translations = {
   tr: {
     "nav.about": "Hakkımızda",
@@ -1151,42 +1238,42 @@ const translations = {
     "nav.roadmap": "Yol Haritası",
     "nav.blog": "Blog",
     "nav.faq": "SSS",
-    "nav.addBot": "🤖 Botu Ekle",
+    "nav.addBot": "Botu Ekle",
     "header.sub": "Bağlantının ve Güvenin Yeni Adı",
     "header.badge1": "7/24 Aktif",
-    "header.badge2": "🚀 v2.0 Yayında",
-    "header.badge3": "💯 Ücretsiz",
+    "header.badge2": "v2.0 Yayında",
+    "header.badge3": "Tamamen Ücretsiz",
     "stats.servers": "Sunucu",
     "stats.users": "Kullanıcı",
     "stats.commands": "Komut",
     "stats.support": "Destek",
     "stats.free": "Ücretsiz",
-    "about.title": "🌟 Biz Kimiz?",
-    "about.p1": "BetterNetwork ekibi olarak, Discord topluluklarını daha güvenli, düzenli ve eğlenceli hale getirmek için yola çıktık. BetterBot 2.0, bu vizyonun bir ürünü. Sadece bir bot değil, aynı zamanda bir topluluk projesi.",
-    "about.p2": "Bugün 19 sunucuda 11 binden fazla kullanıcıya hizmet veriyoruz. Bu sayı her geçen gün artıyor çünkü BetterBot 2.0, güvenilirliği ve işlevselliği ile fark yaratıyor.",
-    "features.title": "🤝 Size Ne Sunuyoruz?",
-    "features.desc": "BetterBot 2.0, bir Discord sunucusunun ihtiyaç duyabileceği neredeyse tüm araçları tek bir çatı altında toplar:",
-    "features.f1": "Gelişmiş Moderasyon (Ban, Uyarı, Mute, Sil)",
-    "features.f2": "Canlı Sunucu ve Kullanıcı İstatistikleri",
-    "features.f3": "Eğlence Komutları (IQ, Aşk, Hackle, Dans)",
-    "features.f4": "Otomatik Rol, Hoş Geldin ve Kurallar",
-    "features.f5": "Form Sistemleri (Başvuru, Şikayet, Öneri)",
+    "about.title": "Biz Kimiz?",
+    "about.p1": "BetterBot 2.0, Discord sunucularının yönetim yükünü hafifletmek ve her ölçekten topluluğun ihtiyaç duyduğu araçları tek bir çatı altında sunmak için geliştirildi. Amacımız basit: sunucu sahiplerinin teknik detaylarla boğuşmasını engellemek, onlara güvenli ve düzenli bir topluluk yönetimi deneyimi sunmak.",
+    "about.p2": "Kısa sürede 19 sunucuda 11.000'den fazla kullanıcıya ulaştık. Bu büyümenin ardındaki en büyük etken, yalnızca güçlü bir bot değil; aynı zamanda aktif bir topluluk ve sürekli gelişen bir ekosistem inşa ediyor olmamız.",
+    "features.title": "Size Neler Sunuyoruz?",
+    "features.desc": "Moderasyondan eğlenceye, otomasyondan topluluk yönetimine kadar bir Discord sunucusunun ihtiyaç duyduğu her şey, tek bir botta toplandı:",
+    "features.f1": "Gelişmiş Moderasyon Sistemi",
+    "features.f2": "Canlı Sunucu İstatistikleri",
+    "features.f3": "Eğlence ve Sosyal Komutlar",
+    "features.f4": "Otomatik Rol ve Karşılama",
+    "features.f5": "Form ve Başvuru Sistemleri",
     "features.f6": "Destek Talebi (Ticket) Sistemi",
-    "features.f7": "Duyuru, Oylama ve Reklam Komutları",
-    "features.f8": "Otomatik Sunucu ve Rol Kurulumu",
+    "features.f7": "Duyuru ve Oylama Araçları",
+    "features.f8": "Otomatik Sunucu Kurulumu",
     "features.quote": "\"BetterBot 2.0, sadece bir bot değil; sunucunuzun kalbi ve beyni.\"",
-    "team.title": "👥 Ekibimiz",
-    "team.desc": "BetterBot 2.0'ı geliştiren ve sürekli iyileştiren tutkulu ekibimiz:",
+    "team.title": "Arkamızdaki Ekip",
+    "team.desc": "BetterBot 2.0'ı geliştiren, test eden ve her gün daha iyi hale getiren tutkulu ekibimiz:",
     "team.role.founder": "Kurucu & Geliştirici",
-    "team.desc.founder": "BetterBot 2.0'ın mimarı. Sunucu yönetimi, backend geliştirme ve topluluk yönetimi.",
+    "team.desc.founder": "Projenin mimarı. Backend geliştirme, sunucu yönetimi ve topluluk liderliği.",
     "team.role.dev": "Yazılım Geliştirici",
     "team.desc.dev": "Bot komutları, eklenti geliştirme ve teknik destek.",
     "team.role.moderator": "Topluluk Moderatörü",
     "team.desc.moderator": "Discord moderasyonu, kullanıcı desteği ve etkinlik yönetimi.",
     "team.role.designer": "Tasarımcı",
-    "team.desc.designer": "Logo, ikon, web sitesi tasarımı ve görsel kimlik.",
-    "roadmap.title": "🎯 Yol Haritası",
-    "roadmap.desc": "BetterBot 2.0'ın bugünü, yarını ve geleceği:",
+    "team.desc.designer": "Logo, ikon, web sitesi tasarımı ve görsel kimlik yönetimi.",
+    "roadmap.title": "Yol Haritamız",
+    "roadmap.desc": "BetterBot 2.0 statik bir proje değil. Sürekli güncellenen, yeni özelliklerle büyüyen ve topluluğun geri bildirimleriyle şekillenen canlı bir ekosistem.",
     "roadmap.done": "Tamamlandı",
     "roadmap.now": "Devam Ediyor",
     "roadmap.next": "Gelecek",
@@ -1204,40 +1291,40 @@ const translations = {
     "roadmap.f3": "Premium özellikler",
     "roadmap.f4": "Topluluk etkinlikleri",
     "roadmap.f5": "Gelişmiş güvenlik",
-    "blog.title": "📰 Blog & Haberler",
-    "blog.desc": "BetterBot 2.0 ve BetterNetwork hakkında son gelişmeler:",
+    "blog.title": "Blog ve Haberler",
+    "blog.desc": "BetterBot 2.0 ve BetterNetwork hakkında en güncel gelişmeler, duyurular ve güncellemeler:",
     "blog.tag.update": "Güncelleme",
     "blog.tag.milestone": "Kilometre Taşı",
     "blog.tag.news": "Duyuru",
     "blog.post1.title": "v2.0 Kararlı Sürüm Yayında!",
     "blog.post1.desc": "BetterBot 2.0'ın kararlı sürümü yayında. Yeni özellikler, performans iyileştirmeleri ve daha fazlası.",
-    "blog.post2.title": "11.000 Kullanıcıya Ulaştık! 🎉",
+    "blog.post2.title": "11.000 Kullanıcıya Ulaştık",
     "blog.post2.desc": "Topluluğumuz büyümeye devam ediyor. 19 sunucuda 11 binden fazla kullanıcıya hizmet veriyoruz.",
     "blog.post3.title": "Minecraft Entegrasyonu Yolda",
-    "blog.post3.desc": "Discord ve Minecraft arasında köprü kuran yeni özelliğimiz çok yakında.",
+    "blog.post3.desc": "Discord ve Minecraft arasında köprü kuran yeni özelliğimiz çok yakında. Oyun içi sohbet Discord'a düşecek.",
     "blog.readMore": "Devamını oku →",
-    "vote.title": "💎 BetterBot'u Destekle",
+    "vote.title": "BetterBot'u Destekle",
     "vote.desc": "Her oyunuz botumuzun büyümesine yardımcı olur. Sadece 10 saniyenizi alır!",
     "vote.button": "Oy Ver ve Destekle",
-    "faq.title": "❓ Sıkça Sorulan Sorular",
+    "faq.title": "Sıkça Sorulan Sorular",
     "faq.q1": "BetterBot 2.0 ücretli mi?",
-    "faq.a1": "Hayır, tamamen ücretsizdir. Tüm temel özellikler için ödeme yapmanıza gerek yoktur.",
+    "faq.a1": "Hayır, tamamen ücretsizdir. Tüm temel özellikler için ödeme yapmanıza gerek yoktur. Gelecekte opsiyonel premium özellikler eklenebilir ancak mevcut özellikler her zaman ücretsiz kalacaktır.",
     "faq.q2": "Botu nasıl eklerim?",
-    "faq.a2": "\"Botu Ekle\" butonuna tıklayıp sunucunuzu seçin ve izinleri onaylayın. Otomatik olarak eklenir.",
+    "faq.a2": "\"Botu Ekle\" butonuna tıklayıp Discord yetkilendirme ekranında sunucunuzu seçin ve gerekli izinleri onaylayın. Bot, sunucunuza otomatik olarak eklenir.",
     "faq.q3": "Hangi komutlar mevcut?",
-    "faq.a3": "50'den fazla komut: moderasyon, eğlence, otomasyon, form sistemleri, ticket sistemi ve daha fazlası.",
+    "faq.a3": "50'den fazla komut mevcut: moderasyon (ban, mute, uyarı), eğlence (IQ, aşk, dans), otomasyon (oto-rol, hoş geldin), form sistemleri, ticket sistemi ve daha fazlası. Detaylı liste için \"Komutlar\" sayfasına göz atın.",
     "faq.q4": "Verilerim güvende mi?",
-    "faq.a4": "Kesinlikle. Veriler şifrelenir, üçüncü taraflarla paylaşılmaz. Düzenli güvenlik denetimleri yapılır.",
+    "faq.a4": "Kesinlikle. Kullanıcı verileri şifrelenir, üçüncü taraflarla paylaşılmaz ve düzenli olarak güvenlik denetimleri yapılır.",
     "faq.q5": "Destek nasıl alabilirim?",
-    "faq.a5": "BetterNetwork Discord sunucumuza katılın. Destek kanallarımızdan 7/24 yardım alabilirsiniz.",
-    "community.title": "🌐 BetterNetwork Topluluğu",
-    "community.p1": "BetterBot 2.0'ın kalbi, BetterNetwork topluluğudur. Burası sadece bir bot sunucusu değil; fikir alışverişi yapabileceğiniz, yeni arkadaşlıklar kurabileceğiniz bir aile ortamıdır.",
+    "faq.a5": "BetterNetwork Discord sunucumuza katılın. Destek kanallarımızdan 7/24 yardım alabilir veya yetkililere doğrudan mesaj atabilirsiniz.",
+    "community.title": "Topluluğumuz",
+    "community.p1": "BetterBot 2.0'ın kalbi, BetterNetwork topluluğudur. Burası yalnızca bir bot sunucusu değil; fikir alışverişi yapabileceğiniz, yeni arkadaşlıklar kurabileceğiniz ve birlikte büyüyebileceğiniz bir aile ortamıdır.",
     "community.quote": "\"BetterNetwork'te herkes birbirinin gelişimine katkı sağlar. Birlikte büyüyoruz, birlikte güçleniyoruz.\"",
-    "buttons.features": "✨ Özellikler",
-    "buttons.commands": "📋 Komutlar",
-    "buttons.addBot": "🤖 Botu Ekle",
-    "buttons.join": "🚀 Sunucuya Katıl",
-    "footer.privacy": "🔒 Gizlilik Politikası"
+    "buttons.features": "Özellikler",
+    "buttons.commands": "Komutlar",
+    "buttons.addBot": "Botu Ekle",
+    "buttons.join": "Sunucuya Katıl",
+    "footer.privacy": "Gizlilik Politikası"
   },
   en: {
     "nav.about": "About",
@@ -1245,42 +1332,42 @@ const translations = {
     "nav.roadmap": "Roadmap",
     "nav.blog": "Blog",
     "nav.faq": "FAQ",
-    "nav.addBot": "🤖 Add Bot",
+    "nav.addBot": "Add Bot",
     "header.sub": "The New Name of Connection and Trust",
     "header.badge1": "24/7 Online",
-    "header.badge2": "🚀 v2.0 Released",
-    "header.badge3": "💯 Free",
+    "header.badge2": "v2.0 Released",
+    "header.badge3": "Completely Free",
     "stats.servers": "Servers",
     "stats.users": "Users",
     "stats.commands": "Commands",
     "stats.support": "Support",
     "stats.free": "Free",
-    "about.title": "🌟 Who Are We?",
-    "about.p1": "As the BetterNetwork team, we set out to make Discord communities safer, more organized, and more fun. BetterBot 2.0 is the product of this vision. Not just a bot, but a community project.",
-    "about.p2": "Today we serve over 11,000 users across 19 servers. This number grows every day because BetterBot 2.0 stands out with its reliability and functionality.",
-    "features.title": "🤝 What Do We Offer?",
-    "features.desc": "BetterBot 2.0 brings together almost all the tools a Discord server might need under one roof:",
-    "features.f1": "Advanced Moderation (Ban, Warn, Mute, Purge)",
-    "features.f2": "Live Server and User Statistics",
-    "features.f3": "Fun Commands (IQ, Love, Hack, Dance)",
-    "features.f4": "Auto Role, Welcome and Rules",
-    "features.f5": "Form Systems (Application, Report, Suggestion)",
+    "about.title": "Who Are We?",
+    "about.p1": "BetterBot 2.0 was developed to ease the management burden of Discord servers and offer every community the tools it needs under one roof. Our goal is simple: to free server owners from technical hassles and give them a secure, organized community management experience.",
+    "about.p2": "In a short time, we reached over 11,000 users across 19 servers. The biggest factor behind this growth is that we're not just building a powerful bot; we're also building an active community and a constantly evolving ecosystem.",
+    "features.title": "What Do We Offer?",
+    "features.desc": "Everything a Discord server needs — from moderation to entertainment, from automation to community management — is gathered in one bot:",
+    "features.f1": "Advanced Moderation System",
+    "features.f2": "Live Server Statistics",
+    "features.f3": "Fun and Social Commands",
+    "features.f4": "Auto Role and Welcome",
+    "features.f5": "Form and Application Systems",
     "features.f6": "Support Ticket System",
-    "features.f7": "Announcement, Polling and Advertising Commands",
-    "features.f8": "Automatic Server and Role Setup",
+    "features.f7": "Announcement and Polling Tools",
+    "features.f8": "Automatic Server Setup",
     "features.quote": "\"BetterBot 2.0 is not just a bot; it's the heart and brain of your server.\"",
-    "team.title": "👥 Our Team",
-    "team.desc": "Our passionate team developing and constantly improving BetterBot 2.0:",
+    "team.title": "The Team Behind Us",
+    "team.desc": "Our passionate team that develops, tests, and improves BetterBot 2.0 every day:",
     "team.role.founder": "Founder & Developer",
-    "team.desc.founder": "Architect of BetterBot 2.0. Server management, backend development, and community management.",
+    "team.desc.founder": "Architect of the project. Backend development, server management, and community leadership.",
     "team.role.dev": "Software Developer",
     "team.desc.dev": "Bot commands, plugin development, and technical support.",
     "team.role.moderator": "Community Moderator",
     "team.desc.moderator": "Discord moderation, user support, and event management.",
     "team.role.designer": "Designer",
-    "team.desc.designer": "Logo, icon, website design, and visual identity.",
-    "roadmap.title": "🎯 Roadmap",
-    "roadmap.desc": "The today, tomorrow, and future of BetterBot 2.0:",
+    "team.desc.designer": "Logo, icon, website design, and visual identity management.",
+    "roadmap.title": "Our Roadmap",
+    "roadmap.desc": "BetterBot 2.0 is not a static project. It's a living ecosystem that is constantly updated, grows with new features, and is shaped by community feedback.",
     "roadmap.done": "Completed",
     "roadmap.now": "In Progress",
     "roadmap.next": "Upcoming",
@@ -1298,40 +1385,40 @@ const translations = {
     "roadmap.f3": "Premium features",
     "roadmap.f4": "Community events",
     "roadmap.f5": "Advanced security",
-    "blog.title": "📰 Blog & News",
-    "blog.desc": "Latest developments about BetterBot 2.0 and BetterNetwork:",
+    "blog.title": "Blog and News",
+    "blog.desc": "The latest developments, announcements, and updates about BetterBot 2.0 and BetterNetwork:",
     "blog.tag.update": "Update",
     "blog.tag.milestone": "Milestone",
     "blog.tag.news": "Announcement",
     "blog.post1.title": "v2.0 Stable Release is Here!",
     "blog.post1.desc": "The stable version of BetterBot 2.0 is out. New features, performance improvements, and more.",
-    "blog.post2.title": "We Reached 11,000 Users! 🎉",
+    "blog.post2.title": "We Reached 11,000 Users",
     "blog.post2.desc": "Our community keeps growing. We serve over 11,000 users across 19 servers.",
     "blog.post3.title": "Minecraft Integration Coming Soon",
-    "blog.post3.desc": "Our new feature bridging Discord and Minecraft is coming very soon.",
+    "blog.post3.desc": "Our new feature bridging Discord and Minecraft is coming very soon. In-game chat will drop into Discord.",
     "blog.readMore": "Read more →",
-    "vote.title": "💎 Support BetterBot",
+    "vote.title": "Support BetterBot",
     "vote.desc": "Every vote helps our bot grow. It only takes 10 seconds!",
     "vote.button": "Vote and Support",
-    "faq.title": "❓ Frequently Asked Questions",
+    "faq.title": "Frequently Asked Questions",
     "faq.q1": "Is BetterBot 2.0 paid?",
-    "faq.a1": "No, it's completely free. You don't need to pay for any core features.",
+    "faq.a1": "No, it's completely free. You don't need to pay for any core features. Optional premium features may be added in the future, but existing features will always remain free.",
     "faq.q2": "How do I add the bot?",
-    "faq.a2": "Click the \"Add Bot\" button, select your server, and approve the permissions. It's added automatically.",
+    "faq.a2": "Click the \"Add Bot\" button, select your server in the Discord authorization screen, and approve the required permissions. The bot is added automatically.",
     "faq.q3": "Which commands are available?",
-    "faq.a3": "Over 50 commands: moderation, fun, automation, form systems, ticket system, and more.",
+    "faq.a3": "Over 50 commands are available: moderation (ban, mute, warn), fun (IQ, love, dance), automation (auto-role, welcome), form systems, ticket system, and more. Check the \"Commands\" page for the full list.",
     "faq.q4": "Is my data safe?",
-    "faq.a4": "Absolutely. Data is encrypted, not shared with third parties. Regular security audits are performed.",
+    "faq.a4": "Absolutely. User data is encrypted, not shared with third parties, and regular security audits are performed.",
     "faq.q5": "How can I get support?",
-    "faq.a5": "Join our BetterNetwork Discord server. You can get help 24/7 from our support channels.",
-    "community.title": "🌐 BetterNetwork Community",
-    "community.p1": "The heart of BetterBot 2.0 is the BetterNetwork community. This is not just a bot server; it's a family environment where you can exchange ideas and make new friendships.",
+    "faq.a5": "Join our BetterNetwork Discord server. You can get help 24/7 from our support channels or message the staff directly.",
+    "community.title": "Our Community",
+    "community.p1": "The heart of BetterBot 2.0 is the BetterNetwork community. This is not just a bot server; it's a family environment where you can exchange ideas, make new friendships, and grow together.",
     "community.quote": "\"In BetterNetwork, everyone contributes to each other's growth. We grow together, we get stronger together.\"",
-    "buttons.features": "✨ Features",
-    "buttons.commands": "📋 Commands",
-    "buttons.addBot": "🤖 Add Bot",
-    "buttons.join": "🚀 Join Server",
-    "footer.privacy": "🔒 Privacy Policy"
+    "buttons.features": "Features",
+    "buttons.commands": "Commands",
+    "buttons.addBot": "Add Bot",
+    "buttons.join": "Join Server",
+    "footer.privacy": "Privacy Policy"
   }
 };
 
@@ -1376,7 +1463,6 @@ const translations = {
       ctx.fill();
     });
 
-    // Bağlantı çizgileri
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -1397,7 +1483,7 @@ const translations = {
   animate();
 })();
 
-/* ===== SCROLL SESİ (Web Audio API) ===== */
+/* ===== SCROLL SESİ ===== */
 (function initScrollSound() {
   let audioCtx = null;
   let lastSectionId = null;
@@ -1435,46 +1521,44 @@ const translations = {
   });
 })();
 
-/* ===== ARKA PLAN MÜZİĞİ (Varsayılan AÇIK) ===== */
+/* ===== MÜZİK ===== */
 (function initMusic() {
   const music = document.getElementById('bgMusic');
   const toggle = document.getElementById('musicToggle');
+  const icon = document.getElementById('musicIcon');
   let isPlaying = false;
   music.volume = 0.15;
+
+  const PLAY_ICON = '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>';
+  const MUTE_ICON = '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2.5"/>';
 
   function setPlaying(state) {
     isPlaying = state;
     if (state) {
       music.play().then(() => {
         toggle.classList.add('playing');
-        toggle.textContent = '🔊';
+        icon.innerHTML = PLAY_ICON;
       }).catch(() => {
-        // Tarayıcı autoplay engelledi — kullanıcı etkileşimi bekle
         toggle.classList.remove('playing');
-        toggle.textContent = '🎵';
+        icon.innerHTML = MUTE_ICON;
         isPlaying = false;
       });
     } else {
       music.pause();
       toggle.classList.remove('playing');
-      toggle.textContent = '🔇';
+      icon.innerHTML = MUTE_ICON;
     }
   }
 
-  toggle.addEventListener('click', () => {
-    setPlaying(!isPlaying);
-  });
+  toggle.addEventListener('click', () => setPlaying(!isPlaying));
 
-  // Varsayılan: çalmayı dene
   setPlaying(true);
 
-  // Kullanıcı ilk tıklamada müzik çalmıyorsa başlat
   document.body.addEventListener('click', function once() {
     if (!isPlaying) setPlaying(true);
     document.body.removeEventListener('click', once);
   }, { once: true });
 
-  // Sayfa kapanınca durdur
   window.addEventListener('beforeunload', () => music.pause());
 })();
 
@@ -1495,10 +1579,7 @@ const translations = {
     currentLang = lang;
   }
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
-  });
-
+  buttons.forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
   applyLang(currentLang);
 })();
 
@@ -1538,7 +1619,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-/* ===== ANIMATED COUNTERS ===== */
+/* ===== COUNTERS ===== */
 const counters = document.querySelectorAll('.number[data-count]');
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1564,7 +1645,7 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 counters.forEach(el => counterObserver.observe(el));
 
-/* ===== FAQ ACCORDION ===== */
+/* ===== FAQ ===== */
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.parentElement;
