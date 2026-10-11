@@ -19,9 +19,7 @@
       color: #e6f1ff;
       line-height: 1.6;
       min-height: 100vh;
-      background-image:
-        radial-gradient(ellipse at 20% 30%, #112240 0%, #0a192f 80%),
-        radial-gradient(ellipse at 80% 70%, #1a1440 0%, transparent 60%);
+      background-image: radial-gradient(ellipse at 20% 30%, #112240 0%, #0a192f 80%);
       overflow-x: hidden;
       position: relative;
     }
@@ -31,6 +29,7 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
+      /* İçerik üstte olsun */
     }
 
     .navbar, .page-wrapper, #backToTop, #musicToggle, #toast, #loader {
@@ -48,17 +47,16 @@
       position: fixed;
       inset: 0;
       background: #0a192f;
-      background-image:
-        radial-gradient(ellipse at 30% 40%, #112240 0%, #0a192f 70%),
-        radial-gradient(ellipse at 70% 60%, #1a1440 0%, transparent 60%);
+      background-image: radial-gradient(ellipse at 30% 40%, #112240 0%, #0a192f 70%);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.7s ease, visibility 0.7s;
+      transition: opacity 0.4s ease;
     }
     #loader.hidden {
       opacity: 0;
       visibility: hidden;
+      display: none; /* Animasyonları tamamen durdurur */
     }
     .loader-content {
       text-align: center;
@@ -66,44 +64,26 @@
       flex-direction: column;
       align-items: center;
       gap: 18px;
-      animation: loaderFadeIn 0.8s ease;
     }
-    @keyframes loaderFadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .loader-logo-wrap {
       position: relative;
-      width: 160px;
-      height: 160px;
+      width: 130px;
+      height: 130px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 8px;
     }
     .loader-logo {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       border: 3px solid #00d4ff;
       object-fit: cover;
       box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
-      animation: loaderLogoPulse 2s ease-in-out infinite;
       position: relative;
       z-index: 2;
     }
-    @keyframes loaderLogoPulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
-      }
-      50% {
-        transform: scale(1.05);
-        box-shadow: 0 0 60px rgba(0, 212, 255, 0.8), 0 0 100px rgba(168, 85, 247, 0.4);
-      }
-    }
-
     .loader-ring-outer {
       position: absolute;
       inset: 0;
@@ -111,22 +91,23 @@
       border: 2px solid transparent;
       border-top-color: #00d4ff;
       border-right-color: #00d4ff;
-      animation: spinCW 1.5s linear infinite;
+      animation: spinCW 1.2s linear infinite;
+      will-change: transform;
     }
     .loader-ring-inner {
       position: absolute;
-      inset: 15px;
+      inset: 12px;
       border-radius: 50%;
       border: 2px solid transparent;
       border-bottom-color: #a855f7;
       border-left-color: #a855f7;
-      animation: spinCCW 2s linear infinite;
+      animation: spinCCW 1.6s linear infinite;
+      will-change: transform;
     }
     @keyframes spinCW { to { transform: rotate(360deg); } }
     @keyframes spinCCW { to { transform: rotate(-360deg); } }
-
     .loader-brand {
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: 900;
       letter-spacing: -1px;
       color: #e6f1ff;
@@ -136,24 +117,20 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      background-size: 200% 200%;
-      animation: gradientMove 3s ease infinite;
     }
     .loader-tagline {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #8892b0;
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 6px;
     }
-
     .loader-bar-wrap {
-      width: 240px;
+      width: 220px;
       height: 4px;
       background: rgba(0, 212, 255, 0.12);
       border-radius: 10px;
       overflow: hidden;
-      position: relative;
     }
     .loader-bar {
       height: 100%;
@@ -161,21 +138,6 @@
       background: linear-gradient(90deg, #00d4ff, #a855f7);
       border-radius: 10px;
       transition: width 0.15s ease;
-      box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
-      position: relative;
-    }
-    .loader-bar::after {
-      content: '';
-      position: absolute;
-      top: 0; right: 0; bottom: 0;
-      width: 40px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5));
-      animation: barShine 1s ease-in-out infinite;
-    }
-    @keyframes barShine {
-      0% { opacity: 0.3; }
-      50% { opacity: 1; }
-      100% { opacity: 0.3; }
     }
     .loader-percent {
       font-size: 0.75rem;
@@ -184,27 +146,23 @@
       letter-spacing: 2px;
       font-variant-numeric: tabular-nums;
     }
-
     @media (max-width: 480px) {
-      .loader-logo-wrap { width: 130px; height: 130px; }
-      .loader-logo { width: 80px; height: 80px; }
-      .loader-brand { font-size: 1.5rem; }
-      .loader-tagline { font-size: 0.7rem; letter-spacing: 1.5px; }
-      .loader-bar-wrap { width: 180px; }
+      .loader-logo-wrap { width: 110px; height: 110px; }
+      .loader-logo { width: 70px; height: 70px; }
+      .loader-brand { font-size: 1.3rem; }
     }
 
     /* ===== NAVBAR ===== */
+    /* OPTİMİZASYON: backdrop-filter kaldırıldı (GPU dostu) */
     .navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(10, 25, 47, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(10, 25, 47, 0.96);
       border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-      transition: all 0.3s ease;
+      transition: box-shadow 0.25s ease;
     }
     .navbar.scrolled {
-      background: rgba(10, 25, 47, 0.95);
+      background: rgba(10, 25, 47, 0.99);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     }
     .nav-container {
@@ -254,7 +212,7 @@
       font-weight: 500;
       padding: 8px 14px;
       border-radius: 8px;
-      transition: all 0.25s;
+      transition: color 0.2s, background-color 0.2s;
     }
     .nav-links a:hover {
       color: #00d4ff;
@@ -267,7 +225,6 @@
     }
     .nav-cta:hover {
       background: #4752c4 !important;
-      box-shadow: 0 4px 16px rgba(88, 101, 242, 0.4);
     }
 
     .lang-switcher {
@@ -288,7 +245,7 @@
       border-radius: 20px;
       cursor: pointer;
       font-family: inherit;
-      transition: all 0.25s;
+      transition: color 0.2s;
       letter-spacing: 0.5px;
     }
     .lang-btn:hover { color: #00d4ff; }
@@ -314,12 +271,11 @@
         top: 64px;
         left: 0; right: 0;
         flex-direction: column;
-        background: rgba(10, 25, 47, 0.98);
-        backdrop-filter: blur(20px);
+        background: #0a192f;
         padding: 20px;
         gap: 4px;
         transform: translateY(-150%);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         border-bottom: 1px solid rgba(0, 212, 255, 0.15);
       }
       .nav-links.open { transform: translateY(0); }
@@ -333,16 +289,15 @@
       flex-direction: column;
       align-items: center;
     }
+    /* OPTİMİZASYON: backdrop-filter kaldırıldı, daha opak background */
     .container {
       max-width: 1100px;
       width: 100%;
-      background: rgba(17, 34, 64, 0.55);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(17, 34, 64, 0.92);
       padding: 60px 45px;
       border-radius: 48px;
-      border: 1px solid rgba(26, 45, 74, 0.5);
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(26, 45, 74, 0.6);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
     }
 
     /* ===== HEADER ===== */
@@ -353,32 +308,17 @@
       border: 4px solid #00d4ff;
       box-shadow: 0 0 70px rgba(0, 212, 255, 0.3);
       object-fit: cover;
-      animation: float 6s ease-in-out infinite;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .logo:hover {
-      transform: scale(1.08) rotate(-5deg);
-      box-shadow: 0 0 100px rgba(0, 212, 255, 0.55);
-    }
+    /* OPTİMİZASYON: gradientMove animasyonu kaldırıldı (statik gradient) */
     h1 {
       font-size: 3.8rem;
       font-weight: 900;
       margin-top: 22px;
       letter-spacing: -1.5px;
       background: linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #00d4ff 100%);
-      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradientMove 4s ease infinite;
-    }
-    @keyframes gradientMove {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
     }
     .sub {
       font-size: 1.15rem;
@@ -414,7 +354,7 @@
       background: #00ff88;
       border-radius: 50%;
       box-shadow: 0 0 8px #00ff88;
-      animation: pulse 1.5s ease-in-out infinite;
+      animation: pulse 2s ease-in-out infinite;
     }
     .badge.green {
       background: rgba(0, 255, 136, 0.12);
@@ -422,8 +362,8 @@
       color: #00ff88;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.2); }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
     }
 
     /* ===== STATS ===== */
@@ -472,12 +412,6 @@
       height: 32px;
       flex-shrink: 0;
       color: #00d4ff;
-      filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
-      animation: iconFloat 3s ease-in-out infinite;
-    }
-    @keyframes iconFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
     }
     p {
       color: #ccd6f6;
@@ -490,9 +424,8 @@
     /* ===== REVEAL ===== */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -504,84 +437,40 @@
       margin: 28px 0 14px;
     }
     .feature-card {
-      background: linear-gradient(145deg, #0d1a2f, #112240);
+      background: #0d1a2f;
       border-radius: 20px;
       padding: 26px 24px;
       border: 1px solid rgba(26, 45, 74, 0.8);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #00d4ff, #a855f7);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .feature-card::after {
-      content: '';
-      position: absolute;
-      top: -50%; right: -50%;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.5s;
-      pointer-events: none;
-    }
     .feature-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
       border-color: rgba(0, 212, 255, 0.4);
-      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.12);
     }
-    .feature-card:hover::before { transform: scaleX(1); }
-    .feature-card:hover::after { opacity: 1; }
-
     .feature-icon {
       width: 52px;
       height: 52px;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.15));
+      background: rgba(0, 212, 255, 0.1);
       border: 1px solid rgba(0, 212, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-    }
-    .feature-icon::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #00d4ff, #a855f7);
-      opacity: 0;
-      z-index: -1;
-      transition: opacity 0.3s;
-      filter: blur(8px);
+      transition: transform 0.25s ease;
     }
     .feature-card:hover .feature-icon {
-      transform: scale(1.08) rotate(-5deg);
-      border-color: transparent;
-      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      transform: scale(1.06);
     }
-    .feature-card:hover .feature-icon::before { opacity: 0.6; }
     .feature-icon svg {
       width: 26px;
       height: 26px;
       color: #00d4ff;
-      transition: color 0.3s;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    .feature-card:hover .feature-icon svg { color: #0a192f; }
-
     .feature-card h3 {
       font-size: 1.05rem;
       font-weight: 800;
@@ -599,7 +488,7 @@
 
     /* ===== QUOTE ===== */
     .quote {
-      background: linear-gradient(145deg, #0d1a2f, #112240);
+      background: #0d1a2f;
       padding: 26px 34px;
       border-radius: 20px;
       border-left: 6px solid #a855f7;
@@ -607,18 +496,6 @@
       font-style: italic;
       font-size: 1.12rem;
       color: #ccd6f6;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-      position: relative;
-      overflow: hidden;
-    }
-    .quote::before {
-      content: '"';
-      position: absolute;
-      top: -20px; right: 20px;
-      font-size: 8rem;
-      color: rgba(168, 85, 247, 0.08);
-      font-family: Georgia, serif;
-      line-height: 1;
     }
 
     /* ===== FAQ ===== */
@@ -628,7 +505,7 @@
       margin-bottom: 12px;
       overflow: hidden;
       border: 1px solid rgba(26, 45, 74, 0.8);
-      transition: border-color 0.3s;
+      transition: border-color 0.2s;
     }
     .faq-item:hover { border-color: rgba(0, 212, 255, 0.3); }
     .faq-item.open { border-color: #00d4ff; }
@@ -647,21 +524,20 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      transition: color 0.25s;
+      transition: color 0.2s;
     }
     .faq-question:hover { color: #00d4ff; }
     .faq-question .arrow {
       font-size: 1.2rem;
       color: #00d4ff;
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.3s ease;
       flex-shrink: 0;
     }
     .faq-item.open .arrow { transform: rotate(180deg); }
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                  padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: max-height 0.35s ease, padding 0.35s ease;
       padding: 0 22px;
       color: #8892b0;
       font-size: 0.95rem;
@@ -680,30 +556,17 @@
       margin: 24px 0;
     }
     .team-card {
-      background: linear-gradient(145deg, #0d1a2f, #112240);
+      background: #0d1a2f;
       border-radius: 22px;
       padding: 28px 20px;
       text-align: center;
       border: 1px solid rgba(0, 212, 255, 0.15);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    .team-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #00d4ff, #a855f7);
-      transform: scaleX(0);
-      transition: transform 0.4s;
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
     .team-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
       border-color: rgba(0, 212, 255, 0.4);
-      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
     }
-    .team-card:hover::before { transform: scaleX(1); }
     .team-avatar {
       width: 80px; height: 80px;
       border-radius: 50%;
@@ -711,10 +574,9 @@
       margin: 0 auto 14px;
       display: block;
       object-fit: cover;
-      box-shadow: 0 0 24px rgba(0, 212, 255, 0.3);
-      transition: transform 0.4s;
+      transition: transform 0.25s ease;
     }
-    .team-card:hover .team-avatar { transform: scale(1.08) rotate(-5deg); }
+    .team-card:hover .team-avatar { transform: scale(1.05); }
     .team-name {
       font-size: 1.1rem;
       font-weight: 800;
@@ -743,15 +605,15 @@
       margin: 30px 0;
     }
     .roadmap-col {
-      background: linear-gradient(145deg, #0d1a2f, #112240);
+      background: #0d1a2f;
       border-radius: 22px;
       padding: 24px 22px;
       border: 1px solid rgba(26, 45, 74, 0.8);
-      transition: all 0.35s;
+      transition: border-color 0.25s, transform 0.25s;
     }
     .roadmap-col:hover {
       border-color: rgba(0, 212, 255, 0.35);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
     .roadmap-col h3 {
       font-size: 1.05rem;
@@ -763,21 +625,14 @@
       align-items: center;
       gap: 8px;
     }
-    .roadmap-col h3 svg {
-      width: 20px; height: 20px;
-      flex-shrink: 0;
-    }
+    .roadmap-col h3 svg { width: 20px; height: 20px; flex-shrink: 0; }
     .roadmap-col.done h3 { color: #00ff88; }
     .roadmap-col.done h3 svg { color: #00ff88; }
     .roadmap-col.now h3 { color: #ffcc00; }
     .roadmap-col.now h3 svg { color: #ffcc00; }
     .roadmap-col.next h3 { color: #a855f7; }
     .roadmap-col.next h3 svg { color: #a855f7; }
-    .roadmap-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+    .roadmap-list { list-style: none; padding: 0; margin: 0; }
     .roadmap-list li {
       color: #ccd6f6;
       font-size: 0.9rem;
@@ -805,21 +660,18 @@
       margin: 24px 0;
     }
     .blog-card {
-      background: linear-gradient(145deg, #0d1a2f, #112240);
+      background: #0d1a2f;
       border-radius: 20px;
       padding: 24px;
       border: 1px solid rgba(26, 45, 74, 0.8);
-      transition: all 0.35s;
+      transition: transform 0.25s, border-color 0.25s;
       text-decoration: none;
       color: inherit;
       display: block;
-      position: relative;
-      overflow: hidden;
     }
     .blog-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
       border-color: rgba(0, 212, 255, 0.4);
-      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
     }
     .blog-tag {
       display: inline-block;
@@ -856,26 +708,15 @@
     .blog-meta .read { color: #00d4ff; font-weight: 600; }
 
     /* ===== OY VER ===== */
+    /* OPTİMİZASYON: rotating conic-gradient kaldırıldı */
     .vote-box {
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(168, 85, 247, 0.08));
+      background: rgba(0, 212, 255, 0.05);
       border: 2px solid rgba(0, 212, 255, 0.3);
       border-radius: 22px;
       padding: 30px;
       text-align: center;
       margin: 30px 0;
-      position: relative;
-      overflow: hidden;
     }
-    .vote-box::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.1), transparent 30%);
-      animation: rotate 6s linear infinite;
-    }
-    @keyframes rotate { to { transform: rotate(360deg); } }
-    .vote-box > * { position: relative; z-index: 1; }
     .vote-title {
       display: flex;
       align-items: center;
@@ -890,8 +731,6 @@
       width: 34px;
       height: 34px;
       color: #00d4ff;
-      filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.6));
-      animation: iconFloat 3s ease-in-out infinite;
       flex-shrink: 0;
     }
     .vote-desc {
@@ -909,16 +748,12 @@
       padding: 14px 32px;
       border-radius: 40px;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
+      transition: transform 0.2s;
     }
     .vote-btn:hover {
-      transform: translateY(-3px) scale(1.04);
-      box-shadow: 0 12px 40px rgba(0, 212, 255, 0.6);
+      transform: translateY(-2px);
     }
-    .vote-btn svg {
-      width: 18px; height: 18px;
-    }
+    .vote-btn svg { width: 18px; height: 18px; }
 
     /* ===== BUTONLAR ===== */
     .btn-group {
@@ -940,34 +775,23 @@
       font-size: 0.88rem;
       border: none;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.2s, background-color 0.2s;
       text-align: center;
       white-space: nowrap;
       font-family: inherit;
     }
-    .btn:hover { transform: translateY(-3px) scale(1.03); }
+    .btn:hover { transform: translateY(-2px); }
     .btn svg { flex-shrink: 0; }
     .btn-discord {
       background: #5865f2;
       color: #fff;
-      box-shadow: 0 4px 18px rgba(88, 101, 242, 0.3);
     }
-    .btn-discord:hover {
-      background: #4752c4;
-      box-shadow: 0 8px 28px rgba(88, 101, 242, 0.5);
-    }
+    .btn-discord:hover { background: #4752c4; }
     .btn-purple {
       background: #7b2fbe;
       color: #fff;
-      box-shadow: 0 4px 18px rgba(123, 47, 190, 0.3);
     }
     .btn-purple:hover { background: #6a26a5; }
-    .btn-primary {
-      background: #00d4ff;
-      color: #0a192f;
-      box-shadow: 0 4px 18px rgba(0, 212, 255, 0.3);
-    }
-    .btn-primary:hover { background: #00b8e6; }
     .btn-outline {
       background: transparent;
       border: 2px solid #00d4ff;
@@ -994,21 +818,13 @@
     .footer a {
       color: #00d4ff;
       text-decoration: none;
-      transition: color 0.25s, transform 0.25s;
+      transition: color 0.2s;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
-    .footer a:hover {
-      color: #a855f7;
-      transform: translateY(-1px);
-    }
-    .footer a svg {
-      width: 15px;
-      height: 15px;
-      flex-shrink: 0;
-      stroke: currentColor;
-    }
+    .footer a:hover { color: #a855f7; }
+    .footer a svg { width: 15px; height: 15px; flex-shrink: 0; stroke: currentColor; }
 
     /* ===== BACK TO TOP ===== */
     #backToTop {
@@ -1024,48 +840,41 @@
       box-shadow: 0 6px 24px rgba(0, 212, 255, 0.4);
       opacity: 0;
       visibility: hidden;
-      transition: all 0.35s;
+      transition: opacity 0.25s, visibility 0.25s, transform 0.25s;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     #backToTop.visible { opacity: 1; visibility: visible; }
-    #backToTop:hover { transform: translateY(-4px) scale(1.08); }
+    #backToTop:hover { transform: translateY(-3px); }
 
     /* ===== MÜZİK BUTONU ===== */
     #musicToggle {
       position: fixed;
       bottom: 30px; right: 90px;
       width: 50px; height: 50px;
-      background: rgba(13, 26, 47, 0.9);
-      backdrop-filter: blur(10px);
+      background: rgba(13, 26, 47, 0.95);
       color: #00d4ff;
       border: 2px solid rgba(0, 212, 255, 0.4);
       border-radius: 50%;
       font-size: 1.2rem;
       cursor: pointer;
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s;
+      transition: transform 0.2s, border-color 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     #musicToggle:hover {
-      transform: translateY(-3px) scale(1.08);
+      transform: translateY(-2px);
       border-color: #00d4ff;
-      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
     }
     #musicToggle.playing {
       background: linear-gradient(135deg, #00d4ff, #a855f7);
       color: #0a192f;
       border-color: transparent;
-      animation: musicPulse 2s ease-in-out infinite;
     }
     #musicToggle svg { width: 20px; height: 20px; }
-    @keyframes musicPulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
-      50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6); }
-    }
 
     /* ===== TOAST ===== */
     #toast {
@@ -1081,7 +890,7 @@
       box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
       opacity: 0;
       visibility: hidden;
-      transition: all 0.35s;
+      transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
     }
     #toast.visible {
       opacity: 1;
@@ -1113,6 +922,16 @@
       h1 { font-size: 1.95rem; }
       .sub { font-size: 0.95rem; letter-spacing: 1.5px; }
       .badge { font-size: 0.65rem; padding: 4px 12px; }
+    }
+
+    /* ===== ERİŞİLEBİLİRLİK: Hareket azaltma tercihi ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      #particles { display: none; }
     }
   </style>
 </head>
@@ -1340,25 +1159,25 @@
 
       <div class="team-grid">
         <div class="team-card">
-          <img class="team-avatar" src="https://mc-heads.net/avatar/AhmetEjler/160" alt="AhmetEjler" />
+          <img class="team-avatar" src="https://mc-heads.net/avatar/AhmetEjler/160" alt="AhmetEjler" loading="lazy" width="80" height="80" />
           <div class="team-name">AhmetEjler</div>
           <div class="team-role" data-i18n="team.role.founder">Kurucu & Geliştirici</div>
           <div class="team-desc" data-i18n="team.desc.founder">Projenin mimarı. Backend geliştirme, sunucu yönetimi ve topluluk liderliği.</div>
         </div>
         <div class="team-card">
-          <img class="team-avatar" src="https://mc-heads.net/avatar/BuseEjler/160" alt="BuseEjler" />
+          <img class="team-avatar" src="https://mc-heads.net/avatar/BuseEjler/160" alt="BuseEjler" loading="lazy" width="80" height="80" />
           <div class="team-name">BuseEjler</div>
           <div class="team-role" data-i18n="team.role.dev">Yazılım Geliştirici</div>
           <div class="team-desc" data-i18n="team.desc.dev">Bot komutları, eklenti geliştirme ve teknik destek.</div>
         </div>
         <div class="team-card">
-          <img class="team-avatar" src="https://mc-heads.net/avatar/MehmetEjler/160" alt="MehmetEjler" />
+          <img class="team-avatar" src="https://mc-heads.net/avatar/MehmetEjler/160" alt="MehmetEjler" loading="lazy" width="80" height="80" />
           <div class="team-name">MehmetEjler</div>
           <div class="team-role" data-i18n="team.role.moderator">Topluluk Moderatörü</div>
           <div class="team-desc" data-i18n="team.desc.moderator">Discord moderasyonu, kullanıcı desteği ve etkinlik yönetimi.</div>
         </div>
         <div class="team-card">
-          <img class="team-avatar" src="https://mc-heads.net/avatar/Rutben/160" alt="Rutben" />
+          <img class="team-avatar" src="https://mc-heads.net/avatar/Rutben/160" alt="Rutben" loading="lazy" width="80" height="80" />
           <div class="team-name">Rutben</div>
           <div class="team-role" data-i18n="team.role.designer">Tasarımcı</div>
           <div class="team-desc" data-i18n="team.desc.designer">Logo, ikon, web sitesi tasarımı ve görsel kimlik yönetimi.</div>
@@ -1620,289 +1439,219 @@
   </svg>
 </button>
 
-<audio id="bgMusic" loop preload="auto">
+<!-- OPTİMİZASYON: preload="none" - sayfa yüklenene kadar indirme -->
+<audio id="bgMusic" loop preload="none">
   <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg" />
 </audio>
 
 <div id="toast">✓ Kopyalandı!</div>
 
 <script>
+/* ===== ÇEVİRİLER (aynı) ===== */
 const translations = {
   tr: {
-    "nav.about": "Hakkımızda",
-    "nav.team": "Ekip",
-    "nav.roadmap": "Yol Haritası",
-    "nav.blog": "Blog",
-    "nav.faq": "SSS",
-    "nav.addBot": "Botu Ekle",
-    "header.sub": "Bağlantının ve Güvenin Yeni Adı",
-    "header.badge1": "7/24 Aktif",
-    "header.badge2": "v2.0 Yayında",
-    "header.badge3": "Tamamen Ücretsiz",
-    "stats.servers": "Sunucu",
-    "stats.users": "Kullanıcı",
-    "stats.commands": "Komut",
-    "stats.support": "Destek",
-    "stats.free": "Ücretsiz",
+    "nav.about": "Hakkımızda","nav.team": "Ekip","nav.roadmap": "Yol Haritası","nav.blog": "Blog","nav.faq": "SSS","nav.addBot": "Botu Ekle",
+    "header.sub": "Bağlantının ve Güvenin Yeni Adı","header.badge1": "7/24 Aktif","header.badge2": "v2.0 Yayında","header.badge3": "Tamamen Ücretsiz",
+    "stats.servers": "Sunucu","stats.users": "Kullanıcı","stats.commands": "Komut","stats.support": "Destek","stats.free": "Ücretsiz",
     "about.title": "Biz Kimiz?",
     "about.p1": "BetterBot 2.0, Discord sunucularının yönetim yükünü hafifletmek ve her ölçekten topluluğun ihtiyaç duyduğu araçları tek bir çatı altında sunmak için geliştirildi. Amacımız basit: sunucu sahiplerinin teknik detaylarla boğuşmasını engellemek, onlara güvenli ve düzenli bir topluluk yönetimi deneyimi sunmak.",
     "about.p2": "Kısa sürede 19 sunucuda 11.000'den fazla kullanıcıya ulaştık. Bu büyümenin ardındaki en büyük etken, yalnızca güçlü bir bot değil; aynı zamanda aktif bir topluluk ve sürekli gelişen bir ekosistem inşa ediyor olmamız.",
     "features.title": "Size Neler Sunuyoruz?",
     "features.desc": "Moderasyondan eğlenceye, otomasyondan topluluk yönetimine kadar bir Discord sunucusunun ihtiyaç duyduğu her şey, tek bir botta toplandı:",
-    "features.f1": "Gelişmiş Moderasyon",
-    "features.f1d": "Ban, mute, uyarı ve otomatik ceza sistemleriyle sunucunuzu güvende tutun.",
-    "features.f2": "Canlı İstatistikler",
-    "features.f2d": "Üye sayısı, mesaj aktivitesi, sunucu sağlığı ve daha fazlasını takip edin.",
-    "features.f3": "Eğlence Komutları",
-    "features.f3d": "IQ testi, aşk ölçer, dans, hackle ve onlarca sosyal eğlence komutu.",
-    "features.f4": "Otomatik Rol & Karşılama",
-    "features.f4d": "Yeni üyeler otomatik rol alır, kişiselleştirilmiş karşılama mesajı görür.",
-    "features.f5": "Form & Başvuru Sistemleri",
-    "features.f5d": "Yetkili başvurusu, şikayet, öneri ve YouTube formları tek tıkla.",
-    "features.f6": "Destek Talebi (Ticket)",
-    "features.f6d": "Özel kanallarda birebir destek. Talep aç, yetkililer anında cevaplasın.",
-    "features.f7": "Duyuru & Oylama",
-    "features.f7d": "Toplu duyuru, anket ve oylama araçlarıyla topluluğunuzu bilgilendirin.",
-    "features.f8": "Otomatik Kurulum",
-    "features.f8d": "Kanal, rol ve kategori yapılandırmasını saniyeler içinde otomatik kurun.",
+    "features.f1": "Gelişmiş Moderasyon","features.f1d": "Ban, mute, uyarı ve otomatik ceza sistemleriyle sunucunuzu güvende tutun.",
+    "features.f2": "Canlı İstatistikler","features.f2d": "Üye sayısı, mesaj aktivitesi, sunucu sağlığı ve daha fazlasını takip edin.",
+    "features.f3": "Eğlence Komutları","features.f3d": "IQ testi, aşk ölçer, dans, hackle ve onlarca sosyal eğlence komutu.",
+    "features.f4": "Otomatik Rol & Karşılama","features.f4d": "Yeni üyeler otomatik rol alır, kişiselleştirilmiş karşılama mesajı görür.",
+    "features.f5": "Form & Başvuru Sistemleri","features.f5d": "Yetkili başvurusu, şikayet, öneri ve YouTube formları tek tıkla.",
+    "features.f6": "Destek Talebi (Ticket)","features.f6d": "Özel kanallarda birebir destek. Talep aç, yetkililer anında cevaplasın.",
+    "features.f7": "Duyuru & Oylama","features.f7d": "Toplu duyuru, anket ve oylama araçlarıyla topluluğunuzu bilgilendirin.",
+    "features.f8": "Otomatik Kurulum","features.f8d": "Kanal, rol ve kategori yapılandırmasını saniyeler içinde otomatik kurun.",
     "features.quote": "\"BetterBot 2.0, sadece bir bot değil; sunucunuzun kalbi ve beyni.\"",
-    "team.title": "Arkamızdaki Ekip",
-    "team.desc": "BetterBot 2.0'ı geliştiren, test eden ve her gün daha iyi hale getiren tutkulu ekibimiz:",
-    "team.role.founder": "Kurucu & Geliştirici",
-    "team.desc.founder": "Projenin mimarı. Backend geliştirme, sunucu yönetimi ve topluluk liderliği.",
-    "team.role.dev": "Yazılım Geliştirici",
-    "team.desc.dev": "Bot komutları, eklenti geliştirme ve teknik destek.",
-    "team.role.moderator": "Topluluk Moderatörü",
-    "team.desc.moderator": "Discord moderasyonu, kullanıcı desteği ve etkinlik yönetimi.",
-    "team.role.designer": "Tasarımcı",
-    "team.desc.designer": "Logo, ikon, web sitesi tasarımı ve görsel kimlik yönetimi.",
-    "roadmap.title": "Yol Haritamız",
-    "roadmap.desc": "BetterBot 2.0 statik bir proje değil. Sürekli güncellenen, yeni özelliklerle büyüyen ve topluluğun geri bildirimleriyle şekillenen canlı bir ekosistem.",
-    "roadmap.done": "Tamamlandı",
-    "roadmap.now": "Devam Ediyor",
-    "roadmap.next": "Gelecek",
-    "roadmap.d1": "Kararlı v2.0 sürümü",
-    "roadmap.d2": "50+ temel komut",
-    "roadmap.d3": "Ticket sistemi",
-    "roadmap.d4": "Otomatik rol sistemi",
-    "roadmap.d5": "11.000+ kullanıcı",
-    "roadmap.n1": "Minecraft entegrasyonu",
-    "roadmap.n2": "Web kontrol paneli",
-    "roadmap.n3": "Gelişmiş istatistik sistemi",
-    "roadmap.n4": "Performans optimizasyonu",
-    "roadmap.f1": "Çok dilli destek (EN, DE)",
-    "roadmap.f2": "Mobil uygulama",
-    "roadmap.f3": "Premium özellikler",
-    "roadmap.f4": "Topluluk etkinlikleri",
-    "roadmap.f5": "Gelişmiş güvenlik",
-    "blog.title": "Blog ve Haberler",
-    "blog.desc": "BetterBot 2.0 ve BetterNetwork hakkında en güncel gelişmeler, duyurular ve güncellemeler:",
-    "blog.tag.update": "Güncelleme",
-    "blog.tag.milestone": "Kilometre Taşı",
-    "blog.tag.news": "Duyuru",
-    "blog.post1.title": "v2.0 Kararlı Sürüm Yayında!",
-    "blog.post1.desc": "BetterBot 2.0'ın kararlı sürümü yayında. Yeni özellikler, performans iyileştirmeleri ve daha fazlası.",
-    "blog.post2.title": "11.000 Kullanıcıya Ulaştık",
-    "blog.post2.desc": "Topluluğumuz büyümeye devam ediyor. 19 sunucuda 11 binden fazla kullanıcıya hizmet veriyoruz.",
-    "blog.post3.title": "Minecraft Entegrasyonu Yolda",
-    "blog.post3.desc": "Discord ve Minecraft arasında köprü kuran yeni özelliğimiz çok yakında. Oyun içi sohbet Discord'a düşecek.",
+    "team.title": "Arkamızdaki Ekip","team.desc": "BetterBot 2.0'ı geliştiren, test eden ve her gün daha iyi hale getiren tutkulu ekibimiz:",
+    "team.role.founder": "Kurucu & Geliştirici","team.desc.founder": "Projenin mimarı. Backend geliştirme, sunucu yönetimi ve topluluk liderliği.",
+    "team.role.dev": "Yazılım Geliştirici","team.desc.dev": "Bot komutları, eklenti geliştirme ve teknik destek.",
+    "team.role.moderator": "Topluluk Moderatörü","team.desc.moderator": "Discord moderasyonu, kullanıcı desteği ve etkinlik yönetimi.",
+    "team.role.designer": "Tasarımcı","team.desc.designer": "Logo, ikon, web sitesi tasarımı ve görsel kimlik yönetimi.",
+    "roadmap.title": "Yol Haritamız","roadmap.desc": "BetterBot 2.0 statik bir proje değil. Sürekli güncellenen, yeni özelliklerle büyüyen ve topluluğun geri bildirimleriyle şekillenen canlı bir ekosistem.",
+    "roadmap.done": "Tamamlandı","roadmap.now": "Devam Ediyor","roadmap.next": "Gelecek",
+    "roadmap.d1": "Kararlı v2.0 sürümü","roadmap.d2": "50+ temel komut","roadmap.d3": "Ticket sistemi","roadmap.d4": "Otomatik rol sistemi","roadmap.d5": "11.000+ kullanıcı",
+    "roadmap.n1": "Minecraft entegrasyonu","roadmap.n2": "Web kontrol paneli","roadmap.n3": "Gelişmiş istatistik sistemi","roadmap.n4": "Performans optimizasyonu",
+    "roadmap.f1": "Çok dilli destek (EN, DE)","roadmap.f2": "Mobil uygulama","roadmap.f3": "Premium özellikler","roadmap.f4": "Topluluk etkinlikleri","roadmap.f5": "Gelişmiş güvenlik",
+    "blog.title": "Blog ve Haberler","blog.desc": "BetterBot 2.0 ve BetterNetwork hakkında en güncel gelişmeler, duyurular ve güncellemeler:",
+    "blog.tag.update": "Güncelleme","blog.tag.milestone": "Kilometre Taşı","blog.tag.news": "Duyuru",
+    "blog.post1.title": "v2.0 Kararlı Sürüm Yayında!","blog.post1.desc": "BetterBot 2.0'ın kararlı sürümü yayında. Yeni özellikler, performans iyileştirmeleri ve daha fazlası.",
+    "blog.post2.title": "11.000 Kullanıcıya Ulaştık","blog.post2.desc": "Topluluğumuz büyümeye devam ediyor. 19 sunucuda 11 binden fazla kullanıcıya hizmet veriyoruz.",
+    "blog.post3.title": "Minecraft Entegrasyonu Yolda","blog.post3.desc": "Discord ve Minecraft arasında köprü kuran yeni özelliğimiz çok yakında. Oyun içi sohbet Discord'a düşecek.",
     "blog.readMore": "Devamını oku →",
-    "vote.title": "BetterBot'u Destekle",
-    "vote.desc": "Her oyunuz botumuzun büyümesine yardımcı olur. Sadece 10 saniyenizi alır!",
-    "vote.button": "Oy Ver ve Destekle",
+    "vote.title": "BetterBot'u Destekle","vote.desc": "Her oyunuz botumuzun büyümesine yardımcı olur. Sadece 10 saniyenizi alır!","vote.button": "Oy Ver ve Destekle",
     "faq.title": "Sıkça Sorulan Sorular",
-    "faq.q1": "BetterBot 2.0 ücretli mi?",
-    "faq.a1": "Hayır, tamamen ücretsizdir. Tüm temel özellikler için ödeme yapmanıza gerek yoktur. Gelecekte opsiyonel premium özellikler eklenebilir ancak mevcut özellikler her zaman ücretsiz kalacaktır.",
-    "faq.q2": "Botu nasıl eklerim?",
-    "faq.a2": "\"Botu Ekle\" butonuna tıklayıp Discord yetkilendirme ekranında sunucunuzu seçin ve gerekli izinleri onaylayın. Bot, sunucunuza otomatik olarak eklenir.",
-    "faq.q3": "Hangi komutlar mevcut?",
-    "faq.a3": "50'den fazla komut mevcut: moderasyon (ban, mute, uyarı), eğlence (IQ, aşk, dans), otomasyon (oto-rol, hoş geldin), form sistemleri, ticket sistemi ve daha fazlası. Detaylı liste için \"Komutlar\" sayfasına göz atın.",
-    "faq.q4": "Verilerim güvende mi?",
-    "faq.a4": "Kesinlikle. Kullanıcı verileri şifrelenir, üçüncü taraflarla paylaşılmaz ve düzenli olarak güvenlik denetimleri yapılır.",
-    "faq.q5": "Destek nasıl alabilirim?",
-    "faq.a5": "BetterNetwork Discord sunucumuza katılın. Destek kanallarımızdan 7/24 yardım alabilir veya yetkililere doğrudan mesaj atabilirsiniz.",
-    "community.title": "Topluluğumuz",
-    "community.p1": "BetterBot 2.0'ın kalbi, BetterNetwork topluluğudur. Burası yalnızca bir bot sunucusu değil; fikir alışverişi yapabileceğiniz, yeni arkadaşlıklar kurabileceğiniz ve birlikte büyüyebileceğiniz bir aile ortamıdır.",
+    "faq.q1": "BetterBot 2.0 ücretli mi?","faq.a1": "Hayır, tamamen ücretsizdir. Tüm temel özellikler için ödeme yapmanıza gerek yoktur. Gelecekte opsiyonel premium özellikler eklenebilir ancak mevcut özellikler her zaman ücretsiz kalacaktır.",
+    "faq.q2": "Botu nasıl eklerim?","faq.a2": "\"Botu Ekle\" butonuna tıklayıp Discord yetkilendirme ekranında sunucunuzu seçin ve gerekli izinleri onaylayın. Bot, sunucunuza otomatik olarak eklenir.",
+    "faq.q3": "Hangi komutlar mevcut?","faq.a3": "50'den fazla komut mevcut: moderasyon (ban, mute, uyarı), eğlence (IQ, aşk, dans), otomasyon (oto-rol, hoş geldin), form sistemleri, ticket sistemi ve daha fazlası. Detaylı liste için \"Komutlar\" sayfasına göz atın.",
+    "faq.q4": "Verilerim güvende mi?","faq.a4": "Kesinlikle. Kullanıcı verileri şifrelenir, üçüncü taraflarla paylaşılmaz ve düzenli olarak güvenlik denetimleri yapılır.",
+    "faq.q5": "Destek nasıl alabilirim?","faq.a5": "BetterNetwork Discord sunucumuza katılın. Destek kanallarımızdan 7/24 yardım alabilir veya yetkililere doğrudan mesaj atabilirsiniz.",
+    "community.title": "Topluluğumuz","community.p1": "BetterBot 2.0'ın kalbi, BetterNetwork topluluğudur. Burası yalnızca bir bot sunucusu değil; fikir alışverişi yapabileceğiniz, yeni arkadaşlıklar kurabileceğiniz ve birlikte büyüyebileceğiniz bir aile ortamıdır.",
     "community.quote": "\"BetterNetwork'te herkes birbirinin gelişimine katkı sağlar. Birlikte büyüyoruz, birlikte güçleniyoruz.\"",
-    "buttons.features": "Özellikler",
-    "buttons.commands": "Komutlar",
-    "buttons.addBot": "Botu Ekle",
-    "buttons.join": "Sunucuya Katıl",
-    "footer.privacy": "Gizlilik Politikası",
-    "footer.terms": "Hizmet Koşulları"
+    "buttons.features": "Özellikler","buttons.commands": "Komutlar","buttons.addBot": "Botu Ekle","buttons.join": "Sunucuya Katıl",
+    "footer.privacy": "Gizlilik Politikası","footer.terms": "Hizmet Koşulları"
   },
   en: {
-    "nav.about": "About",
-    "nav.team": "Team",
-    "nav.roadmap": "Roadmap",
-    "nav.blog": "Blog",
-    "nav.faq": "FAQ",
-    "nav.addBot": "Add Bot",
-    "header.sub": "The New Name of Connection and Trust",
-    "header.badge1": "24/7 Online",
-    "header.badge2": "v2.0 Released",
-    "header.badge3": "Completely Free",
-    "stats.servers": "Servers",
-    "stats.users": "Users",
-    "stats.commands": "Commands",
-    "stats.support": "Support",
-    "stats.free": "Free",
+    "nav.about": "About","nav.team": "Team","nav.roadmap": "Roadmap","nav.blog": "Blog","nav.faq": "FAQ","nav.addBot": "Add Bot",
+    "header.sub": "The New Name of Connection and Trust","header.badge1": "24/7 Online","header.badge2": "v2.0 Released","header.badge3": "Completely Free",
+    "stats.servers": "Servers","stats.users": "Users","stats.commands": "Commands","stats.support": "Support","stats.free": "Free",
     "about.title": "Who Are We?",
     "about.p1": "BetterBot 2.0 was developed to ease the management burden of Discord servers and offer every community the tools it needs under one roof. Our goal is simple: to free server owners from technical hassles and give them a secure, organized community management experience.",
     "about.p2": "In a short time, we reached over 11,000 users across 19 servers. The biggest factor behind this growth is that we're not just building a powerful bot; we're also building an active community and a constantly evolving ecosystem.",
-    "features.title": "What Do We Offer?",
-    "features.desc": "Everything a Discord server needs — from moderation to entertainment, from automation to community management — is gathered in one bot:",
-    "features.f1": "Advanced Moderation",
-    "features.f1d": "Keep your server safe with ban, mute, warn, and automated punishment systems.",
-    "features.f2": "Live Statistics",
-    "features.f2d": "Track member count, message activity, server health, and much more.",
-    "features.f3": "Fun Commands",
-    "features.f3d": "IQ tests, love meters, dance, hack, and dozens of social fun commands.",
-    "features.f4": "Auto Role & Welcome",
-    "features.f4d": "New members get roles automatically and see personalized welcome messages.",
-    "features.f5": "Form & Application Systems",
-    "features.f5d": "Staff applications, reports, suggestions, and YouTube forms in one click.",
-    "features.f6": "Support Tickets",
-    "features.f6d": "One-on-one support in private channels. Open a ticket, staff replies instantly.",
-    "features.f7": "Announcement & Polling",
-    "features.f7d": "Inform your community with mass announcements, polls, and voting tools.",
-    "features.f8": "Automatic Setup",
-    "features.f8d": "Set up channels, roles, and category structures automatically in seconds.",
+    "features.title": "What Do We Offer?","features.desc": "Everything a Discord server needs — from moderation to entertainment, from automation to community management — is gathered in one bot:",
+    "features.f1": "Advanced Moderation","features.f1d": "Keep your server safe with ban, mute, warn, and automated punishment systems.",
+    "features.f2": "Live Statistics","features.f2d": "Track member count, message activity, server health, and much more.",
+    "features.f3": "Fun Commands","features.f3d": "IQ tests, love meters, dance, hack, and dozens of social fun commands.",
+    "features.f4": "Auto Role & Welcome","features.f4d": "New members get roles automatically and see personalized welcome messages.",
+    "features.f5": "Form & Application Systems","features.f5d": "Staff applications, reports, suggestions, and YouTube forms in one click.",
+    "features.f6": "Support Tickets","features.f6d": "One-on-one support in private channels. Open a ticket, staff replies instantly.",
+    "features.f7": "Announcement & Polling","features.f7d": "Inform your community with mass announcements, polls, and voting tools.",
+    "features.f8": "Automatic Setup","features.f8d": "Set up channels, roles, and category structures automatically in seconds.",
     "features.quote": "\"BetterBot 2.0 is not just a bot; it's the heart and brain of your server.\"",
-    "team.title": "The Team Behind Us",
-    "team.desc": "Our passionate team that develops, tests, and improves BetterBot 2.0 every day:",
-    "team.role.founder": "Founder & Developer",
-    "team.desc.founder": "Architect of the project. Backend development, server management, and community leadership.",
-    "team.role.dev": "Software Developer",
-    "team.desc.dev": "Bot commands, plugin development, and technical support.",
-    "team.role.moderator": "Community Moderator",
-    "team.desc.moderator": "Discord moderation, user support, and event management.",
-    "team.role.designer": "Designer",
-    "team.desc.designer": "Logo, icon, website design, and visual identity management.",
-    "roadmap.title": "Our Roadmap",
-    "roadmap.desc": "BetterBot 2.0 is not a static project. It's a living ecosystem that is constantly updated, grows with new features, and is shaped by community feedback.",
-    "roadmap.done": "Completed",
-    "roadmap.now": "In Progress",
-    "roadmap.next": "Upcoming",
-    "roadmap.d1": "Stable v2.0 release",
-    "roadmap.d2": "50+ core commands",
-    "roadmap.d3": "Ticket system",
-    "roadmap.d4": "Auto role system",
-    "roadmap.d5": "11,000+ users",
-    "roadmap.n1": "Minecraft integration",
-    "roadmap.n2": "Web control panel",
-    "roadmap.n3": "Advanced statistics system",
-    "roadmap.n4": "Performance optimization",
-    "roadmap.f1": "Multi-language support (EN, DE)",
-    "roadmap.f2": "Mobile application",
-    "roadmap.f3": "Premium features",
-    "roadmap.f4": "Community events",
-    "roadmap.f5": "Advanced security",
-    "blog.title": "Blog and News",
-    "blog.desc": "The latest developments, announcements, and updates about BetterBot 2.0 and BetterNetwork:",
-    "blog.tag.update": "Update",
-    "blog.tag.milestone": "Milestone",
-    "blog.tag.news": "Announcement",
-    "blog.post1.title": "v2.0 Stable Release is Here!",
-    "blog.post1.desc": "The stable version of BetterBot 2.0 is out. New features, performance improvements, and more.",
-    "blog.post2.title": "We Reached 11,000 Users",
-    "blog.post2.desc": "Our community keeps growing. We serve over 11,000 users across 19 servers.",
-    "blog.post3.title": "Minecraft Integration Coming Soon",
-    "blog.post3.desc": "Our new feature bridging Discord and Minecraft is coming very soon. In-game chat will drop into Discord.",
+    "team.title": "The Team Behind Us","team.desc": "Our passionate team that develops, tests, and improves BetterBot 2.0 every day:",
+    "team.role.founder": "Founder & Developer","team.desc.founder": "Architect of the project. Backend development, server management, and community leadership.",
+    "team.role.dev": "Software Developer","team.desc.dev": "Bot commands, plugin development, and technical support.",
+    "team.role.moderator": "Community Moderator","team.desc.moderator": "Discord moderation, user support, and event management.",
+    "team.role.designer": "Designer","team.desc.designer": "Logo, icon, website design, and visual identity management.",
+    "roadmap.title": "Our Roadmap","roadmap.desc": "BetterBot 2.0 is not a static project. It's a living ecosystem that is constantly updated, grows with new features, and is shaped by community feedback.",
+    "roadmap.done": "Completed","roadmap.now": "In Progress","roadmap.next": "Upcoming",
+    "roadmap.d1": "Stable v2.0 release","roadmap.d2": "50+ core commands","roadmap.d3": "Ticket system","roadmap.d4": "Auto role system","roadmap.d5": "11,000+ users",
+    "roadmap.n1": "Minecraft integration","roadmap.n2": "Web control panel","roadmap.n3": "Advanced statistics system","roadmap.n4": "Performance optimization",
+    "roadmap.f1": "Multi-language support (EN, DE)","roadmap.f2": "Mobile application","roadmap.f3": "Premium features","roadmap.f4": "Community events","roadmap.f5": "Advanced security",
+    "blog.title": "Blog and News","blog.desc": "The latest developments, announcements, and updates about BetterBot 2.0 and BetterNetwork:",
+    "blog.tag.update": "Update","blog.tag.milestone": "Milestone","blog.tag.news": "Announcement",
+    "blog.post1.title": "v2.0 Stable Release is Here!","blog.post1.desc": "The stable version of BetterBot 2.0 is out. New features, performance improvements, and more.",
+    "blog.post2.title": "We Reached 11,000 Users","blog.post2.desc": "Our community keeps growing. We serve over 11,000 users across 19 servers.",
+    "blog.post3.title": "Minecraft Integration Coming Soon","blog.post3.desc": "Our new feature bridging Discord and Minecraft is coming very soon. In-game chat will drop into Discord.",
     "blog.readMore": "Read more →",
-    "vote.title": "Support BetterBot",
-    "vote.desc": "Every vote helps our bot grow. It only takes 10 seconds!",
-    "vote.button": "Vote and Support",
+    "vote.title": "Support BetterBot","vote.desc": "Every vote helps our bot grow. It only takes 10 seconds!","vote.button": "Vote and Support",
     "faq.title": "Frequently Asked Questions",
-    "faq.q1": "Is BetterBot 2.0 paid?",
-    "faq.a1": "No, it's completely free. You don't need to pay for any core features. Optional premium features may be added in the future, but existing features will always remain free.",
-    "faq.q2": "How do I add the bot?",
-    "faq.a2": "Click the \"Add Bot\" button, select your server in the Discord authorization screen, and approve the required permissions. The bot is added automatically.",
-    "faq.q3": "Which commands are available?",
-    "faq.a3": "Over 50 commands are available: moderation (ban, mute, warn), fun (IQ, love, dance), automation (auto-role, welcome), form systems, ticket system, and more. Check the \"Commands\" page for the full list.",
-    "faq.q4": "Is my data safe?",
-    "faq.a4": "Absolutely. User data is encrypted, not shared with third parties, and regular security audits are performed.",
-    "faq.q5": "How can I get support?",
-    "faq.a5": "Join our BetterNetwork Discord server. You can get help 24/7 from our support channels or message the staff directly.",
-    "community.title": "Our Community",
-    "community.p1": "The heart of BetterBot 2.0 is the BetterNetwork community. This is not just a bot server; it's a family environment where you can exchange ideas, make new friendships, and grow together.",
+    "faq.q1": "Is BetterBot 2.0 paid?","faq.a1": "No, it's completely free. You don't need to pay for any core features. Optional premium features may be added in the future, but existing features will always remain free.",
+    "faq.q2": "How do I add the bot?","faq.a2": "Click the \"Add Bot\" button, select your server in the Discord authorization screen, and approve the required permissions. The bot is added automatically.",
+    "faq.q3": "Which commands are available?","faq.a3": "Over 50 commands are available: moderation (ban, mute, warn), fun (IQ, love, dance), automation (auto-role, welcome), form systems, ticket system, and more. Check the \"Commands\" page for the full list.",
+    "faq.q4": "Is my data safe?","faq.a4": "Absolutely. User data is encrypted, not shared with third parties, and regular security audits are performed.",
+    "faq.q5": "How can I get support?","faq.a5": "Join our BetterNetwork Discord server. You can get help 24/7 from our support channels or message the staff directly.",
+    "community.title": "Our Community","community.p1": "The heart of BetterBot 2.0 is the BetterNetwork community. This is not just a bot server; it's a family environment where you can exchange ideas, make new friendships, and grow together.",
     "community.quote": "\"In BetterNetwork, everyone contributes to each other's growth. We grow together, we get stronger together.\"",
-    "buttons.features": "Features",
-    "buttons.commands": "Commands",
-    "buttons.addBot": "Add Bot",
-    "buttons.join": "Join Server",
-    "footer.privacy": "Privacy Policy",
-    "footer.terms": "Terms of Service"
+    "buttons.features": "Features","buttons.commands": "Commands","buttons.addBot": "Add Bot","buttons.join": "Join Server",
+    "footer.privacy": "Privacy Policy","footer.terms": "Terms of Service"
   }
 };
 
-/* ===== PARTİKÜL EFEKTİ ===== */
+/* ===== PARTİKÜL EFEKTİ (OPTİMİZE) ===== */
 (function initParticles() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
   const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: true });
+
+  // Cihaz kapasitesine göre ayar
+  const cores = navigator.hardwareConcurrency || 4;
+  const isLowEnd = cores <= 4 || window.innerWidth < 900;
+  const PARTICLE_COUNT = isLowEnd ? 12 : 30;
+  const FRAME_INTERVAL = isLowEnd ? 80 : 40; // ~12 FPS / ~25 FPS
+  const MAX_DIST = 110;
+  const MAX_DIST_SQ = MAX_DIST * MAX_DIST;
+
   let particles = [];
   let w, h;
+  let lastFrame = 0;
+  let isVisible = true;
+  let rafId = null;
 
   function resize() {
     w = canvas.width = window.innerWidth;
     h = canvas.height = window.innerHeight;
   }
   resize();
-  window.addEventListener('resize', resize);
 
-  const PARTICLE_COUNT = window.innerWidth < 768 ? 30 : 60;
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(resize, 250);
+  });
 
   for (let i = 0; i < PARTICLE_COUNT; i++) {
     particles.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 1.8 + 0.5
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.5
     });
   }
 
-  function animate() {
+  function draw(now) {
+    rafId = requestAnimationFrame(draw);
+
+    // Sekme arka planda ise çizme
+    if (!isVisible) return;
+
+    // FPS sınırla
+    if (now - lastFrame < FRAME_INTERVAL) return;
+    lastFrame = now;
+
     ctx.clearRect(0, 0, w, h);
 
-    particles.forEach(p => {
+    // Noktalar
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
       p.x += p.vx;
       p.y += p.vy;
       if (p.x < 0 || p.x > w) p.vx *= -1;
       if (p.y < 0 || p.y > h) p.vy *= -1;
-
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r, 0, 6.2832);
       ctx.fillStyle = 'rgba(0, 212, 255, 0.5)';
       ctx.fill();
-    });
+    }
 
+    // Bağlantı çizgileri (kare mesafe karşılaştırması ile)
     for (let i = 0; i < particles.length; i++) {
+      const pi = particles[i];
       for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 130) {
+        const pj = particles[j];
+        const dx = pi.x - pj.x;
+        const dy = pi.y - pj.y;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < MAX_DIST_SQ) {
+          const dist = Math.sqrt(distSq);
           ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0, 212, 255, ${0.15 * (1 - dist / 130)})`;
+          ctx.moveTo(pi.x, pi.y);
+          ctx.lineTo(pj.x, pj.y);
+          ctx.strokeStyle = 'rgba(0, 212, 255, ' + (0.15 * (1 - dist / MAX_DIST)).toFixed(3) + ')';
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
       }
     }
-    requestAnimationFrame(animate);
   }
-  animate();
+
+  // Sekme değiştiğinde durdur/başlat
+  document.addEventListener('visibilitychange', () => {
+    isVisible = !document.hidden;
+  });
+
+  rafId = requestAnimationFrame(draw);
 })();
 
-/* ===== SCROLL SESİ ===== */
+/* ===== SCROLL SESİ (opsiyonel, performans dostu) ===== */
 (function initScrollSound() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) return;
+
   let audioCtx = null;
   let lastSectionId = null;
+  let lastPlay = 0;
 
   function playTick() {
+    const now = performance.now();
+    if (now - lastPlay < 1500) return; // spam engelle
+    lastPlay = now;
     try {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1912,7 +1661,7 @@ const translations = {
       osc.type = 'sine';
       osc.frequency.setValueAtTime(880, audioCtx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.08);
-      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -1965,14 +1714,7 @@ const translations = {
   }
 
   toggle.addEventListener('click', () => setPlaying(!isPlaying));
-
-  setPlaying(true);
-
-  document.body.addEventListener('click', function once() {
-    if (!isPlaying) setPlaying(true);
-    document.body.removeEventListener('click', once);
-  }, { once: true });
-
+  // Otomatik başlatma denemesi kaldırıldı - kullanıcı tıklaması beklenir
   window.addEventListener('beforeunload', () => music.pause());
 })();
 
@@ -1990,14 +1732,13 @@ const translations = {
     document.documentElement.lang = lang;
     buttons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     localStorage.setItem('bb_lang', lang);
-    currentLang = lang;
   }
 
   buttons.forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
   applyLang(currentLang);
 })();
 
-/* ===== YÜKLEME EKRANI ===== */
+/* ===== YÜKLEME EKRANI (OPTİMİZE) ===== */
 (function initLoader() {
   const loader = document.getElementById('loader');
   const bar = document.getElementById('loaderBar');
@@ -2005,45 +1746,49 @@ const translations = {
   let progress = 0;
   let pageLoaded = false;
 
+  // Hızlı sahte ilerleme (daha az sıklık)
   const fakeProgress = setInterval(() => {
     if (pageLoaded && progress >= 90) return;
     if (progress < 90) {
-      progress += Math.random() * 8 + 3;
+      progress += Math.random() * 12 + 5;
       if (progress > 90) progress = 90;
       bar.style.width = progress + '%';
       percent.textContent = Math.floor(progress) + '%';
     }
-  }, 120);
+  }, 150);
 
-  window.addEventListener('load', () => {
+  function finish() {
     pageLoaded = true;
     clearInterval(fakeProgress);
-
     progress = 100;
     bar.style.width = '100%';
     percent.textContent = '100%';
+    setTimeout(() => loader.classList.add('hidden'), 400);
+  }
 
-    setTimeout(() => {
-      loader.classList.add('hidden');
-    }, 600);
-  });
+  window.addEventListener('load', finish);
 
+  // Maksimum 2.5 saniye bekle, sonra zorla kapat
   setTimeout(() => {
-    if (!loader.classList.contains('hidden')) {
-      loader.classList.add('hidden');
-    }
-  }, 4000);
+    if (!loader.classList.contains('hidden')) finish();
+  }, 2500);
 })();
 
-/* ===== NAVBAR SCROLL ===== */
+/* ===== NAVBAR SCROLL (throttled) ===== */
 const navbar = document.getElementById('navbar');
 const backToTop = document.getElementById('backToTop');
+let scrollTicking = false;
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 40) navbar.classList.add('scrolled');
-  else navbar.classList.remove('scrolled');
-  if (window.scrollY > 400) backToTop.classList.add('visible');
-  else backToTop.classList.remove('visible');
-});
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(() => {
+    if (window.scrollY > 40) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+    if (window.scrollY > 400) backToTop.classList.add('visible');
+    else backToTop.classList.remove('visible');
+    scrollTicking = false;
+  });
+}, { passive: true });
 
 /* ===== MOBILE MENU ===== */
 const navToggle = document.getElementById('navToggle');
@@ -2061,7 +1806,7 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 /* ===== COUNTERS ===== */
@@ -2073,7 +1818,7 @@ const counterObserver = new IntersectionObserver((entries) => {
       const target = parseInt(el.dataset.count);
       const prefix = el.dataset.prefix || '';
       const suffix = el.dataset.suffix || '';
-      const duration = 1800;
+      const duration = 1500;
       const start = performance.now();
       const update = (now) => {
         const progress = Math.min((now - start) / duration, 1);
