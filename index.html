@@ -698,19 +698,25 @@
     /* ===== EKİP ===== */
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
       margin: 24px 0;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .team-card {
       background: linear-gradient(145deg, #0d1a2f, #112240);
       border-radius: 22px;
-      padding: 28px 20px;
-      text-align: center;
+      padding: 32px 24px;
+      text-align: left;
       border: 1px solid rgba(0, 212, 255, 0.15);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .team-card::before {
       content: '';
@@ -728,10 +734,10 @@
     }
     .team-card:hover::before { transform: scaleX(1); }
     .team-avatar {
-      width: 80px; height: 80px;
+      width: 90px; height: 90px;
       border-radius: 50%;
       border: 3px solid #00d4ff;
-      margin: 0 auto 14px;
+      margin: 0 auto 16px;
       display: block;
       object-fit: cover;
       box-shadow: 0 0 24px rgba(0, 212, 255, 0.3);
@@ -739,23 +745,45 @@
     }
     .team-card:hover .team-avatar { transform: scale(1.08) rotate(-5deg); }
     .team-name {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 800;
       color: #e6f1ff;
       margin-bottom: 4px;
+      text-align: center;
     }
     .team-role {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: #00d4ff;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 10px;
+      margin-bottom: 16px;
+      text-align: center;
     }
     .team-desc {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: #8892b0;
-      line-height: 1.6;
+      line-height: 1.7;
+      width: 100%;
+      text-align: left;
+    }
+    .team-desc ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0 0;
+    }
+    .team-desc li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 6px;
+      color: #ccd6f6;
+    }
+    .team-desc li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #00d4ff;
+      font-weight: bold;
     }
 
     /* ===== ROADMAP ===== */
@@ -1114,7 +1142,7 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 950px) {
-      .perf-switcher { display: none; } /* Mobil görünümde fazla kalabalık yapmaması için gizlenir */
+      .perf-switcher { display: none; }
     }
     @media (max-width: 768px) {
       .page-wrapper { padding: 90px 16px 30px; }
@@ -1155,7 +1183,7 @@
       <img class="loader-logo" src="https://github.com/AhmetEjler/AhmetEjler.github.io/blob/gh-pages/BetterBot-2.0.png?raw=true" alt="BetterBot" />
     </div>
     <div class="loader-brand">BetterBot <span>2.0</span></div>
-    <div class="loader-tagline">Bağlantının ve Güvenin Yeni Adı</div>
+    <div class="loader-tagline">Bağlantının dan Güvenin Yeni Adı</div>
     <div class="loader-bar-wrap">
       <div class="loader-bar" id="loaderBar"></div>
     </div>
@@ -1371,28 +1399,34 @@
 
       <div class="team-grid">
         <div class="team-card">
+          <img class="team-avatar" src="https://mc-heads.net/avatar/HasanGocer/160" alt="Hasan" />
+          <div class="team-name">Hasan</div>
+          <div class="team-role" data-i18n="team.role.hasan">Kurucu & Fikir Lideri</div>
+          <div class="team-desc">
+            <span data-i18n="team.desc.hasan.intro">Projenin arkasındaki kurucu ve lider güç:</span>
+            <ul>
+              <li data-i18n="team.desc.hasan.1">Projeyi başlatmak ve ekibi kurmak</li>
+              <li data-i18n="team.desc.hasan.2">Botun temel fikirlerini ve hedeflerini belirlemek</li>
+              <li data-i18n="team.desc.hasan.3">Sunucu yönetimi ve topluluk desteği sağlamak</li>
+              <li data-i18n="team.desc.hasan.4">Fikir ve strateji desteği ile ekip içi iletişimi yürütmek</li>
+              <li data-i18n="team.desc.hasan.5">Destek Ekibi Yöneticisi</li>
+            </ul>
+          </div>
+        </div>
+        <div class="team-card">
           <img class="team-avatar" src="https://mc-heads.net/avatar/AhmetEjler/160" alt="AhmetEjler" />
           <div class="team-name">AhmetEjler</div>
-          <div class="team-role" data-i18n="team.role.founder">Kurucu & Geliştirici</div>
-          <div class="team-desc" data-i18n="team.desc.founder">Projenin mimarı. Backend geliştirme, sunucu yönetimi ve topluluk liderliği.</div>
-        </div>
-        <div class="team-card">
-          <img class="team-avatar" src="https://mc-heads.net/avatar/BuseEjler/160" alt="BuseEjler" />
-          <div class="team-name">BuseEjler</div>
-          <div class="team-role" data-i18n="team.role.dev">Yazılım Geliştirici</div>
-          <div class="team-desc" data-i18n="team.desc.dev">Bot komutları, eklenti geliştirme ve teknik destek.</div>
-        </div>
-        <div class="team-card">
-          <img class="team-avatar" src="https://mc-heads.net/avatar/MehmetEjler/160" alt="MehmetEjler" />
-          <div class="team-name">MehmetEjler</div>
-          <div class="team-role" data-i18n="team.role.moderator">Topluluk Moderatörü</div>
-          <div class="team-desc" data-i18n="team.desc.moderator">Discord moderasyonu, kullanıcı desteği ve etkinlik yönetimi.</div>
-        </div>
-        <div class="team-card">
-          <img class="team-avatar" src="https://mc-heads.net/avatar/Rutben/160" alt="Rutben" />
-          <div class="team-name">Rutben</div>
-          <div class="team-role" data-i18n="team.role.designer">Tasarımcı</div>
-          <div class="team-desc" data-i18n="team.desc.designer">Logo, ikon, web sitesi tasarımı ve görsel kimlik yönetimi.</div>
+          <div class="team-role" data-i18n="team.role.ahmet">Baş Geliştirici & Tasarımcı & Yönetici</div>
+          <div class="team-desc">
+            <span data-i18n="team.desc.ahmet.intro">Projenin yazılımsal ve yapısal mimarı:</span>
+            <ul>
+              <li data-i18n="team.desc.ahmet.1">Botun tüm kodlarını yazmak ve geliştirmek</li>
+              <li data-i18n="team.desc.ahmet.2">Komutları, form sistemlerini ve otomasyonu tasarlamak</li>
+              <li data-i18n="team.desc.ahmet.3">Web sitesi, GitHub ve altyapı işlerini yürütmek</li>
+              <li data-i18n="team.desc.ahmet.4">Test, hata ayıklama ve güncellemeleri gerçekleştirmek</li>
+              <li data-i18n="team.desc.ahmet.5">Projenin genel yönetimi ve planlaması</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -1699,14 +1733,20 @@ const translations = {
     "features.quote": "\"BetterBot 2.0, sadece bir bot değil; sunucunuzun kalbi ve beyni.\"",
     "team.title": "Arkamızdaki Ekip",
     "team.desc": "BetterBot 2.0'ı geliştiren, test eden ve her gün daha iyi hale getiren tutkulu ekibimiz:",
-    "team.role.founder": "Kurucu & Geliştirici",
-    "team.desc.founder": "Projenin mimarı. Backend geliştirme, sunucu yönetimi ve topluluk liderliği.",
-    "team.role.dev": "Yazılım Geliştirici",
-    "team.desc.dev": "Bot komutları, eklenti geliştirme ve teknik destek.",
-    "team.role.moderator": "Topluluk Moderatörü",
-    "team.desc.moderator": "Discord moderasyonu, kullanıcı desteği ve etkinlik yönetimi.",
-    "team.role.designer": "Tasarımcı",
-    "team.desc.designer": "Logo, ikon, web sitesi tasarımı ve görsel kimlik yönetimi.",
+    "team.role.hasan": "Kurucu & Fikir Lideri",
+    "team.desc.hasan.intro": "Projenin arkasındaki kurucu ve lider güç:",
+    "team.desc.hasan.1": "Projeyi başlatmak ve ekibi kurmak",
+    "team.desc.hasan.2": "Botun temel fikirlerini ve hedeflerini belirlemek",
+    "team.desc.hasan.3": "Sunucu yönetimi ve topluluk desteği sağlamak",
+    "team.desc.hasan.4": "Fikir ve strateji desteği ile ekip içi iletişimi yürütmek",
+    "team.desc.hasan.5": "Destek Ekibi Yöneticisi",
+    "team.role.ahmet": "Baş Geliştirici & Tasarımcı & Yönetici",
+    "team.desc.ahmet.intro": "Projenin yazılımsal ve yapısal mimarı:",
+    "team.desc.ahmet.1": "Botun tüm kodlarını yazmak ve geliştirmek",
+    "team.desc.ahmet.2": "Komutları, form sistemlerini ve otomasyonu tasarlamak",
+    "team.desc.ahmet.3": "Web sitesi, GitHub ve altyapı işlerini yürütmek",
+    "team.desc.ahmet.4": "Test, hata ayıklama ve güncellemeleri gerçekleştirmek",
+    "team.desc.ahmet.5": "Projenin genel yönetimi ve planlaması",
     "roadmap.title": "Yol Haritamız",
     "roadmap.desc": "BetterBot 2.0 statik bir proje değil. Sürekli güncellenen, yeni özelliklerle büyüyen ve topluluğun geri bildirimleriyle şekillenen canlı bir ekosistem.",
     "roadmap.done": "Tamamlandı",
@@ -1802,14 +1842,20 @@ const translations = {
     "features.quote": "\"BetterBot 2.0 is not just a bot; it's the heart and brain of your server.\"",
     "team.title": "The Team Behind Us",
     "team.desc": "Our passionate team that develops, tests, and improves BetterBot 2.0 every day:",
-    "team.role.founder": "Founder & Developer",
-    "team.desc.founder": "Architect of the project. Backend development, server management, and community leadership.",
-    "team.role.dev": "Software Developer",
-    "team.desc.dev": "Bot commands, plugin development, and technical support.",
-    "team.role.moderator": "Community Moderator",
-    "team.desc.moderator": "Discord moderation, user support, and event management.",
-    "team.role.designer": "Designer",
-    "team.desc.designer": "Logo, icon, website design, and visual identity management.",
+    "team.role.hasan": "Founder & Visionary Leader",
+    "team.desc.hasan.intro": "The visionary founder and core force:",
+    "team.desc.hasan.1": "Initiating the project and building the team",
+    "team.desc.hasan.2": "Defining core bot ideas and goals",
+    "team.desc.hasan.3": "Server management and community support",
+    "team.desc.hasan.4": "Providing strategy support and internal communication",
+    "team.desc.hasan.5": "Support Team Manager",
+    "team.role.ahmet": "Lead Developer & Designer & Manager",
+    "team.desc.ahmet.intro": "The software and structural architect:",
+    "team.desc.ahmet.1": "Writing and developing all bot code",
+    "team.desc.ahmet.2": "Designing commands, form systems, and automation",
+    "team.desc.ahmet.3": "Managing website, GitHub, and infrastructure",
+    "team.desc.ahmet.4": "Executing testing, debugging, and updates",
+    "team.desc.ahmet.5": "Overall project management and planning",
     "roadmap.title": "Our Roadmap",
     "roadmap.desc": "BetterBot 2.0 is not a static project. It's a living ecosystem that is constantly updated, grows with new features, and is shaped by community feedback.",
     "roadmap.done": "Completed",
@@ -1886,7 +1932,7 @@ let currentPerfMode = localStorage.getItem('bb_perf') || 'medium';
   function getParticleCount() {
     if (currentPerfMode === 'high') return window.innerWidth < 768 ? 50 : 90;
     if (currentPerfMode === 'medium') return window.innerWidth < 768 ? 25 : 50;
-    return 0; // low mode
+    return 0;
   }
 
   function resetParticles() {
