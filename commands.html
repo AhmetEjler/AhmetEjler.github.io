@@ -921,7 +921,8 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!ban @KotuKullanici Spam yapıyor' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "error", title: "Kullanıcı Sunucudan Yasaklandı", desc: "**Yasaklanan:** <@KotuKullanici>\n**Yetkili:** <@AhmetEjler>\n**Sebep:** Spam yapıyor" } }
     ],
-    code: `$onlyPerms[ban;⚠️ **»** **<@$authorID>**, bu komutu kullanabilmek için Üyeleri Yasakla yetkisine sahip olmalısın!]
+    code: `$nomention
+$onlyPerms[ban;⚠️ **»** **<@$authorID>**, bu komutu kullanabilmek için Üyeleri Yasakla yetkisine sahip olmalısın!]
 $onlyIf[$mentioned[1]!=;⚠️ **»** **<@$authorID>**, banlamak istediğin kişiyi etiketlemelisin!]
 $onlyIf[$noMentionMessage[2]!=;⚠️ **»** **<@$authorID>**, ban sebebini yazmalısın!]
 
@@ -964,7 +965,8 @@ $addTimestamp`
       { type: "user", name: "AhmetEjler", message: 'b!unban 123456789012345678' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Yasak Kaldırıldı", desc: "Kullanıcının yasağı başarıyla kaldırıldı." } }
     ],
-    code: `$onlyPerms[ban;⚠️ **»** **<@$authorID>**, bu komutu kullanabilmek için Üyeleri Yasakla yetkisine sahip olmalısın!]
+    code: `$nomention
+$onlyPerms[ban;⚠️ **»** **<@$authorID>**, bu komutu kullanabilmek için Üyeleri Yasakla yetkisine sahip olmalısın!]
 $onlyIf[$message[1]!=;⚠️ **»** **<@$authorID>**, yasağı kaldırılacak kullanıcının **ID'sini** girmelisin!]
 $onlyIf[$message[2]!=;⚠️ **»** **<@$authorID>**, yasağı kaldırma sebebini yazmalısın!]
 
@@ -1005,7 +1007,62 @@ $addTimestamp`
       { type: "user", name: "AhmetEjler", message: 'b!uyarı @Kullanici Küfür' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "Kullanıcı Uyarıldı", desc: "@Kullanici 1. uyarısını aldı.\n**Sebep:** Küfür" } }
     ],
-    code: "// b!uyarı komutunun kodu"
+    code: `$nomention
+$onlyIf[$mentioned[1]!=;⚠️ **»** **<@$authorID>**, uyarılacak kişiyi etiketlemelisin!]
+$onlyIf[$noMentionMessage[2]!=;⚠️ **»** **<@$authorID>**, uyarı sebebini yazmalısın!]
+$onlyPerms[kick;⚠️ **»** **<@$authorID>**, bu komutu kullanmak için Üyeleri At yetkisine sahip olmalısın!]
+
+
+$if[$mentioned[1]==$authorID]
+$sendMessage[⚠️ **»** **<@$authorID>**, kendini uyaramazsın! 😅]
+$stop
+$endif
+
+$var[kullanici;$mentioned[1]]
+
+
+$var[mevcutSayi;$getUserVar[uyari_;$var[kullanici]]]
+
+$if[$var[mevcutSayi]==]
+$var[yeniSayi;1]
+$elseif[$var[mevcutSayi]==1]
+$var[yeniSayi;2]
+$elseif[$var[mevcutSayi]==2]
+$var[yeniSayi;3]
+$else
+$var[yeniSayi;1]
+$endif
+
+$setUserVar[uyari_;$var[yeniSayi];$var[kullanici]]
+
+
+$title[🛡️ **UYARI SİSTEMİ**]
+$color[#00ffcc]
+$description[
+**━━━━━━━━━━━━━━━━━━━━**
+⚠️ **UYARI BİLGİLERİ**
+
+🛡️ **Uyarı Veren Yetkili:** <@$authorID>
+👮 **Uyarılan Kullanıcı:** <@$var[kullanici]>
+
+**━━━━━━━━━━━━━━━━━━━━**
+💻 **SİSTEM BİLGİLERİ**
+
+**📖 Sebep:** $noMentionMessage[2]
+**📊 Toplam Uyarı:** $var[yeniSayi]/3
+**📅 Tarih:** $date
+
+**━━━━━━━━━━━━━━━━━━━━**
+**<@$var[kullanici]>** adlı kullanıcı **<@$authorID>** tarafından uyarıldı!]
+$thumbnail[$userAvatar[$botID]]
+$footerIcon[$userAvatar[$botID]]
+$footer[BetterBot 2.0 • Uyarı Sistemi]
+
+$if[$var[yeniSayi]==3]
+$timeout[60;$var[kullanici]]
+$sendMessage[⏱️ **»** **<@$var[kullanici]>** 3 uyarıya ulaştı ve **1 saat** süreyle zaman aşımı atıldı!]
+$resetUserVar[uyari_;$var[kullanici]]
+$endif`
   },
 
   "b!sil": {
