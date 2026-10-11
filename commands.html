@@ -968,8 +968,40 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!ban @KotuKullanici Spam yapıyor' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "error", title: "Kullanıcı Sunucudan Yasaklandı", desc: "**Yasaklanan:** <@KotuKullanici>\n**Yetkili:** <@AhmetEjler>\n**Sebep:** Spam yapıyor" } }
     ],
-    code: `$nomention$onlyPerms[ban;Bu komutu kullanmak için **Yasakla (Ban)** yetkin bulunmuyor!]
-$argsCheck[>1;Lütfen yasaklanacak kullanıcıyı etiketleyin veya ID'sini yazın! Örnek: \`!ban @kullanici Sebep\`]
+    code: `$onlyPerms[ban;<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756851272> **»** **<@$authorID>**, bu komutu kullanabilmek için `Üyeleri Yasakla` yetkisine sahip olmalısın!]
+$onlyIf[$mentioned[1]!=;<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756851272> **»** **<@$authorID>**, banlamak istediğin kişiyi etiketlemelisin!]
+$onlyIf[$noMentionMessage[2]!=;<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756851272> **»** **<@$authorID>**, ban sebebini yazmalısın!]
+
+$onlyIf[$mentioned[1]!=$botID;<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756851272> **»** BetterBot 2.0'ı sunucudan yasaklayamazsın!]
+
+$ban[$mentioned[1];$noMentionMessage[2]]
+$suppressErrors[<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756851272> **»** **<@$mentioned[1]>** zaten banlı veya geçersiz bir kullanıcı!]
+
+$title[<:e77b3e41371e4d93a5479c66b0cd8e78:1522869805365854238> | **KULLANICI SUNUCUDAN YASAKLANDI!** | <:4515security:1530543847162118194>]
+$color[#00ffcc]
+$thumbnail[$userAvatar[$mentioned[1]]]
+$description[
+**━━━━━━━━━━━━━━━━━━━━**
+<:8635vslsettings:1531728277071200468> **İŞLEM BİLGİLERİ**
+
+**<:yetkiliEMOJI_ID_3:1522869873770758235> Yetkili:** <@$authorID>
+**<:67793memberhexagon:1529955160585928836> Banlanan Kullanıcı:** <@$mentioned[1]>
+**<:685600memberidcard:1530123102292410501> Kullanıcı ID:** `$mentioned[1]`
+**<:445181discordorbsbook:1530976282152534172> Ban Sebebi:** $noMentionMessage[2] $noMentionMessage[3] $noMentionMessage[4]
+**<:530749calendar:1530124833885782166> İşlem Tarihi:** $date
+
+**━━━━━━━━━━━━━━━━━━━━**
+**<:41435statistics:1531267128907403375> İŞLEM DETAYLARI:**
+
+<:338607turquoisediscordshieldmode:1530481394923474975> **Yetkili ID:** `$authorID`
+<:67793memberhexagon:1529955160585928836> **Kullanıcı Adı:** `$username[$mentioned[1]]`
+<:57410timer:1530299078305648681> **Ban Zamanı:** $date
+<:4515security:1530543847162118194> **Sunucu ID:** `$guildID`
+]
+$thumbnail[$userAvatar[$botID]]
+$footer[BetterBot 2.0 • Ban Sistemi]
+$footerIcon[$userAvatar[$botID]]
+$addTimestamp`]
 
 $ban[$mentioned[1];$noMentionMessage]
 
