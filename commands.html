@@ -1154,9 +1154,40 @@ $deletecommand`
     logic: "Bot, kullanıcının rollerini kontrol eder ve belirtilen rolü kaldırır.",
     chat: [
       { type: "user", name: "AhmetEjler", message: 'b!rol al @Kullanici Üye' },
-      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Rol Alındı", desc: "@Kullanici kullanıcısından **Üye** rolü alındı." } }
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Rol Alınamadı", desc: "Bu özellik artık kullanılamaz." } }
     ],
-    code: "// b!rol al komutunun kodu"
+    code: `$nomention
+$title[👮 | **BETTERBOT 2.0 GÜVENLİK KARARI** | 🌐]
+$description[
+Değerli BetterBot 2.0 kullanıcıları 💖,
+BetterBot olarak her zaman önceliğimiz **sizin güvenliğiniz ve sunucularınızın istikrarıdır.** Bu bilinçle, bugünden itibaren **b!rolver ve b!rolal** komutlarını hizmet dışı bırakma kararı aldık.
+
+**━━━━━━━━━━━━━━━━━━━━**
+📁 **BU KARARI ALMA NEDENLERİMİZ**
+
+- Rol verme/ alma işlemleri, sunucu hiyerarşisini doğrudan etkileyen kritik yetkilerdir.
+- BDFD altyapısında bu işlemlerin %100 güvenli bir şekilde kontrol edilmesi teknik olarak mümkün değildi.
+- Olası bir hata veya yetki aşımı, sunucunuzda geri dönüşü zor sorunlara yol açabilirdi.
+- Sizleri bu riske atmak istemedik.
+
+**━━━━━━━━━━━━━━━━━━━━**
+🧭 **ŞİMDİ NE OLACAK?**
+
+- Artık b!rolver ve b!rolal komutları artık çalışmayacaktır.
+- Sunucunuzdaki rol yönetimini Discord'un yerel yetki sistemleri üzerinden yapmaya devam edebilirsiniz.
+- BetterBot 2.0'ın moderasyon (ban, kick, mute), eğlence, bilgi ve ticket sistemleri gibi diğer tüm özellikleri **kesintisiz çalışmaya devam edecektir.**
+
+**━━━━━━━━━━━━━━━━━━━━**
+🛡️ **BU KARARI ALMAYA DEĞER Mİ?**
+
+BetterBot, sadece işlevsel değil, aynı zamanda **güvenilir** bir bot olma hedefiyle gelişiyor. Bu karar, sizin güvenliğiniz için alınmış bilinçli bir adımdır.
+Herhangi bir sorunuz veya öneriniz için destek sunucumuza bekleriz.
+Güvende kalın, iyi eğlenceler! 🎉
+]
+$color[#00ffcc]
+$footerIcon[$userAvatar[$botID]]
+$footer[BetterBot 2.0 • Geliştirici Ekibi]
+$deletecommand`
   },
 
   "b!kilit aç": {
@@ -1166,7 +1197,29 @@ $deletecommand`
       { type: "user", name: "AhmetEjler", message: 'b!kilit aç' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Kilitlendi", desc: "Bu kanal artık kilitli. Mesaj gönderilemez." } }
     ],
-    code: "// b!kilit aç komutunun kodu"
+    code: `$nomention
+$onlyAdmin[⚠️ **»** **Bu Komutu Sadece `Yönetici` iznine sahip kişiler kullanabilir!**]
+$onlyBotPerms[admin;⚠️ **»** **`Yönetici` İznine Sahip Değilim!**]
+$editChannelPerms[$channelID;$guildID;-sendmessages]
+
+$title[🔒 | KANAL KİLİTLENDİ | 🔐]
+$description[
+**━━━━━━━━━━━━━━━━━━━━**
+📋 **SİSTEM BİLGİLERİ**
+
+ 👮 **Yetkili:** <@$authorID>
+ 💬 **Kanal:** <#$channelID>
+ 💾 **Kanal ID:** $channelID
+ 📅 **Tarih:** $date
+
+**━━━━━━━━━━━━━━━━━━━━**
+🔧 **BİLGİ**
+Kanal kilidini yeniden açmak istiyorsanız **`b!kilit-aç`** komutunu girmeniz yeterli
+]
+$color[#00ffcc]
+$footer[BetterBot 2.0 • Kanal Kilitleme Sistemi]
+$footerIcon[$userAvatar[$botID]]
+$deletecommand`
   },
 
   "b!kilit kapat": {
