@@ -914,7 +914,7 @@
        PERFORMANS MODLARI
        ============================================= */
 
-    /* 🎨 YÜKSEK KALİTE - Tüm efektler açık */
+    /* YÜKSEK KALİTE */
     body.perf-high .navbar {
       background: rgba(10, 25, 47, 0.85);
       backdrop-filter: blur(20px);
@@ -983,12 +983,12 @@
     body.perf-high .feature-card,
     body.perf-high .team-card { position: relative; overflow: hidden; }
 
-    /* ⚖️ ORTA - Varsayılan (dengeli) */
+    /* ORTA - Varsayılan */
     body.perf-medium .navbar { background: rgba(10, 25, 47, 0.96); }
     body.perf-medium .container { background: rgba(17, 34, 64, 0.92); }
     body.perf-medium #musicToggle { background: rgba(13, 26, 47, 0.95); }
 
-    /* ⚡ PERFORMANS - Minimum efekt */
+    /* PERFORMANS - Minimum */
     body.perf-low .navbar,
     body.perf-low .container,
     body.perf-low #musicToggle,
@@ -1583,40 +1583,22 @@
 <div id="toast">✓ Kopyalandı!</div>
 
 <script>
-/* ===== PERFORMANS MODU YÖNETİMİ ===== */
+/* ============================================================
+   1) PERFORMANS MODU
+   ============================================================ */
 const PERF_MODES = {
   high:   { particles: 60, fps: 60 },
   medium: { particles: 30, fps: 30 },
   low:    { particles: 0,  fps: 0  }
 };
 
-let currentPerfMode = 'medium';
-
-function applyPerfMode(mode) {
-  if (!PERF_MODES[mode]) mode = 'medium';
-  currentPerfMode = mode;
-
-  // Body class'ını değiştir
-  document.body.classList.remove('perf-high', 'perf-medium', 'perf-low');
-  document.body.classList.add('perf-' + mode);
-
-  // Aktif butonu güncelle
-  document.querySelectorAll('.perf-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.perf === mode);
-  });
-
-  // Partikülleri yeni moda göre başlat
-  const cfg = PERF_MODES[mode];
-  startParticles(cfg.particles, cfg.fps);
-
-  // Kaydet
-  try { localStorage.setItem('bb_perf', mode); } catch (e) {}
-}
-
-/* ===== PARTİKÜL SİSTEMİ ===== */
+/* ============================================================
+   2) PARTİKÜL SİSTEMİ
+   ============================================================ */
 let particlesRAF = null;
 let particlesData = [];
-let particlesCanvas, particlesCtx;
+let particlesCanvas = null;
+let particlesCtx = null;
 let particlesW = 0, particlesH = 0;
 let particlesFpsInterval = 40;
 let lastParticleFrame = 0;
@@ -1625,13 +1607,16 @@ let particlesRunning = false;
 
 function initParticlesCanvas() {
   particlesCanvas = document.getElementById('particles');
+  if (!particlesCanvas) return;
   particlesCtx = particlesCanvas.getContext('2d', { alpha: true });
   resizeParticlesCanvas();
+
   let resizeTimeout;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(resizeParticlesCanvas, 250);
   });
+
   document.addEventListener('visibilitychange', () => {
     particlesVisible = !document.hidden;
   });
@@ -1656,7 +1641,7 @@ function stopParticles() {
 
 function startParticles(count, fps) {
   stopParticles();
-  if (count <= 0 || fps <= 0) return;
+  if (count <= 0 || fps <= 0 || !particlesCtx) return;
 
   particlesFpsInterval = 1000 / fps;
   lastParticleFrame = 0;
@@ -1672,21 +1657,19 @@ function startParticles(count, fps) {
     });
   }
 
-  const MAX_DIST_SQ = 110 * 110;
-
+  const MAX_DIST = 110;
+  const MAX_DIST_SQ = MAX_DIST * MAX_DIST;
   particlesRunning = true;
 
   function animate(now) {
     if (!particlesRunning) return;
     particlesRAF = requestAnimationFrame(animate);
-
     if (!particlesVisible) return;
     if (now - lastParticleFrame < particlesFpsInterval) return;
     lastParticleFrame = now;
 
     particlesCtx.clearRect(0, 0, particlesW, particlesH);
 
-    // Noktalar
     for (let i = 0; i < particlesData.length; i++) {
       const p = particlesData[i];
       p.x += p.vx;
@@ -1699,7 +1682,6 @@ function startParticles(count, fps) {
       particlesCtx.fill();
     }
 
-    // Bağlantı çizgileri
     for (let i = 0; i < particlesData.length; i++) {
       const pi = particlesData[i];
       for (let j = i + 1; j < particlesData.length; j++) {
@@ -1712,7 +1694,7 @@ function startParticles(count, fps) {
           particlesCtx.beginPath();
           particlesCtx.moveTo(pi.x, pi.y);
           particlesCtx.lineTo(pj.x, pj.y);
-          particlesCtx.strokeStyle = 'rgba(0, 212, 255, ' + (0.15 * (1 - dist / 110)).toFixed(3) + ')';
+          particlesCtx.strokeStyle = 'rgba(0, 212, 255, ' + (0.15 * (1 - dist / MAX_DIST)).toFixed(3) + ')';
           particlesCtx.lineWidth = 0.6;
           particlesCtx.stroke();
         }
@@ -1723,7 +1705,25 @@ function startParticles(count, fps) {
   particlesRAF = requestAnimationFrame(animate);
 }
 
-/* ===== ÇEVİRİLER ===== */
+function applyPerfMode(mode) {
+  if (!PERF_MODES[mode]) mode = 'medium';
+
+  document.body.classList.remove('perf-high', 'perf-medium', 'perf-low');
+  document.body.classList.add('perf-' + mode);
+
+  document.querySelectorAll('.perf-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.perf === mode);
+  });
+
+  const cfg = PERF_MODES[mode];
+  startParticles(cfg.particles, cfg.fps);
+
+  try { localStorage.setItem('bb_perf', mode); } catch (e) {}
+}
+
+/* ============================================================
+   3) ÇEVİRİLER
+   ============================================================ */
 const translations = {
   tr: {
     "nav.about": "Hakkımızda","nav.team": "Ekip","nav.roadmap": "Yol Haritası","nav.blog": "Blog","nav.faq": "SSS","nav.addBot": "Botu Ekle",
@@ -1806,4 +1806,254 @@ const translations = {
     "blog.readMore": "Read more →",
     "vote.title": "Support BetterBot","vote.desc": "Every vote helps our bot grow. It only takes 10 seconds!","vote.button": "Vote and Support",
     "faq.title": "Frequently Asked Questions",
-    "faq.q1": "Is BetterBot 2.0 paid?","faq.a1": "No, it's completely free. You don't need to pay for any core features. Optional premium features
+    "faq.q1": "Is BetterBot 2.0 paid?","faq.a1": "No, it's completely free. You don't need to pay for any core features. Optional premium features may be added in the future, but existing features will always remain free.",
+    "faq.q2": "How do I add the bot?","faq.a2": "Click the \"Add Bot\" button, select your server in the Discord authorization screen, and approve the required permissions. The bot is added automatically.",
+    "faq.q3": "Which commands are available?","faq.a3": "Over 50 commands are available: moderation (ban, mute, warn), fun (IQ, love, dance), automation (auto-role, welcome), form systems, ticket system, and more. Check the \"Commands\" page for the full list.",
+    "faq.q4": "Is my data safe?","faq.a4": "Absolutely. User data is encrypted, not shared with third parties, and regular security audits are performed.",
+    "faq.q5": "How can I get support?","faq.a5": "Join our BetterNetwork Discord server. You can get help 24/7 from our support channels or message the staff directly.",
+    "community.title": "Our Community","community.p1": "The heart of BetterBot 2.0 is the BetterNetwork community. This is not just a bot server; it's a family environment where you can exchange ideas, make new friendships, and grow together.",
+    "community.quote": "\"In BetterNetwork, everyone contributes to each other's growth. We grow together, we get stronger together.\"",
+    "buttons.features": "Features","buttons.commands": "Commands","buttons.addBot": "Add Bot","buttons.join": "Join Server",
+    "footer.privacy": "Privacy Policy","footer.terms": "Terms of Service"
+  }
+};
+
+/* ============================================================
+   4) DİL DEĞİŞTİRİCİ
+   ============================================================ */
+function initLang() {
+  const buttons = document.querySelectorAll('.lang-btn');
+  let currentLang = 'tr';
+  try { currentLang = localStorage.getItem('bb_lang') || 'tr'; } catch (e) {}
+
+  function applyLang(lang) {
+    const dict = translations[lang] || translations.tr;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+    document.documentElement.lang = lang;
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('bb_lang', lang); } catch (e) {}
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
+  applyLang(currentLang);
+}
+
+/* ============================================================
+   5) YÜKLEME EKRANI
+   ============================================================ */
+function initLoader() {
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+  const bar = document.getElementById('loaderBar');
+  const percent = document.getElementById('loaderPercent');
+  let progress = 0;
+  let pageLoaded = false;
+
+  const fakeProgress = setInterval(() => {
+    if (pageLoaded && progress >= 90) return;
+    if (progress < 90) {
+      progress += Math.random() * 12 + 5;
+      if (progress > 90) progress = 90;
+      bar.style.width = progress + '%';
+      percent.textContent = Math.floor(progress) + '%';
+    }
+  }, 150);
+
+  function finish() {
+    if (pageLoaded) return;
+    pageLoaded = true;
+    clearInterval(fakeProgress);
+    progress = 100;
+    bar.style.width = '100%';
+    percent.textContent = '100%';
+    setTimeout(() => loader.classList.add('hidden'), 400);
+  }
+
+  window.addEventListener('load', finish);
+  setTimeout(finish, 3000);
+}
+
+/* ============================================================
+   6) MÜZİK
+   ============================================================ */
+function initMusic() {
+  const music = document.getElementById('bgMusic');
+  const toggle = document.getElementById('musicToggle');
+  const icon = document.getElementById('musicIcon');
+  if (!music || !toggle || !icon) return;
+
+  let isPlaying = false;
+  music.volume = 0.15;
+
+  const PLAY_ICON = '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>';
+  const MUTE_ICON = '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2.5"/>';
+
+  icon.innerHTML = MUTE_ICON;
+
+  function setPlaying(state) {
+    isPlaying = state;
+    if (state) {
+      music.play().then(() => {
+        toggle.classList.add('playing');
+        icon.innerHTML = PLAY_ICON;
+      }).catch(() => {
+        toggle.classList.remove('playing');
+        icon.innerHTML = MUTE_ICON;
+        isPlaying = false;
+      });
+    } else {
+      music.pause();
+      toggle.classList.remove('playing');
+      icon.innerHTML = MUTE_ICON;
+    }
+  }
+
+  toggle.addEventListener('click', () => setPlaying(!isPlaying));
+  window.addEventListener('beforeunload', () => music.pause());
+}
+
+/* ============================================================
+   7) SCROLL, REVEAL, COUNTERS, FAQ, COPY
+   ============================================================ */
+function initScrollEffects() {
+  const navbar = document.getElementById('navbar');
+  const backToTop = document.getElementById('backToTop');
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (y > 40) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+      if (y > 400) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+      ticking = false;
+    });
+  }, { passive: true });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+function initMobileMenu() {
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+}
+
+function initReveal() {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+function initCounters() {
+  const counters = document.querySelectorAll('.number[data-count]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const duration = 1500;
+        const start = performance.now();
+        const update = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(eased * target);
+          el.textContent = prefix + current.toLocaleString('tr-TR') + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = prefix + target.toLocaleString('tr-TR') + suffix;
+        };
+        requestAnimationFrame(update);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => counterObserver.observe(el));
+}
+
+function initFAQ() {
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+}
+
+function initCopyInvite() {
+  const INVITE_URL = "https://discord.com/oauth2/authorize?client_id=1229120180253102140&permissions=8&integration_type=0&scope=bot";
+  const toast = document.getElementById('toast');
+  const copyBtn = document.getElementById('copyInvite');
+  if (!copyBtn) return;
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('visible');
+    setTimeout(() => toast.classList.remove('visible'), 2000);
+  }
+
+  copyBtn.addEventListener('click', () => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(INVITE_URL).then(() => {
+        showToast('✓ Davet linki kopyalandı!');
+      }).catch(() => window.open(INVITE_URL, '_blank'));
+    } else {
+      window.open(INVITE_URL, '_blank');
+    }
+  });
+}
+
+/* ============================================================
+   8) ANA BAŞLATMA
+   ============================================================ */
+function initApp() {
+  initParticlesCanvas();
+
+  let savedPerf = 'medium';
+  try { savedPerf = localStorage.getItem('bb_perf') || 'medium'; } catch (e) {}
+  applyPerfMode(savedPerf);
+
+  document.querySelectorAll('.perf-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyPerfMode(btn.dataset.perf));
+  });
+
+  initLang();
+  initMusic();
+  initScrollEffects();
+  initMobileMenu();
+  initReveal();
+  initCounters();
+  initFAQ();
+  initCopyInvite();
+  initLoader();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+</script>
+
+</body>
+</html>
