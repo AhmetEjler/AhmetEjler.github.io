@@ -1194,7 +1194,7 @@ $deletecommand`
     purpose: "Belirtilen kanalı @everyone için kilitler, kimse mesaj gönderemez.",
     logic: "Bot, kanalın izinlerini güncelleyerek @everyone rolünün mesaj gönderme yetkisini kapatır.",
     chat: [
-      { type: "user", name: "AhmetEjler", message: 'b!kilit aç' },
+      { type: "user", name: "AhmetEjler", message: 'b!kilitle' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Kilitlendi", desc: "Bu kanal artık kilitli. Mesaj gönderilemez." } }
     ],
     code: `$nomention
@@ -1222,14 +1222,36 @@ $footerIcon[$userAvatar[$botID]]
 $deletecommand`
   },
 
-  "b!kilit kapat": {
+  "b!kilit-aç": {
     purpose: "Daha önce kilitlenmiş kanalın kilidini açar.",
     logic: "Bot, kanalın izinlerini eski haline getirir ve @everyone mesaj gönderebilir.",
     chat: [
       { type: "user", name: "AhmetEjler", message: 'b!kilit kapat' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kilit Açıldı", desc: "Bu kanalın kilidi açıldı. Mesaj gönderilebilir." } }
     ],
-    code: "// b!kilit kapat komutunun kodu"
+    code: `$nomention
+$onlyAdmin[⚠️ **»** **Bu Komutu Sadece `Yönetici` iznine sahip kişiler kullanabilir!**]
+$onlyBotPerms[admin;⚠️ **»** **`Yönetici` İznine Sahip Değilim!**]
+$editChannelPerms[$channelID;$guildID;+sendmessages]
+
+$title[🔓 | KANAL KİLİDİ AÇILDI | 🔐]
+$description[
+**━━━━━━━━━━━━━━━━━━━━**
+📋 **SİSTEM BİLGİLERİ**
+
+ 👮 **Yetkili:** <@$authorID>
+ 💬 **Kanal:** <#$channelID>
+ 💾 **Kanal ID:** $channelID
+ 📅 **Tarih:** $date
+
+**━━━━━━━━━━━━━━━━━━━━**
+🔧 **BİLGİ**
+Kanalı kilitlemek istiyorsanız **`b!kilit`** komutunu girmeniz yeterli.
+]
+$color[#00ffcc]
+$footer[BetterBot 2.0 • Kanal Kilitleme Sistemi]
+$footerIcon[$userAvatar[$botID]]
+$deletecommand`
   },
 
   "b!mute": {
