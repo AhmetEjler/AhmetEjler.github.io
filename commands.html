@@ -653,7 +653,7 @@
     </svg>
     BetterBot 2.0 – Komutlar
   </h1>
-  <p class="sub">Komutlara tıklayarak detayları, Discord önizlemesini ve kodu görebilirsiniz.</p>
+  <p class="sub">Komutlara ve sistem modlarına tıklayarak detayları, Discord önizlemesini ve kodları görebilirsiniz.</p>
 
   <div class="top-bar">
     <div class="prefix-box">🔹 Prefix: <strong>b!</strong></div>
@@ -662,7 +662,23 @@
         <circle cx="11" cy="11" r="8"/>
         <line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input type="text" id="searchInput" placeholder="Komut ara..." autocomplete="off" />
+      <input type="text" id="searchInput" placeholder="Komut veya mod ara..." autocomplete="off" />
+    </div>
+  </div>
+
+  <!-- ===== SİSTEM MODLARI ===== -->
+  <div class="category" data-category="modlar">
+    <h2>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+      Sistem Modları
+    </h2>
+    <div class="command-grid">
+      <div class="command-item" data-cmd="🌟 Yüksek Kalite Modu"><span class="cmd">🌟 Yüksek Kalite</span><span class="desc">Maksimum görsel zenginlik ve detaylı log</span></div>
+      <div class="command-item" data-cmd="⚡ Orta Mod"><span class="cmd">⚡ Orta (Dengeli)</span><span class="desc">Kaynak tüketimi ve kalite dengesi</span></div>
+      <div class="command-item" data-cmd="🚀 Performans Modu"><span class="cmd">🚀 Performans (Lite)</span><span class="desc">Minimum gecikme ve yüksek hız</span></div>
     </div>
   </div>
 
@@ -909,24 +925,60 @@
 
 <script>
 /* ======================================================
-   KOMUT VERİLERİ
-   ------------------------------------------------------
-   Buradaki her komut için:
-   - purpose: Komutun amacı (kısa açıklama)
-   - logic:   Komutun mantığı (nasıl çalışır)
-   - chat:    Discord sohbet önizlemesi (dizi halinde)
-   - code:    Kopyalanacak kod (buraya kendi kodunu yaz)
+   KOMUT VE SİSTEM MODU VERİLERİ
    ====================================================== */
 const commandData = {
 
+  /* ===== SİSTEM MODLARI ===== */
+  "🌟 Yüksek Kalite Modu": {
+    purpose: "Botun tüm görsel detaylarını, zengin embed tasarımlarını ve gelişmiş loglama altyapısını aktif eder.",
+    logic: "Gelişmiş hata ayıklama, tam grafikli dinamik embed yapıları ve anlık veri tabanı senkronizasyonu sağlar. Güçlü altyapı gerektirir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'Modu Yüksek Kalite olarak ayarla' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🌟 Yüksek Kalite Modu Aktif", desc: "Tüm görsel özellikler ve detaylı log sistemi devreye sokuldu." } }
+    ],
+    code: "// [SİSTEM AYARI] Yüksek Kalite Modu Yapılandırması\nMODE = \"high_quality\";\nEMBED_DETAILS = true;\nADVANCED_LOGGING = true;\nCACHE_STRATEGY = \"realtime\";"
+  },
+
+  "⚡ Orta Mod": {
+    purpose: "Kaynak tüketimi ile görsel kaliteyi dengede tutan ideal ve standart çalışma modudur.",
+    logic: "Optimize edilmiş önbellekleme (cache) ve standart loglama kullanarak en stabil yanıt süresini sunar.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'Modu Orta olarak ayarla' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "⚡ Orta Mod Aktif", desc: "Kaynak ve görsel kalite dengeli konuma getirildi." } }
+    ],
+    code: "// [SİSTEM AYARI] Orta (Dengeli) Mod Yapılandırması\nMODE = \"balanced\";\nEMBED_DETAILS = \"standard\";\nADVANCED_LOGGING = false;\nCACHE_STRATEGY = \"optimized\";"
+  },
+
+  "🚀 Performans Modu": {
+    purpose: "Gecikmeyi (ping) minimuma indirmek ve kaynak tüketimini kısmak için tasarlanmış yalın mod.",
+    logic: "Ağır embed süslemeleri ve gereksiz veri tabanı sorguları devre dışı bırakılır, maksimum hız elde edilir.",
+    chat: [
+      { type: "user", name: "AhmetEjler", message: 'Modu Performans olarak ayarla' },
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🚀 Performans Modu Aktif", desc: "Minimum gecikme ve hafifletilmiş altyapı devreye alındı." } }
+    ],
+    code: "// [SİSTEM AYARI] Performans (Lite) Modu Yapılandırması\nMODE = \"performance_lite\";\nEMBED_DETAILS = false;\nADVANCED_LOGGING = false;\nCACHE_STRATEGY = \"aggressive\";"
+  },
+
+  /* ===== BDFD KOMUTLARI ===== */
   "b!ban": {
-    purpose: "Sunucudan bir kullanıcıyı kalıcı olarak yasaklar.",
-    logic: "Bot, komutu kullanan kişinin yetkisini kontrol eder, ardından belirtilen kullanıcıyı yasaklar ve yasaklama sebebini log kanalına gönderir.",
+    purpose: "Sunucudan bir kullanıcıyı kurallara uymadığı gerekçesiyle kalıcı olarak yasaklar.",
+    logic: "Bot, komutu kullanan yetkilinin ban yetkisini kontrol eder, etiketlenen kullanıcıyı ve belirtilen sebebi işleyerek sunucudan uzaklaştırır.",
     chat: [
       { type: "user", name: "AhmetEjler", message: 'b!ban @KotuKullanici Spam yapıyor' },
-      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kullanıcı Yasaklandı", desc: "@KotuKullanici sunucudan kalıcı olarak yasaklandı.\n**Sebep:** Spam yapıyor" } }
+      { type: "bot", name: "BetterBot 2.0", embed: { type: "error", title: "Kullanıcı Sunucudan Yasaklandı", desc: "**Yasaklanan:** <@KotuKullanici>\n**Yetkili:** <@AhmetEjler>\n**Sebep:** Spam yapıyor" } }
     ],
-    code: "// b!ban komutunun kodu buraya gelecek\n// Örnek:\n// module.exports = {\n//   name: 'ban',\n//   execute(message, args) {\n//     // ...\n//   }\n// }"
+    code: `$nomention$onlyPerms[ban;Bu komutu kullanmak için **Yasakla (Ban)** yetkin bulunmuyor!]
+$argsCheck[>1;Lütfen yasaklanacak kullanıcıyı etiketleyin veya ID'sini yazın! Örnek: \`!ban @kullanici Sebep\`]
+
+$ban[$mentioned[1];$noMentionMessage]
+
+$color[#ff4757]
+$title[Kullanıcı Sunucudan Yasaklandı]
+$description[**Yasaklanan:** <@$mentioned[1]> (\`$mentioned[1]\`)
+**Yetkili:** <@$authorID>
+**Sebep:** $noMentionMessage]$footer[BetterBot 2.0 Güvenlik Sistemi]
+$addTimestamp`
   },
 
   "b!unban": {
@@ -936,17 +988,17 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!unban 123456789012345678' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Yasak Kaldırıldı", desc: "Kullanıcının yasağı başarıyla kaldırıldı." } }
     ],
-    code: "// b!unban komutunun kodu buraya gelecek"
+    code: "// b!unban komutunun kodu"
   },
 
   "b!uyarı": {
     purpose: "Bir kullanıcıyı kural ihlali sebebiyle uyarır.",
-    logic: "Bot, kullanıcıya DM üzerinden uyarı gönderir ve uyarı sayısını veritabanına kaydeder. Belirli sayıda uyarı alan kullanıcı otomatik olarak mute veya banlanabilir.",
+    logic: "Bot, kullanıcıya DM üzerinden uyarı gönderir ve uyarı sayısını veritabanına kaydeder.",
     chat: [
       { type: "user", name: "AhmetEjler", message: 'b!uyarı @Kullanici Küfür' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "Kullanıcı Uyarıldı", desc: "@Kullanici 1. uyarısını aldı.\n**Sebep:** Küfür" } }
     ],
-    code: "// b!uyarı komutunun kodu buraya gelecek"
+    code: "// b!uyarı komutunun kodu"
   },
 
   "b!sil": {
@@ -956,7 +1008,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!sil 50' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Mesajlar Silindi", desc: "50 mesaj başarıyla silindi." } }
     ],
-    code: "// b!sil komutunun kodu buraya gelecek"
+    code: "// b!sil komutunun kodu"
   },
 
   "b!rol ver": {
@@ -966,7 +1018,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!rol ver @Kullanici Üye' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Rol Verildi", desc: "@Kullanici kullanıcısına **Üye** rolü verildi." } }
     ],
-    code: "// b!rol ver komutunun kodu buraya gelecek"
+    code: "// b!rol ver komutunun kodu"
   },
 
   "b!rol al": {
@@ -976,7 +1028,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!rol al @Kullanici Üye' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Rol Alındı", desc: "@Kullanici kullanıcısından **Üye** rolü alındı." } }
     ],
-    code: "// b!rol al komutunun kodu buraya gelecek"
+    code: "// b!rol al komutunun kodu"
   },
 
   "b!kilit aç": {
@@ -986,7 +1038,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!kilit aç' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Kilitlendi", desc: "Bu kanal artık kilitli. Mesaj gönderilemez." } }
     ],
-    code: "// b!kilit aç komutunun kodu buraya gelecek"
+    code: "// b!kilit aç komutunun kodu"
   },
 
   "b!kilit kapat": {
@@ -996,7 +1048,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!kilit kapat' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kilit Açıldı", desc: "Bu kanalın kilidi açıldı. Mesaj gönderilebilir." } }
     ],
-    code: "// b!kilit kapat komutunun kodu buraya gelecek"
+    code: "// b!kilit kapat komutunun kodu"
   },
 
   "b!mute": {
@@ -1006,7 +1058,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!mute @Kullanici 10m Spam' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "Kullanıcı Susturuldu", desc: "@Kullanici 10 dakika boyunca susturuldu.\n**Sebep:** Spam" } }
     ],
-    code: "// b!mute komutunun kodu buraya gelecek"
+    code: "// b!mute komutunun kodu"
   },
 
   "b!reklam engel": {
@@ -1016,7 +1068,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!reklam engel aç' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Reklam Engel Aktif", desc: "Sunucuda reklam engelleme sistemi aktif edildi." } }
     ],
-    code: "// b!reklam engel komutunun kodu buraya gelecek"
+    code: "// b!reklam engel komutunun kodu"
   },
 
   "b!küfürengel": {
@@ -1026,7 +1078,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!küfürengel aç' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Küfür Engel Aktif", desc: "Sunucuda küfür engelleme sistemi aktif edildi." } }
     ],
-    code: "// b!küfürengel komutunun kodu buraya gelecek"
+    code: "// b!küfürengel komutunun kodu"
   },
 
   "b!rol oluştur": {
@@ -1036,7 +1088,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!rol oluştur Yetkili #ff0000' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Rol Oluşturuldu", desc: "**Yetkili** rolü başarıyla oluşturuldu." } }
     ],
-    code: "// b!rol oluştur komutunun kodu buraya gelecek"
+    code: "// b!rol oluştur komutunun kodu"
   },
 
   "b!metin kanalı oluştur": {
@@ -1046,7 +1098,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!metin kanalı oluştur duyurular' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Oluşturuldu", desc: "**#duyurular** metin kanalı oluşturuldu." } }
     ],
-    code: "// b!metin kanalı oluştur komutunun kodu buraya gelecek"
+    code: "// b!metin kanalı oluştur komutunun kodu"
   },
 
   "b!ses kanalı oluştur": {
@@ -1056,7 +1108,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!ses kanalı oluştur Sohbet' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Oluşturuldu", desc: "**🔊 Sohbet** ses kanalı oluşturuldu." } }
     ],
-    code: "// b!ses kanalı oluştur komutunun kodu buraya gelecek"
+    code: "// b!ses kanalı oluştur komutunun kodu"
   },
 
   "b!duyuru": {
@@ -1066,7 +1118,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!duyuru #genel Yeni etkinlik bu akşam!' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📢 Duyuru", desc: "Yeni etkinlik bu akşam!" } }
     ],
-    code: "// b!duyuru komutunun kodu buraya gelecek"
+    code: "// b!duyuru komutunun kodu"
   },
 
   "b!oylama": {
@@ -1076,7 +1128,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!oylama Sunucuya yeni kanal eklensin mi?' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🗳️ Oylama Başladı", desc: "Sunucuya yeni kanal eklensin mi?\n\n👍 Evet\n👎 Hayır" } }
     ],
-    code: "// b!oylama komutunun kodu buraya gelecek"
+    code: "// b!oylama komutunun kodu"
   },
 
   "b!set mute rol": {
@@ -1086,7 +1138,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!set mute rol @Muted' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Mute Rolü Ayarlandı", desc: "Mute rolü olarak **@Muted** seçildi." } }
     ],
-    code: "// b!set mute rol komutunun kodu buraya gelecek"
+    code: "// b!set mute rol komutunun kodu"
   },
 
   "b!set butonlu rol": {
@@ -1096,7 +1148,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!set butonlu rol #roller' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Butonlu Rol Kuruldu", desc: "Rol seçim sistemi **#roller** kanalında oluşturuldu." } }
     ],
-    code: "// b!set butonlu rol komutunun kodu buraya gelecek"
+    code: "// b!set butonlu rol komutunun kodu"
   },
 
   "b!form başvur": {
@@ -1106,7 +1158,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!form başvur' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📝 Başvuru Formu", desc: "Form modalı açıldı. Bilgilerini doldur ve gönder." } }
     ],
-    code: "// b!form başvur komutunun kodu buraya gelecek"
+    code: "// b!form başvur komutunun kodu"
   },
 
   "b!form şikayet": {
@@ -1116,7 +1168,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!form şikayet' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "📝 Şikayet Formu", desc: "Form modalı açıldı. Şikayetini detaylıca yaz." } }
     ],
-    code: "// b!form şikayet komutunun kodu buraya gelecek"
+    code: "// b!form şikayet komutunun kodu"
   },
 
   "b!form öneri": {
@@ -1126,7 +1178,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!form öneri' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "💡 Öneri Formu", desc: "Form modalı açıldı. Önerini yaz ve gönder." } }
     ],
-    code: "// b!form öneri komutunun kodu buraya gelecek"
+    code: "// b!form öneri komutunun kodu"
   },
 
   "b!form youtube": {
@@ -1136,7 +1188,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!form youtube' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🎬 YouTube Başvuru Formu", desc: "Form modalı açıldı. Kanal bilgilerini doldur." } }
     ],
-    code: "// b!form youtube komutunun kodu buraya gelecek"
+    code: "// b!form youtube komutunun kodu"
   },
 
   "b!destek sistemi aç": {
@@ -1146,7 +1198,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!destek sistemi aç' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🎫 Destek Sistemi Kuruldu", desc: "Ticket sistemi aktif edildi. Destek kanalından talep açabilirsiniz." } }
     ],
-    code: "// b!destek sistemi aç komutunun kodu buraya gelecek"
+    code: "// b!destek sistemi aç komutunun kodu"
   },
 
   "b!kapat": {
@@ -1156,7 +1208,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!kapat' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🎫 Ticket Kapatıldı", desc: "Bu destek talebi kapatıldı. Kanal 5 saniye içinde silinecek." } }
     ],
-    code: "// b!kapat komutunun kodu buraya gelecek"
+    code: "// b!kapat komutunun kodu"
   },
 
   "b!sunucukur": {
@@ -1166,7 +1218,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!sunucukur' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "⚙️ Sunucu Kuruluyor", desc: "Kategoriler, kanallar ve roller oluşturuluyor...\n\n✅ Genel kategorisi\n✅ Yetkili kategorisi\n✅ 12 kanal\n✅ 8 rol\n\n**Tamamlandı! (30s)**" } }
     ],
-    code: "// b!sunucukur komutunun kodu buraya gelecek"
+    code: "// b!sunucukur komutunun kodu"
   },
 
   "b!rolkur": {
@@ -1176,7 +1228,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!rolkur' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "⚙️ Roller Kuruluyor", desc: "✅ Kurucu\n✅ Yönetici\n✅ Moderatör\n✅ Rehber\n✅ Üye\n\n**Tamamlandı! (3s)**" } }
     ],
-    code: "// b!rolkur komutunun kodu buraya gelecek"
+    code: "// b!rolkur komutunun kodu"
   },
 
   "b!ıq": {
@@ -1186,7 +1238,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!ıq' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🧠 IQ Testi", desc: "**AhmetEjler**'in IQ seviyesi: **142** 🎉" } }
     ],
-    code: "// b!ıq komutunun kodu buraya gelecek"
+    code: "// b!ıq komutunun kodu"
   },
 
   "b!hackle": {
@@ -1196,7 +1248,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!hackle @Kullanici' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "💻 Hackleniyor...", desc: "@Kullanici'nin sistemi hackleniyor...\n\n`%10`\n`%30`\n`%60`\n`%100`\n\n🎉 Şaka! Hiçbir şey hacklenmedi 😄" } }
     ],
-    code: "// b!hackle komutunun kodu buraya gelecek"
+    code: "// b!hackle komutunun kodu"
   },
 
   "b!aşk": {
@@ -1206,7 +1258,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!aşk @Kullanici' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "❤️ Aşk Uyumu", desc: "**AhmetEjler** ❤️ **Kullanici**\n\nUyum: **%87** 💕" } }
     ],
-    code: "// b!aşk komutunun kodu buraya gelecek"
+    code: "// b!aşk komutunun kodu"
   },
 
   "b!dans": {
@@ -1216,7 +1268,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!dans' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "💃 Dans Zamanı!", desc: "🕺 AhmetEjler dans ediyor!" } }
     ],
-    code: "// b!dans komutunun kodu buraya gelecek"
+    code: "// b!dans komutunun kodu"
   },
 
   "b!ciddileşme": {
@@ -1226,7 +1278,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!ciddileşme' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "😐 Ciddi Mod", desc: "**AhmetEjler** artık ciddi moda geçti. Şaka yok!" } }
     ],
-    code: "// b!ciddileşme komutunun kodu buraya gelecek"
+    code: "// b!ciddileşme komutunun kodu"
   },
 
   "b!sunucu sil": {
@@ -1236,7 +1288,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!sunucu sil' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "error", title: "⚠️ SUNUCU SİLİNİYOR...", desc: "`%25`\n`%50`\n`%75`\n`%100`\n\n😅 Şaka! Sunucu sapasağlam duruyor." } }
     ],
-    code: "// b!sunucu sil komutunun kodu buraya gelecek"
+    code: "// b!sunucu sil komutunun kodu"
   },
 
   "b!korona": {
@@ -1246,7 +1298,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!korona' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🦠 Korona Testi", desc: "**AhmetEjler**'in test sonucu: **Negatif** ✅" } }
     ],
-    code: "// b!korona komutunun kodu buraya gelecek"
+    code: "// b!korona komutunun kodu"
   },
 
   "b!karne not": {
@@ -1256,7 +1308,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!karne not' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📜 Karne Notu", desc: "**AhmetEjler**'in karne notu: **95** 🎉\n\nTebrikler, takdir aldın!" } }
     ],
-    code: "// b!karne not komutunun kodu buraya gelecek"
+    code: "// b!karne not komutunun kodu"
   },
 
   "b!say": {
@@ -1266,7 +1318,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!say Merhaba dünya!' },
       { type: "bot", name: "BetterBot 2.0", message: "Merhaba dünya!" }
     ],
-    code: "// b!say komutunun kodu buraya gelecek"
+    code: "// b!say komutunun kodu"
   },
 
   "b!avatar": {
@@ -1276,7 +1328,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!avatar @Kullanici' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🖼️ Avatar", desc: "**Kullanici**'nin avatarı aşağıda gösteriliyor." } }
     ],
-    code: "// b!avatar komutunun kodu buraya gelecek"
+    code: "// b!avatar komutunun kodu"
   },
 
   "b!öneri": {
@@ -1286,7 +1338,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!öneri Yeni bir etkinlik kanalı açılsın' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "💡 Öneriniz Alındı", desc: "Öneriniz yetkililere iletildi. Teşekkürler!" } }
     ],
-    code: "// b!öneri komutunun kodu buraya gelecek"
+    code: "// b!öneri komutunun kodu"
   },
 
   "b!şikayet": {
@@ -1296,7 +1348,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!şikayet @Kullanici Küfür ediyor' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "⚠️ Şikayetiniz Alındı", desc: "Şikayetiniz yetkililere iletildi. Gizliliğiniz korunacaktır." } }
     ],
-    code: "// b!şikayet komutunun kodu buraya gelecek"
+    code: "// b!şikayet komutunun kodu"
   },
 
   "b!canlı destek": {
@@ -1306,7 +1358,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!canlı destek Sunucumda bir sorun var' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📞 Destek Talebi Gönderildi", desc: "Talebiniz kuruculara iletildi. En kısa sürede dönüş yapılacak." } }
     ],
-    code: "// b!canlı destek komutunun kodu buraya gelecek"
+    code: "// b!canlı destek komutunun kodu"
   },
 
   "b!afk": {
@@ -1316,7 +1368,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!afk Yemek yiyorum' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "💤 AFK Modu", desc: "**AhmetEjler** artık AFK. Sebep: Yemek yiyorum" } }
     ],
-    code: "// b!afk komutunun kodu buraya gelecek"
+    code: "// b!afk komutunun kodu"
   },
 
   "b!unafk": {
@@ -1326,7 +1378,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!unafk' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "✅ AFK Modundan Çıktı", desc: "**AhmetEjler** artık aktif." } }
     ],
-    code: "// b!unafk komutunun kodu buraya gelecek"
+    code: "// b!unafk komutunun kodu"
   },
 
   "b!dm": {
@@ -1336,7 +1388,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!dm @Kullanici Merhaba!' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📨 DM Gönderildi", desc: "**Kullanici** kullanıcısına mesaj gönderildi." } }
     ],
-    code: "// b!dm komutunun kodu buraya gelecek"
+    code: "// b!dm komutunun kodu"
   },
 
   "b!butonlu rol": {
@@ -1346,7 +1398,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!butonlu rol' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🎭 Rol Seçimi", desc: "Aşağıdaki butonlardan birine tıklayarak rol alabilirsin." } }
     ],
-    code: "// b!butonlu rol komutunun kodu buraya gelecek"
+    code: "// b!butonlu rol komutunun kodu"
   },
 
   "b!otocevap": {
@@ -1356,7 +1408,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!otocevap aç' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🤖 Otocevap Aktif", desc: "Sa-As otomatik cevap sistemi açıldı." } }
     ],
-    code: "// b!otocevap komutunun kodu buraya gelecek"
+    code: "// b!otocevap komutunun kodu"
   },
 
   "b!kullanıcı bilgi": {
@@ -1366,7 +1418,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!kullanıcı bilgi @Kullanici' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "👤 Kullanıcı Bilgisi", desc: "**İsim:** Kullanici\n**ID:** 1234567890\n**Katılım:** 15.08.2024\n**Roller:** Üye, Aktif" } }
     ],
-    code: "// b!kullanıcı bilgi komutunun kodu buraya gelecek"
+    code: "// b!kullanıcı bilgi komutunun kodu"
   },
 
   "b!sunucu bilgi": {
@@ -1376,7 +1428,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!sunucu bilgi' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🏠 Sunucu Bilgisi", desc: "**Sunucu:** BetterNetwork\n**Üye:** 11.299\n**Kanal:** 45\n**Sahip:** AhmetEjler" } }
     ],
-    code: "// b!sunucu bilgi komutunun kodu buraya gelecek"
+    code: "// b!sunucu bilgi komutunun kodu"
   },
 
   "b!bot bilgi": {
@@ -1386,7 +1438,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!bot bilgi' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🤖 Bot Bilgisi", desc: "**Sürüm:** v2.0\n**Geliştirici:** BetterNetwork\n**Sunucu:** 19\n**Kullanıcı:** 11.299" } }
     ],
-    code: "// b!bot bilgi komutunun kodu buraya gelecek"
+    code: "// b!bot bilgi komutunun kodu"
   },
 
   "b!rol liste": {
@@ -1396,7 +1448,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!rol liste' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📋 Rol Listesi", desc: "1. @Kurucu\n2. @Yönetici\n3. @Moderatör\n4. @Rehber\n5. @Üye" } }
     ],
-    code: "// b!rol liste komutunun kodu buraya gelecek"
+    code: "// b!rol liste komutunun kodu"
   },
 
   "b!reklam ver": {
@@ -1406,7 +1458,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!reklam ver' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "📢 Reklam Gönderildi", desc: "Sunucunuz reklam kanalında tanıtıldı. Sonraki reklam: 6 saat sonra." } }
     ],
-    code: "// b!reklam ver komutunun kodu buraya gelecek"
+    code: "// b!reklam ver komutunun kodu"
   },
 
   "b!oyver": {
@@ -1416,7 +1468,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!oyver' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🗳️ Oy Verme Linki", desc: "Bota oy vermek için: https://top.gg/bot/1229120180253102140/vote" } }
     ],
-    code: "// b!oyver komutunun kodu buraya gelecek"
+    code: "// b!oyver komutunun kodu"
   },
 
   "b!bot güncellemeleri": {
@@ -1426,7 +1478,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!bot güncellemeleri' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🔄 Son Güncellemeler", desc: "**v2.0** (15.09.2026)\n• Yeni komutlar\n• Performans iyileştirmeleri\n• Bug düzeltmeleri" } }
     ],
-    code: "// b!bot güncellemeleri komutunun kodu buraya gelecek"
+    code: "// b!bot güncellemeleri komutunun kodu"
   },
 
   "b!bot kurucuları": {
@@ -1436,7 +1488,7 @@ const commandData = {
       { type: "user", name: "AhmetEjler", message: 'b!bot kurucuları' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "👑 Bot Kurucuları", desc: "**Kurucu:** AhmetEjler\n**Geliştirici:** BuseEjler\n**Moderatör:** MehmetEjler" } }
     ],
-    code: "// b!bot kurucuları komutunun kodu buraya gelecek"
+    code: "// b!bot kurucuları komutunun kodu"
   }
 
 };
@@ -1459,13 +1511,12 @@ let currentCode = "";
 function openModal(cmdKey) {
   const data = commandData[cmdKey];
   if (!data) {
-    // Veri yoksa placeholder göster
     modalCmdName.textContent = cmdKey;
-    modalPurpose.textContent = "Bu komut için henüz açıklama eklenmedi.";
-    modalLogic.textContent = "Bu komutun mantığı henüz eklenmedi.";
-    discordChat.innerHTML = '<div class="no-result">Bu komut için Discord önizlemesi henüz eklenmedi.</div>';
-    modalCode.innerHTML = '<span class="placeholder">// ' + cmdKey + ' komutunun kodu buraya gelecek</span>';
-    currentCode = "// " + cmdKey + " komutunun kodu buraya gelecek";
+    modalPurpose.textContent = "Bu öğe için henüz açıklama eklenmedi.";
+    modalLogic.textContent = "Bu öğenin mantığı henüz eklenmedi.";
+    discordChat.innerHTML = '<div class="no-result">Bu öğe için önizleme henüz eklenmedi.</div>';
+    modalCode.innerHTML = '<span class="placeholder">// ' + cmdKey + ' kod içeriği yakında eklenecek</span>';
+    currentCode = "// " + cmdKey + " kod içeriği";
   } else {
     modalCmdName.textContent = cmdKey;
     modalPurpose.textContent = data.purpose || "Açıklama yok.";
@@ -1544,17 +1595,13 @@ function renderEmbed(embed) {
   `;
 }
 
-/* ===== MESAJ FORMATLA (kod, mention, satır sonu) ===== */
+/* ===== MESAJ FORMATLA ===== */
 function formatMessage(text) {
   if (!text) return '';
   let html = escapeHtml(text);
-  // \n -> <br>
   html = html.replace(/\n/g, '<br>');
-  // `kod` -> cmd-highlight
   html = html.replace(/`([^`]+)`/g, '<span class="cmd-highlight">$1</span>');
-  // **bold**
   html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  // @mention
   html = html.replace(/(^|\s)(@[\w]+)/g, '$1<span class="mention">$2</span>');
   return html;
 }
