@@ -1584,12 +1584,33 @@
 
 <script>
 /* ============================================================
-   1) PERFORMANS MODU
+   1) PERFORMANS MODU AYARLARI
    ============================================================ */
 const PERF_MODES = {
-  high:   { particles: 60, fps: 60 },
-  medium: { particles: 30, fps: 30 },
-  low:    { particles: 0,  fps: 0  }
+  high: {
+    particles: 80,
+    fps: 60,
+    maxDist: 160,
+    size: 2.2,
+    opacity: 0.65,
+    lineOpacity: 0.28
+  },
+  medium: {
+    particles: 40,
+    fps: 30,
+    maxDist: 120,
+    size: 1.4,
+    opacity: 0.45,
+    lineOpacity: 0.15
+  },
+  low: {
+    particles: 0,
+    fps: 0,
+    maxDist: 0,
+    size: 0,
+    opacity: 0,
+    lineOpacity: 0
+  }
 };
 
 /* ============================================================
@@ -1639,10 +1660,11 @@ function stopParticles() {
   }
 }
 
-function startParticles(count, fps) {
+function startParticles(count, fps, opts) {
   stopParticles();
   if (count <= 0 || fps <= 0 || !particlesCtx) return;
 
+  const o = opts || PERF_MODES.medium;
   particlesFpsInterval = 1000 / fps;
   lastParticleFrame = 0;
   particlesData = [];
@@ -1651,14 +1673,18 @@ function startParticles(count, fps) {
     particlesData.push({
       x: Math.random() * particlesW,
       y: Math.random() * particlesH,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.5
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * o.size + 0.5
     });
   }
 
-  const MAX_DIST = 110;
+  const MAX_DIST = o.maxDist;
   const MAX_DIST_SQ = MAX_DIST * MAX_DIST;
+  const SIZE = o.size;
+  const OPACITY = o.opacity;
+  const LINE_OPACITY = o.lineOpacity;
+
   particlesRunning = true;
 
   function animate(now) {
@@ -1670,6 +1696,7 @@ function startParticles(count, fps) {
 
     particlesCtx.clearRect(0, 0, particlesW, particlesH);
 
+    // Noktalar
     for (let i = 0; i < particlesData.length; i++) {
       const p = particlesData[i];
       p.x += p.vx;
@@ -1678,10 +1705,11 @@ function startParticles(count, fps) {
       if (p.y < 0 || p.y > particlesH) p.vy *= -1;
       particlesCtx.beginPath();
       particlesCtx.arc(p.x, p.y, p.r, 0, 6.2832);
-      particlesCtx.fillStyle = 'rgba(0, 212, 255, 0.5)';
+      particlesCtx.fillStyle = 'rgba(0, 212, 255, ' + OPACITY + ')';
       particlesCtx.fill();
     }
 
+    // Bağlantı çizgileri
     for (let i = 0; i < particlesData.length; i++) {
       const pi = particlesData[i];
       for (let j = i + 1; j < particlesData.length; j++) {
@@ -1694,8 +1722,8 @@ function startParticles(count, fps) {
           particlesCtx.beginPath();
           particlesCtx.moveTo(pi.x, pi.y);
           particlesCtx.lineTo(pj.x, pj.y);
-          particlesCtx.strokeStyle = 'rgba(0, 212, 255, ' + (0.15 * (1 - dist / MAX_DIST)).toFixed(3) + ')';
-          particlesCtx.lineWidth = 0.6;
+          particlesCtx.strokeStyle = 'rgba(0, 212, 255, ' + (LINE_OPACITY * (1 - dist / MAX_DIST)).toFixed(3) + ')';
+          particlesCtx.lineWidth = 0.7;
           particlesCtx.stroke();
         }
       }
@@ -1716,7 +1744,7 @@ function applyPerfMode(mode) {
   });
 
   const cfg = PERF_MODES[mode];
-  startParticles(cfg.particles, cfg.fps);
+  startParticles(cfg.particles, cfg.fps, cfg);
 
   try { localStorage.setItem('bb_perf', mode); } catch (e) {}
 }
