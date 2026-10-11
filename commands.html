@@ -964,7 +964,38 @@ $addTimestamp`
       { type: "user", name: "AhmetEjler", message: 'b!unban 123456789012345678' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Yasak Kaldırıldı", desc: "Kullanıcının yasağı başarıyla kaldırıldı." } }
     ],
-    code: "// b!unban komutunun kodu"
+    code: "$onlyPerms[ban;⚠️ **»** **<@$authorID>**, bu komutu kullanabilmek için Üyeleri Yasakla yetkisine sahip olmalısın!]
+$onlyIf[$message[1]!=;⚠️ **»** **<@$authorID>**, yasağı kaldırılacak kullanıcının **ID'sini** girmelisin!]
+$onlyIf[$message[2]!=;⚠️ **»** **<@$authorID>**, yasağı kaldırma sebebini yazmalısın!]
+
+$suppressErrors[⚠️ **»** **Geçersiz ID veya kullanıcı zaten banlı değil!**]
+
+$unbanID[$message[1]]
+
+$title[✅ | **YASAK BAŞARIYLA KALDIRILDI!** | 🔓]
+$color[#00ffcc]
+$thumbnail[$userAvatar[$authorID]]
+$description[
+**━━━━━━━━━━━━━━━━━━━━**
+⚙️ **İŞLEM BİLGİLERİ**
+
+**👮 Yetkili:** <@$authorID>
+**🆔 Kullanıcı ID:** $message[1]
+**📖 Kaldırma Sebebi:** $message[2] $message[3] $message[4]
+**📅 İşlem Tarihi:** $date
+
+**━━━━━━━━━━━━━━━━━━━━**
+📊 **İŞLEM DETAYLARI:**
+
+🛡️ **Yetkili ID:** $authorID
+⏱️ **Ban Kaldırma Zamanı:** $date
+💾 **Sunucu ID:** $guildID
+🏠 **Sunucu Adı:** $serverName[$guildID]
+]
+$thumbnail[$userAvatar[$botID]]
+$footer[BetterBot 2.0 • Unban Sistemi • $username]
+$footerIcon[$userAvatar[$botID]]
+$addTimestamp"
   },
 
   "b!uyarı": {
