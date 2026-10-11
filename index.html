@@ -305,6 +305,7 @@
       border-radius: 48px;
       border: 1px solid rgba(26, 45, 74, 0.6);
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
     }
 
     /* ===== HEADER ===== */
@@ -452,7 +453,7 @@
       border-radius: 20px;
       padding: 26px 24px;
       border: 1px solid rgba(26, 45, 74, 0.8);
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -572,7 +573,7 @@
       padding: 28px 20px;
       text-align: center;
       border: 1px solid rgba(0, 212, 255, 0.15);
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .team-card:hover {
       transform: translateY(-4px);
@@ -728,6 +729,7 @@
       margin: 30px 0;
       position: relative;
       overflow: hidden;
+      transition: background 0.3s, border-color 0.3s;
     }
     .vote-title {
       display: flex;
@@ -911,10 +913,10 @@
     }
 
     /* =============================================
-       PERFORMANS MODLARI
+       PERFORMANS MODLARI (GELİŞTİRİLDİ)
        ============================================= */
 
-    /* YÜKSEK KALİTE */
+    /* 1) YÜKSEK KALİTE (HIGH) - Bol partikül, yoğun animasyonlar ve şık parlamalar */
     body.perf-high .navbar {
       background: rgba(10, 25, 47, 0.85);
       backdrop-filter: blur(20px);
@@ -924,6 +926,7 @@
       background: rgba(17, 34, 64, 0.55);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 30px 90px rgba(0, 212, 255, 0.15), 0 0 50px rgba(0,0,0,0.6);
     }
     body.perf-high #musicToggle {
       background: rgba(13, 26, 47, 0.9);
@@ -934,28 +937,30 @@
       animation: gradientMove 4s ease infinite;
     }
     body.perf-high .logo {
-      animation: float 6s ease-in-out infinite;
+      animation: float 5s ease-in-out infinite;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-12px); }
     }
     body.perf-high h2 svg.h2-icon {
       animation: iconFloat 3s ease-in-out infinite;
     }
     @keyframes iconFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
+      50% { transform: translateY(-4px); }
     }
     body.perf-high .vote-box {
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(168, 85, 247, 0.08));
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+      border-color: rgba(0, 212, 255, 0.6);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.25);
     }
     body.perf-high .vote-box::before {
       content: '';
       position: absolute;
       top: -50%; left: -50%;
       width: 200%; height: 200%;
-      background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.1), transparent 30%);
+      background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.15), transparent 30%);
       animation: rotate 6s linear infinite;
     }
     @keyframes rotate { to { transform: rotate(360deg); } }
@@ -965,7 +970,7 @@
     }
     @keyframes musicPulse {
       0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
-      50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6); }
+      50% { box-shadow: 0 0 35px rgba(168, 85, 247, 0.7); }
     }
     body.perf-high .feature-card::before,
     body.perf-high .team-card::before {
@@ -983,12 +988,12 @@
     body.perf-high .feature-card,
     body.perf-high .team-card { position: relative; overflow: hidden; }
 
-    /* ORTA - Varsayılan */
+    /* 2) ORTA SEVİYE / DENGELİ (MEDIUM) - Standart ve şık */
     body.perf-medium .navbar { background: rgba(10, 25, 47, 0.96); }
     body.perf-medium .container { background: rgba(17, 34, 64, 0.92); }
     body.perf-medium #musicToggle { background: rgba(13, 26, 47, 0.95); }
 
-    /* PERFORMANS - Minimum */
+    /* 3) PERFORMANS / DÜŞÜK (LOW) - Tertemiz, sıfır kasma, efektler iptal */
     body.perf-low .navbar,
     body.perf-low .container,
     body.perf-low #musicToggle,
@@ -1011,7 +1016,7 @@
     body.perf-low * {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
-      transition-duration: 0.08s !important;
+      transition-duration: 0.05s !important;
     }
     body.perf-low .reveal {
       opacity: 1 !important;
@@ -1030,7 +1035,7 @@
     body.perf-low .roadmap-col:hover {
       transform: none;
     }
-    body.perf-low #particles { display: none; }
+    body.perf-low #particles { display: none !important; }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
@@ -1099,7 +1104,7 @@
       <div class="perf-switcher" title="Performans Modu">
         <button class="perf-btn" data-perf="high" title="Yüksek Kalite">🎨</button>
         <button class="perf-btn active" data-perf="medium" title="Dengeli (Önerilen)">⚖️</button>
-        <button class="perf-btn" data-perf="low" title="Performans">⚡</button>
+        <button class="perf-btn" data-perf="low" title="Performans (Tertemiz)">⚡</button>
       </div>
       <div class="lang-switcher">
         <button class="lang-btn active" data-lang="tr">TR</button>
@@ -1472,7 +1477,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-question"><span data-i18n="faq.q3">Hangi komutlar mevcut?</span><span class="arrow">▼</span></button>
-        <div class="faq-answer" data-i18n="faq.a3">50'den fazla komut mevcut: moderasyon (ban, mute, uyarı), eğlence (IQ, aşk, dans), otomasyon (oto-rol, hoş geldin), form sistemleri, ticket sistemi ve daha fazlası. Detaylı liste için "Komutlar" sayfasına göz atın.</div>
+        <div class="faq-answer" data-i18n="faq.a3">50'den fazla komut mevcut: moderasyon (ban, mute, uyarı), eğlence (IQ, aşk, danstan), otomasyon (oto-rol, hoş geldin), form sistemleri, ticket sistemi ve daha fazlası. Detaylı liste için "Komutlar" sayfasına göz atın.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question"><span data-i18n="faq.q4">Verilerim güvende mi?</span><span class="arrow">▼</span></button>
@@ -1584,19 +1589,19 @@
 
 <script>
 /* ============================================================
-   1) PERFORMANS MODU AYARLARI
+   1) PERFORMANS MODU AYARLARI (YENİDEN DÜZENLENDİ)
    ============================================================ */
 const PERF_MODES = {
   high: {
-    particles: 80,
+    particles: 90,     // Yüksek kalite için bol partikül
     fps: 60,
-    maxDist: 160,
-    size: 2.2,
-    opacity: 0.65,
-    lineOpacity: 0.28
+    maxDist: 150,
+    size: 2.3,
+    opacity: 0.7,
+    lineOpacity: 0.3
   },
   medium: {
-    particles: 40,
+    particles: 40,     // Orta seviye için dengeli partikül
     fps: 30,
     maxDist: 120,
     size: 1.4,
@@ -1604,7 +1609,7 @@ const PERF_MODES = {
     lineOpacity: 0.15
   },
   low: {
-    particles: 0,
+    particles: 0,      // Performans modu için tamamen sıfır partikül
     fps: 0,
     maxDist: 0,
     size: 0,
@@ -1681,7 +1686,6 @@ function startParticles(count, fps, opts) {
 
   const MAX_DIST = o.maxDist;
   const MAX_DIST_SQ = MAX_DIST * MAX_DIST;
-  const SIZE = o.size;
   const OPACITY = o.opacity;
   const LINE_OPACITY = o.lineOpacity;
 
