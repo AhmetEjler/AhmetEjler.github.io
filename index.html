@@ -56,10 +56,12 @@ html
       align-items: center;
       justify-content: center;
       transition: opacity 0.5s ease, visibility 0.5s;
+      z-index: 99999;
     }
     #loader.hidden {
       opacity: 0;
       visibility: hidden;
+      pointer-events: none;
     }
     .loader-content {
       text-align: center;
@@ -1747,25 +1749,39 @@ const translations = {
   const bar = document.getElementById('loaderBar');
   const percent = document.getElementById('loaderPercent');
   let progress = 0;
-  let pageLoaded = false;
+  let isDone = false;
 
-  const fakeProgress = setInterval(() => {
-    if (pageLoaded && progress >= 90) return;
+  function finish() {
+    if (isDone) return;
+    isDone = true;
+    clearInterval(timer);
+    
+    if (bar) bar.style.width = '100%';
+    if (percent) percent.textContent = '100%';
+
+    setTimeout(() => {
+      if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(() => { loader.style.display = 'none'; }, 500);
+      }
+    }, 200);
+  }
+
+  // Barın dolma animasyonu
+  const timer = setInterval(() => {
     if (progress < 90) {
-      progress += Math.random() * 10 + 4;
+      progress += Math.floor(Math.random() * 10) + 5;
       if (progress > 90) progress = 90;
-      bar.style.width = progress + '%';
-      percent.textContent = Math.floor(progress) + '%';
+      if (bar) bar.style.width = progress + '%';
+      if (percent) percent.textContent = progress + '%';
     }
-  }, 100);
+  }, 50);
 
-  window.addEventListener('load', () => {
-    pageLoaded = true;
-    clearInterval(fakeProgress);
-    bar.style.width = '100%';
-    percent.textContent = '100%';
-    setTimeout(() => loader.classList.add('hidden'), 400);
-  });
+  // Sayfa yüklenince kapat
+  window.addEventListener('load', finish);
+
+  // EĞER RESİMLER VEYA MÜZİK TAKILIRSA: En geç 1.5 saniye sonra ekranı zorla kapat ve siteyi aç!
+  setTimeout(finish, 1500);
 })();
 
 /* ===== NAVBAR & SCROLL (PERFORMANS DÜZELTMELİ) ===== */
