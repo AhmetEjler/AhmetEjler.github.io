@@ -957,14 +957,14 @@ $footerIcon[$userAvatar[$botID]]
 $addTimestamp`
   },
 
-  "b!unban": {
+"b!unban": {
     purpose: "Yasaklanmış bir kullanıcının yasağını kaldırır.",
     logic: "Bot, yasaklı kullanıcı listesinden ilgili ID'yi bulur ve yasağı kaldırır.",
     chat: [
       { type: "user", name: "AhmetEjler", message: 'b!unban 123456789012345678' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Yasak Kaldırıldı", desc: "Kullanıcının yasağı başarıyla kaldırıldı." } }
     ],
-    code: "$onlyPerms[ban;⚠️ **»** **<@$authorID>**, bu komutu kullanabilmek için Üyeleri Yasakla yetkisine sahip olmalısın!]
+    code: `$onlyPerms[ban;⚠️ **»** **<@$authorID>**, bu komutu kullanabilmek için Üyeleri Yasakla yetkisine sahip olmalısın!]
 $onlyIf[$message[1]!=;⚠️ **»** **<@$authorID>**, yasağı kaldırılacak kullanıcının **ID'sini** girmelisin!]
 $onlyIf[$message[2]!=;⚠️ **»** **<@$authorID>**, yasağı kaldırma sebebini yazmalısın!]
 
@@ -995,7 +995,7 @@ $description[
 $thumbnail[$userAvatar[$botID]]
 $footer[BetterBot 2.0 • Unban Sistemi • $username]
 $footerIcon[$userAvatar[$botID]]
-$addTimestamp"
+$addTimestamp`
   },
 
   "b!uyarı": {
