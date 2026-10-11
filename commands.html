@@ -653,7 +653,7 @@
     </svg>
     BetterBot 2.0 – Komutlar
   </h1>
-  <p class="sub">Komutlara ve sistem modlarına tıklayarak detayları, Discord önizlemesini ve kodları görebilirsiniz.</p>
+  <p class="sub">Komutlara tıklayarak detayları, Discord önizlemesini ve kodları görebilirsiniz.</p>
 
   <div class="top-bar">
     <div class="prefix-box">🔹 Prefix: <strong>b!</strong></div>
@@ -662,23 +662,7 @@
         <circle cx="11" cy="11" r="8"/>
         <line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input type="text" id="searchInput" placeholder="Komut veya mod ara..." autocomplete="off" />
-    </div>
-  </div>
-
-  <!-- ===== SİSTEM MODLARI ===== -->
-  <div class="category" data-category="modlar">
-    <h2>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 20h9"/>
-        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-      </svg>
-      Sistem Modları
-    </h2>
-    <div class="command-grid">
-      <div class="command-item" data-cmd="🌟 Yüksek Kalite Modu"><span class="cmd">🌟 Yüksek Kalite</span><span class="desc">Maksimum görsel zenginlik ve detaylı log</span></div>
-      <div class="command-item" data-cmd="⚡ Orta Mod"><span class="cmd">⚡ Orta (Dengeli)</span><span class="desc">Kaynak tüketimi ve kalite dengesi</span></div>
-      <div class="command-item" data-cmd="🚀 Performans Modu"><span class="cmd">🚀 Performans (Lite)</span><span class="desc">Minimum gecikme ve yüksek hız</span></div>
+      <input type="text" id="searchInput" placeholder="Komut ara..." autocomplete="off" />
     </div>
   </div>
 
@@ -925,42 +909,11 @@
 
 <script>
 /* ======================================================
-   KOMUT VE SİSTEM MODU VERİLERİ
+   KOMUT VERİLERİ (Kodlarınızı buradaki ilgili komutların 
+   'code' alanına yapıştırabilirsiniz)
    ====================================================== */
 const commandData = {
 
-  /* ===== SİSTEM MODLARI ===== */
-  "🌟 Yüksek Kalite Modu": {
-    purpose: "Botun tüm görsel detaylarını, zengin embed tasarımlarını ve gelişmiş loglama altyapısını aktif eder.",
-    logic: "Gelişmiş hata ayıklama, tam grafikli dinamik embed yapıları ve anlık veri tabanı senkronizasyonu sağlar. Güçlü altyapı gerektirir.",
-    chat: [
-      { type: "user", name: "AhmetEjler", message: 'Modu Yüksek Kalite olarak ayarla' },
-      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🌟 Yüksek Kalite Modu Aktif", desc: "Tüm görsel özellikler ve detaylı log sistemi devreye sokuldu." } }
-    ],
-    code: "// [SİSTEM AYARI] Yüksek Kalite Modu Yapılandırması\nMODE = \"high_quality\";\nEMBED_DETAILS = true;\nADVANCED_LOGGING = true;\nCACHE_STRATEGY = \"realtime\";"
-  },
-
-  "⚡ Orta Mod": {
-    purpose: "Kaynak tüketimi ile görsel kaliteyi dengede tutan ideal ve standart çalışma modudur.",
-    logic: "Optimize edilmiş önbellekleme (cache) ve standart loglama kullanarak en stabil yanıt süresini sunar.",
-    chat: [
-      { type: "user", name: "AhmetEjler", message: 'Modu Orta olarak ayarla' },
-      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "⚡ Orta Mod Aktif", desc: "Kaynak ve görsel kalite dengeli konuma getirildi." } }
-    ],
-    code: "// [SİSTEM AYARI] Orta (Dengeli) Mod Yapılandırması\nMODE = \"balanced\";\nEMBED_DETAILS = \"standard\";\nADVANCED_LOGGING = false;\nCACHE_STRATEGY = \"optimized\";"
-  },
-
-  "🚀 Performans Modu": {
-    purpose: "Gecikmeyi (ping) minimuma indirmek ve kaynak tüketimini kısmak için tasarlanmış yalın mod.",
-    logic: "Ağır embed süslemeleri ve gereksiz veri tabanı sorguları devre dışı bırakılır, maksimum hız elde edilir.",
-    chat: [
-      { type: "user", name: "AhmetEjler", message: 'Modu Performans olarak ayarla' },
-      { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "🚀 Performans Modu Aktif", desc: "Minimum gecikme ve hafifletilmiş altyapı devreye alındı." } }
-    ],
-    code: "// [SİSTEM AYARI] Performans (Lite) Modu Yapılandırması\nMODE = \"performance_lite\";\nEMBED_DETAILS = false;\nADVANCED_LOGGING = false;\nCACHE_STRATEGY = \"aggressive\";"
-  },
-
-  /* ===== BDFD KOMUTLARI ===== */
   "b!ban": {
     purpose: "Sunucudan bir kullanıcıyı kurallara uymadığı gerekçesiyle kalıcı olarak yasaklar.",
     logic: "Bot, komutu kullanan yetkilinin ban yetkisini kontrol eder, etiketlenen kullanıcıyı ve belirtilen sebebi işleyerek sunucudan uzaklaştırır.",
@@ -974,20 +927,17 @@ $onlyIf[$noMentionMessage[2]!=;<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756
 
 $onlyIf[$mentioned[1]!=$botID;<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756851272> **»** BetterBot 2.0'ı sunucudan yasaklayamazsın!]
 
-$ban[$mentioned[1];$noMentionMessage[2]]
-$suppressErrors[<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756851272> **»** **<@$mentioned[1]>** zaten banlı veya geçersiz bir kullanıcı!]
+$ban[$mentioned[1];$noMentionMessage[2]]$suppressErrors[<a:92943b3d4bb2409687d40c62cbc7fc23:1522869635756851272> **»** **<@$mentioned[1]>** zaten banlı veya geçersiz bir kullanıcı!]
 
-$title[<:e77b3e41371e4d93a5479c66b0cd8e78:1522869805365854238> | **KULLANICI SUNUCUDAN YASAKLANDI!** | <:4515security:1530543847162118194>]
-$color[#00ffcc]
-$thumbnail[$userAvatar[$mentioned[1]]]
-$description[
+$title[<:e77b3e41371e4d93a5479c66b0cd8e78:1522869805365854238> \vert{} **KULLANICI SUNUCUDAN YASAKLANDI!** \vert{} <:4515security:1530543847162118194>]$color[#00ffcc]
+$thumbnail[$userAvatar[$mentioned[1]]]$description[
 **━━━━━━━━━━━━━━━━━━━━**
 <:8635vslsettings:1531728277071200468> **İŞLEM BİLGİLERİ**
 
 **<:yetkiliEMOJI_ID_3:1522869873770758235> Yetkili:** <@$authorID>
 **<:67793memberhexagon:1529955160585928836> Banlanan Kullanıcı:** <@$mentioned[1]>
 **<:685600memberidcard:1530123102292410501> Kullanıcı ID:** $mentioned[1]
-**<:445181discordorbsbook:1530976282152534172> Ban Sebebi:** $noMentionMessage[2] $noMentionMessage[3] $noMentionMessage[4]
+**<:445181discordorbsbook:1530976282152534172> Ban Sebebi:** $noMentionMessage[2] $noMentionMessage[3]$noMentionMessage[4]
 **<:530749calendar:1530124833885782166> İşlem Tarihi:** $date
 
 **━━━━━━━━━━━━━━━━━━━━**
@@ -998,19 +948,8 @@ $description[
 <:57410timer:1530299078305648681> **Ban Zamanı:** $date
 <:4515security:1530543847162118194> **Sunucu ID:** $guildID
 ]
-$thumbnail[$userAvatar[$botID]]
-$footer[BetterBot 2.0 • Ban Sistemi]
-$footerIcon[$userAvatar[$botID]]
-$addTimestamp`]
-
-$ban[$mentioned[1];$noMentionMessage]
-
-$color[#ff4757]
-$title[Kullanıcı Sunucudan Yasaklandı]
-$description[**Yasaklanan:** <@$mentioned[1]> (\`$mentioned[1]\`)
-**Yetkili:** <@$authorID>
-**Sebep:** $noMentionMessage]$footer[BetterBot 2.0 Güvenlik Sistemi]
-$addTimestamp`
+$thumbnail[$userAvatar[$botID]]$footer[BetterBot 2.0 • Ban Sistemi]
+$footerIcon[$userAvatar[$botID]]$addTimestamp`
   },
 
   "b!unban": {
