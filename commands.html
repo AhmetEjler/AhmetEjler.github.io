@@ -1198,8 +1198,8 @@ $deletecommand`
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kanal Kilitlendi", desc: "Bu kanal artık kilitli. Mesaj gönderilemez." } }
     ],
     code: `$nomention
-$onlyAdmin[⚠️ **»** **Bu Komutu Sadece `Yönetici` iznine sahip kişiler kullanabilir!**]
-$onlyBotPerms[admin;⚠️ **»** **`Yönetici` İznine Sahip Değilim!**]
+$onlyAdmin[⚠️ **»** **Bu Komutu Sadece Yönetici iznine sahip kişiler kullanabilir!**]
+$onlyBotPerms[admin;⚠️ **»** **Yönetici İznine Sahip Değilim!**]
 $editChannelPerms[$channelID;$guildID;-sendmessages]
 
 $title[🔒 | KANAL KİLİTLENDİ | 🔐]
@@ -1214,7 +1214,7 @@ $description[
 
 **━━━━━━━━━━━━━━━━━━━━**
 🔧 **BİLGİ**
-Kanal kilidini yeniden açmak istiyorsanız **`b!kilit-aç`** komutunu girmeniz yeterli
+Kanal kilidini yeniden açmak istiyorsanız **b!kilit-aç** komutunu girmeniz yeterli
 ]
 $color[#00ffcc]
 $footer[BetterBot 2.0 • Kanal Kilitleme Sistemi]
@@ -1230,8 +1230,8 @@ $deletecommand`
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Kilit Açıldı", desc: "Bu kanalın kilidi açıldı. Mesaj gönderilebilir." } }
     ],
     code: `$nomention
-$onlyAdmin[⚠️ **»** **Bu Komutu Sadece `Yönetici` iznine sahip kişiler kullanabilir!**]
-$onlyBotPerms[admin;⚠️ **»** **`Yönetici` İznine Sahip Değilim!**]
+$onlyAdmin[⚠️ **»** **Bu Komutu Sadece Yönetici iznine sahip kişiler kullanabilir!**]
+$onlyBotPerms[admin;⚠️ **»** **Yönetici İznine Sahip Değilim!**]
 $editChannelPerms[$channelID;$guildID;+sendmessages]
 
 $title[🔓 | KANAL KİLİDİ AÇILDI | 🔐]
@@ -1261,7 +1261,43 @@ $deletecommand`
       { type: "user", name: "AhmetEjler", message: 'b!mute @Kullanici 10m Spam' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "warning", title: "Kullanıcı Susturuldu", desc: "@Kullanici 10 dakika boyunca susturuldu.\n**Sebep:** Spam" } }
     ],
-    code: "// b!mute komutunun kodu"
+    code: `$nomention
+$onlyPerms[manageroles;⚠️ **»** **Bu komutu sadece **Rolleri Yönet** yetkisi olanlar kullanabilir!**]
+$onlyBotPerms[admin;⚠️ **»** **Bot Yönetici iznine sahip değil!**]
+$cooldown[20s;⏱️ **»** **Bu komutu tekrar kullanmak için 20 saniye beklemelisin!**]
+
+$mute[$roleName[$getServerVar[muterol]]]
+$allowMention
+
+$title[🔇 | **Susturma Başarıyla Açıldı!** | ✅]
+$description[
+**━━━━━━━━━━━━━━━━━━━━━━━━━━**
+👤 **KULLANICI BİLGİLERİ**
+**━━━━━━━━━━━━━━━━━━━━━━━━━━**
+
+👤 **Kullanıcı:** <@$mentioned[1]>
+🆔 **Kullanıcı ID:** $mentioned[1]
+
+**━━━━━━━━━━━━━━━━━━━━━━━━━━**
+📋 **SİSTEM BİLGİLERİ**
+**━━━━━━━━━━━━━━━━━━━━━━━━━━**
+
+**Başarılı bir şekilde susturuldu kaldırmak için b!unmute komutunu girin.**
+📅 **İşlem Tarihi:** $date
+
+**━━━━━━━━━━━━━━━━━━━━━━━━━━**
+🛡️ **YETKİLİ BİLGİSİ**
+**━━━━━━━━━━━━━━━━━━━━━━━━━━**
+
+👮 **İşlemi Yapan:** <@$authorID>
+🆔 **Yetkili ID:** $authorID
+
+**━━━━━━━━━━━━━━━━━━━━━━━━━━**
+]
+$color[00ffcc]
+$footer[BetterBot • Mute Sistemi]
+$footerIcon[$userAvatar[$botID]]
+$addTimestamp`
   },
 
   "b!reklam engel": {
