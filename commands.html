@@ -684,7 +684,7 @@
       <div class="command-item" data-cmd="b!kilit aç"><span class="cmd">b!kilit aç</span><span class="desc">Kanalı kilitler</span></div>
       <div class="command-item" data-cmd="b!kilit kapat"><span class="cmd">b!kilit kapat</span><span class="desc">Kanalın kilidini açar</span></div>
       <div class="command-item" data-cmd="b!mute"><span class="cmd">b!mute</span><span class="desc">Kullanıcıyı susturur</span></div>
-      <div class="command-item" data-cmd="b!reklam engel"><span class="cmd">b!reklam engel aç/kapat</span><span class="desc">Reklam engelini açar/kapatır</span></div>
+      <div class="command-item" data-cmd="b!reklam engel aç"><span class="cmd">b!reklam engel aç</span><span class="desc">Reklam engelini açar</span></div>
       <div class="command-item" data-cmd="b!küfürengel"><span class="cmd">b!küfürengel aç/kapat</span><span class="desc">Küfür engelini açar/kapatır</span></div>
     </div>
   </div>
@@ -1300,8 +1300,8 @@ $footerIcon[$userAvatar[$botID]]
 $addTimestamp`
   },
 
-  "b!reklam engel": {
-    purpose: "Sunucuda reklam engelini açar veya kapatır.",
+  "b!reklam engel aç": {
+    purpose: "Sunucuda reklam engelini açar.",
     logic: "Bot, aktiflik durumunu değiştirir. Aktifken reklam içeren mesajları otomatik olarak siler.",
     chat: [
       { type: "user", name: "AhmetEjler", message: 'b!reklam engel aç' },
