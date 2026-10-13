@@ -1307,7 +1307,57 @@ $addTimestamp`
       { type: "user", name: "AhmetEjler", message: 'b!reklam engel aç' },
       { type: "bot", name: "BetterBot 2.0", embed: { type: "success", title: "Reklam Engel Aktif", desc: "Sunucuda reklam engelleme sistemi aktif edildi." } }
     ],
-    code: "// b!reklam engel komutunun kodu"
+    code: `$nomention
+$onlyPerms[admin;⚠️ **»** Bu komutu sadece Yönetici yetkisine sahip kişiler kullanabilir!]
+$onlyBotPerms[admin;⚠️ **»** Botun Yönetici yetkisi yok!]
+$cooldown[20s;⏱️ **»** **Bu komutu tekrar kullanmak için 20 saniye beklemelisin!**]
+
+$if[$getServerVar[lengel]==yes]
+  $title[🛠️ | Reklam Engel Zaten Aktif | ⚠️]
+  $description[
+**━━━━━━━━━━━━━━━━━━━━**
+⚙️ **SİSTEM BİLGİLERİ**
+
+🛡️ **Sistem:** **Aktif** ✅
+🏅 **Sürüm:** Beta
+
+**━━━━━━━━━━━━━━━━━━━━**
+➡️ Sistemi kapatmak isterseniz: b!reklam-kapat]
+  $color[#00ffcc]
+  $footer[BetterBot 2.0 • Güvenlik Sistemi]
+  $footerIcon[$userAvatar[$botID]]
+  $thumbnail[$userAvatar[$botID]]
+  $stop
+$endif
+
+$setServerVar[lengel;yes]
+
+$title[🛠️ | Reklam Engel Aktifleştirildi | ✅]
+$description[
+**━━━━━━━━━━━━━━━━━━━━**
+⚙️ **SİSTEM BİLGİLERİ**
+
+🛡️ **Sistem:** **Aktif** ✅
+💬 **Kanal:** <#$channelID>
+🎖️ **Yetkili:** <@$authorID>
+📅 **Tarih:** $date
+🏅 **Sürüm:** Beta
+
+**━━━━━━━━━━━━━━━━━━━━**
+⚠️ **Bilgilendirme**
+
+Bu sistem **beta (deneme) sürümündedir.** 
+➡️ Her türlü reklamı %100 tespit edemeyebilir.
+➡️ Özellikle kelime arasına boşluk/karakter gizlenen reklamlarda hata payı olabilir.
+➡️ Geliştirilmeye devam ediyor, geri bildirimleriniz önemli.
+
+**━━━━━━━━━━━━━━━━━━━━**
+Reklam Engelleyici Sistemi kapatmak için **b!reklam engel kapat** komutunu giriniz lütfen
+]
+$color[#00ffcc]
+$footer[BetterBot 2.0 • Güvenlik Sistemi]
+$footerIcon[$userAvatar[$botID]]
+$thumbnail[$userAvatar[$botID]]`
   },
 
   "b!küfürengel": {
